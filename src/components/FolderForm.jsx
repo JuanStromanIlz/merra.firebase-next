@@ -39,6 +39,7 @@ const validationSchema = Yup.object().shape({
 const FolderForm = ({ isSubmit, folder, onSubmit }) => {
   const [newKeyWord, setNewKeyWord] = useState("");
   const [newImages, setNewImages] = useState([]);
+  const [deleteImages, setDeleteImages] = useState([]);
 
   function handleKeyWord(push) {
     setNewKeyWord((prev) => {
@@ -66,9 +67,14 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
   }
 
   function handleSubmit(values) {
-    onSubmit({ ...values, newImages: newImages });
+    onSubmit({ ...values, newImages, deleteImages });
     setNewImages([]);
     setNewKeyWord("");
+  }
+
+  function handleDeleteImagesFromDB(index, remove) {
+    setDeleteImages((prev) => [...prev, folder.images[index]]);
+    remove(index);
   }
 
   return (
@@ -179,7 +185,6 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
                   name="description"
                   value={values.description}
                   onChange={(data) => {
-                    console.log(data);
                     setFieldValue("description", data);
                     setFieldTouched("description", true);
                   }}
@@ -208,7 +213,9 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
                                 }}
                               />
                               <CloseButton
-                                onClick={() => remove(index)}
+                                onClick={() =>
+                                  handleDeleteImagesFromDB(index, remove)
+                                }
                                 borderRadius={"2xl"}
                                 bg={"white"}
                                 color={"gray.800"}
