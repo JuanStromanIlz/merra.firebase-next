@@ -3,21 +3,31 @@ import { getFirestore } from "firebase/firestore";
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
+const {
+  REACT_APP_FIREBASE_API_KEY,
+  REACT_APP_FIREBASE_AUTH_DOMAIN,
+  REACT_APP_FIREBASE_MESSAGE_ID,
+  REACT_APP_FIREBASE_APP_ID,
+  REACT_APP_FIREBASE_MEASUREMENT_ID,
+  REACT_APP_FIREBASE_STORAGE_BUCKET,
+  REACT_APP_FIREBASE_PROJECT_ID,
+} = process.env;
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDb5Kd8-4o_6E8qXXOiTbXDtRVfR6Ax7Yw",
-  authDomain: "merra-firebase-next.firebaseapp.com",
-  projectId: "merra-firebase-next",
-  storageBucket: "merra-firebase-next.appspot.com",
-  messagingSenderId: "203712236631",
-  appId: "1:203712236631:web:322485ab6fe32b9c3b6712",
-  measurementId: "G-L5LRV2G7K5",
+  apiKey: REACT_APP_FIREBASE_API_KEY,
+  authDomain: REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: REACT_APP_FIREBASE_MESSAGE_ID,
+  appId: REACT_APP_FIREBASE_APP_ID,
+  measurementId: REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-// const provider = new GoogleAuthProvider();
-// const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+const auth = getAuth(app);
 const storage = getStorage(app);
 
-export { db, storage };
+export { db, storage, auth, provider };
