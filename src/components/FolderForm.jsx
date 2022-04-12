@@ -14,18 +14,26 @@ import {
   Wrap,
   WrapItem,
   Image,
-  Text,
   GridItem,
   SimpleGrid,
-  FormHelperText,
   Flex,
+  Select,
 } from "@chakra-ui/react";
 import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
+import {
+  EDITORIAL,
+  ARTWORK,
+  COMERCIAL,
+  FILMS,
+  PUBLICACIONES,
+  BLOG,
+} from "../services/foldersNames";
 import Editor from "./Editor";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("El titulo es requerido."),
+  category: Yup.string().required("La categoria es requerida."),
 });
 
 const FolderForm = ({ isSubmit, folder, onSubmit }) => {
@@ -88,17 +96,27 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
                 />
                 <ErrorMessage name="title" component={FormErrorMessage} />
               </FormControl>
-              <FormControl isInvalid={errors.sub && touched.sub}>
-                <FormLabel fontWeight={"bold"} htmlFor="sub">
-                  Subtitulo
+              <FormControl isInvalid={errors.category && touched.category}>
+                <FormLabel fontWeight={"bold"} htmlFor="category">
+                  Categoria
                 </FormLabel>
-                <Field
-                  as={Input}
-                  id="sub"
-                  name="sub"
-                  placeholder="Nuevo subtitulo"
-                />
-                <ErrorMessage name="sub" component={FormErrorMessage} />
+                <Select
+                  placeholder="Selecciona una categoria"
+                  id="category"
+                  name="category"
+                  onChange={({ target: { value = EDITORIAL } }) => {
+                    setFieldValue("category", value);
+                    setFieldTouched("category", true);
+                  }}
+                >
+                  <option value={EDITORIAL}>{EDITORIAL}</option>
+                  <option value={ARTWORK}>{ARTWORK}</option>
+                  <option value={COMERCIAL}>{COMERCIAL}</option>
+                  <option value={FILMS}>{FILMS}</option>
+                  <option value={PUBLICACIONES}>{PUBLICACIONES}</option>
+                  <option value={BLOG}>{BLOG}</option>
+                </Select>
+                <ErrorMessage name="category" component={FormErrorMessage} />
               </FormControl>
               <FormControl>
                 <FormLabel fontWeight={"bold"} htmlFor="addKeyWord">
@@ -153,31 +171,11 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
                   )}
                 </FieldArray>
               </FormControl>
-              <Flex gap={3}>
-                <FormControl>
-                  <Text fontWeight={"bold"} mb={3}>
-                    Github
-                  </Text>
-                  <Field as={Input} name="github.name" id="github.link" />
-                  <FormHelperText mb={2}>Nombre visible</FormHelperText>
-                  <Field as={Input} name="github.link" id="github.link" />
-                  <FormHelperText>El link al que va a apuntar</FormHelperText>
-                </FormControl>
-                <FormControl>
-                  <Text fontWeight={"bold"} mb={3}>
-                    Online
-                  </Text>
-                  <Field as={Input} name="online.name" id="online.link" />
-                  <FormHelperText mb={2}>Nombre visible</FormHelperText>
-                  <Field as={Input} name="online.link" id="online.link" />
-                  <FormHelperText>El link al que va a apuntar</FormHelperText>
-                </FormControl>
-              </Flex>
               <FormControl>
                 <FormLabel fontWeight={"bold"} htmlFor="description">
                   Descripción
                 </FormLabel>
-                <Editor
+                {/* <Editor
                   name="description"
                   value={values.description}
                   onChange={(data) => {
@@ -185,7 +183,7 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
                     setFieldValue("description", data);
                     setFieldTouched("description", true);
                   }}
-                />
+                /> */}
                 <ErrorMessage name="description" component={FormErrorMessage} />
               </FormControl>
               <FormControl>
@@ -256,7 +254,6 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
                 </FieldArray>
               </FormControl>
               <Button
-                colorScheme={"brand"}
                 width={"fit-content"}
                 isLoading={isSubmit}
                 loadingText={
@@ -279,17 +276,9 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
 FolderForm.defaultProps = {
   folder: {
     title: "",
-    sub: "",
+    category: "",
     description: "",
     keyWords: [],
-    github: {
-      name: "",
-      link: "",
-    },
-    online: {
-      name: "",
-      link: "",
-    },
     images: [],
   },
 };

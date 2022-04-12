@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 
 export default function FolderView() {
   const router = useRouter();
-  const { folder } = router.query;
+  const { item } = router.query;
   return (
     <Stack>
-      <Heading>edit {folder}</Heading>
+      <Heading>edit {item}</Heading>
     </Stack>
   );
 }

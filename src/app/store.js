@@ -7,6 +7,10 @@ const store = configureStore({
     folders: foldersSlice,
     detail: detailSlice,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export default store;

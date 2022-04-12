@@ -21,7 +21,7 @@ export const getFolder = createAsyncThunk(
           ...doc.data(),
         });
       });
-      return data;
+      return { folder, data };
     } catch ({ message }) {
       rejectWithValue({ error: message });
     }
@@ -29,20 +29,18 @@ export const getFolder = createAsyncThunk(
 );
 
 const initialState = {
-  folders: {
-    isLoading: false,
-    error: false,
-    [EDITORIAL]: [],
-    [ARTWORK]: [],
-    [COMERCIAL]: [],
-    [FILMS]: [],
-    [BLOG]: [],
-    [PUBLICACIONES]: [],
-  },
+  isLoading: false,
+  error: false,
+  [EDITORIAL]: [],
+  [ARTWORK]: [],
+  [COMERCIAL]: [],
+  [FILMS]: [],
+  [BLOG]: [],
+  [PUBLICACIONES]: [],
 };
 
-const worksSlice = createSlice({
-  name: "works",
+const foldersSlice = createSlice({
+  name: "folders",
   initialState,
   extraReducers: {
     [getFolder.pending]: (state) => {
@@ -51,12 +49,15 @@ const worksSlice = createSlice({
         isLoading: true,
       };
     },
-    [getFolder.fulfilled]: (state, { payload: { folder, data } }) => {
-      return {
-        ...state,
-        [folder]: data,
-        isLoading: false,
-      };
+    [getFolder.fulfilled]: (state, { payload: { folder, data } = {} }) => {
+      if (folder) {
+        return {
+          ...state,
+          [folder]: data,
+          isLoading: false,
+        };
+      }
+      return state;
     },
     [getFolder.rejected]: (state, { payload: { error } }) => {
       return {
@@ -68,6 +69,6 @@ const worksSlice = createSlice({
   },
 });
 
-const { reducer } = worksSlice;
+const { reducer } = foldersSlice;
 
 export default reducer;

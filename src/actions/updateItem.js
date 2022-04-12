@@ -19,7 +19,7 @@ const imagesToDelete = (prevFolder, newFolder) => {
   return result;
 };
 
-const editFolder = async (values, folder) => {
+export const editFolder = async (values, folder) => {
   try {
     const { id, newImages, images, title: newTitle, ...rest } = values;
     let urls = [];
@@ -41,15 +41,15 @@ const editFolder = async (values, folder) => {
   }
 };
 
-export const updateEditorialItem = (values, folder = EDITORIAL) =>
-  editFolder(values, folder);
-export const updateArtworkItem = (values, folder = ARTWORK) =>
-  editFolder(values, folder);
-export const updateComercialItem = (values, folder = COMERCIAL) =>
-  editFolder(values, folder);
-export const updateFilmsItem = (values, folder = FILMS) =>
-  editFolder(values, folder);
-export const updateBlogItem = (values, folder = BLOG) =>
-  editFolder(values, folder);
-export const updatePublicationItem = (values, folder = PUBLICACIONES) =>
-  editFolder(values, folder);
+// export const updateEditorialItem = (values, folder = EDITORIAL) =>
+//   editFolder(values, folder);
+// export const updateArtworkItem = (values, folder = ARTWORK) =>
+//   editFolder(values, folder);
+// export const updateComercialItem = (values, folder = COMERCIAL) =>
+//   editFolder(values, folder);
+// export const updateFilmsItem = (values, folder = FILMS) =>
+//   editFolder(values, folder);
+// export const updateBlogItem = (values, folder = BLOG) =>
+//   editFolder(values, folder);
+// export const updatePublicationItem = (values, folder = PUBLICACIONES) =>
+//   editFolder(values, folder);
