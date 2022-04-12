@@ -59,7 +59,7 @@ const foldersSlice = createSlice({
       }
       return state;
     },
-    [getFolder.rejected]: (state, { payload: { error } }) => {
+    [getFolder.rejected]: (state, { payload: { error } = {} }) => {
       return {
         ...state,
         isLoading: false,

@@ -12,7 +12,7 @@ export default function NewItem() {
       const { category: folder, ...rest } = values;
       if (folder !== PUBLICACIONES) {
         await createItem({ ...rest }, folder);
-        router.push(values.title);
+        router.push(`/section/${folder}/doc/${values.title}`);
       }
     } catch ({ message }) {
       console.error(message);

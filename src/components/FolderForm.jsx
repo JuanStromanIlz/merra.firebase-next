@@ -175,7 +175,7 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
                 <FormLabel fontWeight={"bold"} htmlFor="description">
                   Descripción
                 </FormLabel>
-                {/* <Editor
+                <Editor
                   name="description"
                   value={values.description}
                   onChange={(data) => {
@@ -183,7 +183,7 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
                     setFieldValue("description", data);
                     setFieldTouched("description", true);
                   }}
-                /> */}
+                />
                 <ErrorMessage name="description" component={FormErrorMessage} />
               </FormControl>
               <FormControl>

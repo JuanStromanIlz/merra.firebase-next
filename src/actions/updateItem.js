@@ -1,13 +1,9 @@
-import { updateItem } from "../services/firebase";
-import { uploadImages, deleteImages } from "../services/storage";
+import { updateItem as updateItemService } from "../services/firebase";
 import {
-  EDITORIAL,
-  ARTWORK,
-  COMERCIAL,
-  FILMS,
-  BLOG,
-  PUBLICACIONES,
-} from "..services/foldersNames";
+  uploadImages as uploadImagesService,
+  deleteImages as deleteImagesService,
+} from "../services/storage";
+import { PUBLICACIONES } from "../services/foldersNames";
 
 const imagesToDelete = (prevFolder, newFolder) => {
   let result = [];
@@ -19,25 +15,33 @@ const imagesToDelete = (prevFolder, newFolder) => {
   return result;
 };
 
-export const editFolder = async (values, folder) => {
+export const updateItem = async (values, folder) => {
   try {
-    const { id, newImages, images, title: newTitle, ...rest } = values;
+    const { id, newImages, images, title, ...rest } = values;
     let urls = [];
-    if (newImages.length > 0) {
-      let files = await newImages.map(({ data }) => data);
-      let uploadFiles = await uploadImages(files, id);
-      urls.push(...uploadFiles);
-    }
-    let deleteImages = imagesToDelete(info.images, images);
-    await deleteImages(deleteImages, id);
-    await updateItem(folder, {
-      ...rest,
+    // if (newImages.length > 0) {
+    //   let files = await newImages.map(({ data }) => data);
+    //   let uploadFiles = await uploadImagesService(files, id);
+    //   urls.push(...uploadFiles);
+    // }
+    // let deleteImages = imagesToDelete(info.images, images);
+    // await deleteImagesService(deleteImages, id);
+    await updateItemService(folder, {
       id,
-      title: newTitle,
+      title,
       images: [...images, ...urls],
+      ...rest,
     });
   } catch ({ message }) {
     return message;
+  }
+};
+
+export const updatePublicationItem = async (values, folder = PUBLICACIONES) => {
+  try {
+    await updateItem(folder, values);
+  } catch ({ message }) {
+    console.error(message);
   }
 };
 

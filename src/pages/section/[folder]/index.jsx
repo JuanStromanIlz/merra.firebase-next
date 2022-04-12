@@ -1,8 +1,8 @@
+import React, { useEffect } from "react";
 import { Heading, Stack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getFolder } from "../../features/foldersSlice";
+import { getFolder } from "../../../features/foldersSlice";
 
 export default function FolderView() {
   const router = useRouter();

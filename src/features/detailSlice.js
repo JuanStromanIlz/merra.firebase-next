@@ -1,15 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getItemByTitle } from "../services/firebase";
 
 export const getDetail = createAsyncThunk(
-  "folders/getDetail",
-  async (title, { rejectWithValue }) => {
+  "detail/getDetail",
+  async ({ title, folder }, { rejectWithValue }) => {
     try {
       let data;
-      let docs = await works.getByTitle(title);
+      let docs = await getItemByTitle(title, folder);
       docs.forEach((doc) => {
         data = { id: doc.id, ...doc.data() };
       });
-      return data;
+      return { data };
     } catch ({ message }) {
       rejectWithValue({ error: message });
     }
@@ -32,14 +33,14 @@ const detailSlice = createSlice({
         isLoading: true,
       };
     },
-    [getDetail.fulfilled]: (state, { payload: { data } }) => {
+    [getDetail.fulfilled]: (_, { payload: { data } = {} }) => {
       return {
         isLoading: false,
         error: false,
         data,
       };
     },
-    [getDetail.rejected]: (state, { payload: { error } }) => {
+    [getDetail.rejected]: (state, { payload: { error } = {} }) => {
       return {
         ...state,
         isLoading: false,

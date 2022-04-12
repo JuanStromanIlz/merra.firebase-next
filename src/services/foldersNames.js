@@ -1,6 +1,6 @@
-export const EDITORIAL = "EDITORIAL";
-export const ARTWORK = "ARTWORK";
-export const COMERCIAL = "COMERCIAL";
-export const FILMS = "FILMS";
-export const BLOG = "BLOG";
-export const PUBLICACIONES = "PUBLICACIONES";
+export const EDITORIAL = "editorial";
+export const ARTWORK = "artwork";
+export const COMERCIAL = "comercial";
+export const FILMS = "films";
+export const BLOG = "blog";
+export const PUBLICACIONES = "publicaciones";
