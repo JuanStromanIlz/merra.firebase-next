@@ -5,7 +5,7 @@ import {
 } from "../services/storage";
 import { PUBLICACIONES } from "../services/foldersNames";
 
-export const updateItem = async (values, folder) => {
+const updateDoc = async (values, folder) => {
   try {
     const { id, newImages, deleteImages, images, title, ...rest } = values;
     let urls = [];
@@ -28,10 +28,12 @@ export const updateItem = async (values, folder) => {
   }
 };
 
-export const updatePublicationItem = async (values, folder = PUBLICACIONES) => {
+export const updatePublicationDoc = async (values, folder = PUBLICACIONES) => {
   try {
     await updateItem(folder, values);
   } catch ({ message }) {
     console.error(message);
   }
 };
+
+export default updateDoc;

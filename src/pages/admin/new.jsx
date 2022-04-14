@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { Heading, Stack } from "@chakra-ui/react";
-import { createItem } from "../../actions/createItem";
+import createDoc from "../../actions/createDoc";
 import { PUBLICACIONES } from "../../services/foldersNames";
 import FolderForm from "../../components/FolderForm";
 
@@ -11,7 +11,7 @@ export default function NewItem() {
     try {
       const { category: folder, ...rest } = values;
       if (folder !== PUBLICACIONES) {
-        await createItem({ ...rest }, folder);
+        await createDoc({ ...rest }, folder);
         router.push(`/section/${folder}/doc/${values.title}`);
       }
     } catch ({ message }) {

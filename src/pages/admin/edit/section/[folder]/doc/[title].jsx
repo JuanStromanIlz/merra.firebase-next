@@ -1,23 +1,23 @@
 import React, { useEffect } from "react";
 import { Heading, Stack } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { getDetail } from "../../../../../../features/detailSlice";
 import FolderForm from "../../../../../../components/FolderForm";
-import { updateItem } from "../../../../../../actions/updateItem";
-import { PUBLICACIONES } from "../../../../../../services/foldersNames";
+import updateDoc from "../../../../../../actions/updateDoc";
+import getSection from "../../../../../../actions/getSection";
+import {
+  EDITORIAL,
+  ARTWORK,
+  COMERCIAL,
+  FILMS,
+  BLOG,
+  PUBLICACIONES,
+} from "../../../../../../services/foldersNames";
 
-export default function FolderView() {
-  const router = useRouter();
-  const { folder, title } = router.query;
-  const dispatch = useDispatch();
-  const { isLoading, error, data = {} } = useSelector(({ detail }) => detail);
-
+const EditFolderView = ({ doc }) => {
   const onSubmit = async (values) => {
     try {
       const { category: folderValue, ...rest } = values;
       if (folderValue !== PUBLICACIONES) {
-        await updateItem({ ...rest }, folderValue);
+        await updateDoc({ ...rest }, folderValue);
         router.push(`/section/${folderValue}/doc/${values.title}`);
       }
     } catch ({ message }) {
@@ -26,8 +26,8 @@ export default function FolderView() {
   };
 
   useEffect(() => {
-    dispatch(getDetail({ title, folder }));
-  }, [dispatch, title, folder]);
+    console.log(doc);
+  }, [doc]);
 
   return (
     <Stack>
@@ -39,4 +39,39 @@ export default function FolderView() {
       )}
     </Stack>
   );
+};
+
+export async function getStaticProps({ params }) {
+  const { section, title } = params;
+  const doc = await getDoc(title, section);
+  return {
+    props: {
+      doc,
+    },
+    revalidate: 5,
+  };
 }
+
+export async function getStaticPaths() {
+  const sections = [EDITORIAL, ARTWORK, COMERCIAL, FILMS, BLOG, PUBLICACIONES];
+  const paths = [];
+  const docs = [];
+  await Promise.all(
+    sections.map(async (section) => {
+      let data = await getSection(section);
+      data.map((doc) => {
+        docs.push({ section: section, title: doc.title });
+      });
+    })
+  );
+  docs.map((doc) => {
+    paths.push({ params: { ...doc } });
+  });
+
+  return {
+    paths,
+    fallback: "blocking",
+  };
+}
+
+export default EditFolderView;

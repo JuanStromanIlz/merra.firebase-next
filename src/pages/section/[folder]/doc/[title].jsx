@@ -1,25 +1,20 @@
 import React, { useEffect } from "react";
 import { Heading, Stack } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { getFolder } from "../../../../features/foldersSlice";
-import { getDetail } from "../../../../features/detailSlice";
+import {
+  EDITORIAL,
+  ARTWORK,
+  COMERCIAL,
+  FILMS,
+  BLOG,
+  PUBLICACIONES,
+} from "../../../../services/foldersNames";
+import getSection from "../../../../actions/getSection";
+import getDoc from "../../../../actions/getDoc";
 
-const TitleView = () => {
-  const router = useRouter();
-  const { folder, title } = router.query;
-  const dispatch = useDispatch();
-  // Title info
-  const { isLoading, error, data } = useSelector(({ detail }) => detail);
-  // Folder info
-  const folders = useSelector(({ folders }) => folders);
-  const folderData = folders[folder];
-  const { isLoading: folderIsLoading, error: folderError } = folders;
-
+const TitleView = ({ doc }) => {
   useEffect(() => {
-    dispatch(getFolder(folder));
-    dispatch(getDetail({ title, folder }));
-  }, [dispatch, title, folder]);
+    console.log(doc);
+  }, [doc]);
 
   return (
     <Stack>
@@ -29,5 +24,38 @@ const TitleView = () => {
     </Stack>
   );
 };
+
+export async function getStaticProps({ params }) {
+  const { section, title } = params;
+  const doc = await getDoc(title, section);
+  return {
+    props: {
+      doc,
+    },
+    revalidate: 5,
+  };
+}
+
+export async function getStaticPaths() {
+  const sections = [EDITORIAL, ARTWORK, COMERCIAL, FILMS, BLOG, PUBLICACIONES];
+  const paths = [];
+  const docs = [];
+  await Promise.all(
+    sections.map(async (section) => {
+      let data = await getSection(section);
+      data.map((doc) => {
+        docs.push({ section: section, title: doc.title });
+      });
+    })
+  );
+  docs.map((doc) => {
+    paths.push({ params: { ...doc } });
+  });
+
+  return {
+    paths,
+    fallback: "blocking",
+  };
+}
 
 export default TitleView;

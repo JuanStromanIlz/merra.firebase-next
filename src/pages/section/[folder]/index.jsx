@@ -1,31 +1,45 @@
 import React, { useEffect } from "react";
 import { Heading, Stack } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { getFolder } from "../../../features/foldersSlice";
+import {
+  EDITORIAL,
+  ARTWORK,
+  COMERCIAL,
+  FILMS,
+  BLOG,
+  PUBLICACIONES,
+} from "../../../services/foldersNames";
+import getSection from "../../../actions/getSection";
 
-export default function FolderView() {
-  const router = useRouter();
-  const { folder } = router.query;
-  const dispatch = useDispatch();
-  const folders = useSelector(({ folders }) => folders);
-  const data = folders[folder];
-  const { isLoading, error } = folders;
-
+const SectionView = ({ folder }) => {
   useEffect(() => {
-    const getFromStorage = async (folder) => {
-      try {
-        dispatch(getFolder(folder));
-      } catch ({ message }) {
-        console.error(message);
-      }
-    };
-    getFromStorage(folder);
-  }, [dispatch, folder]);
+    console.log(folder);
+  }, [folder]);
 
   return (
     <Stack>
-      <Heading>carpeta {folder}</Heading>
+      <Heading>carpeta</Heading>
     </Stack>
   );
+};
+
+export async function getStaticProps({ params }) {
+  const folder = await getSection(params.folder);
+  return {
+    props: {
+      folder,
+    },
+    revalidate: 5,
+  };
 }
+
+export async function getStaticPaths() {
+  const sections = [EDITORIAL, ARTWORK, COMERCIAL, FILMS, BLOG, PUBLICACIONES];
+  // Get the paths we want to pre-render based on sections
+  const paths = sections.map((folder) => ({
+    params: { folder },
+  }));
+
+  return { paths, fallback: false };
+}
+
+export default SectionView;
