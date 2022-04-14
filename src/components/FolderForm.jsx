@@ -29,7 +29,7 @@ import {
   PUBLICACIONES,
   BLOG,
 } from "../services/foldersNames";
-import Editor from "./Editor";
+// import Editor from "./Editor";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("El titulo es requerido."),
@@ -181,14 +181,14 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
                 <FormLabel fontWeight={"bold"} htmlFor="description">
                   Descripción
                 </FormLabel>
-                <Editor
+                {/* <Editor
                   name="description"
                   value={values.description}
                   onChange={(data) => {
                     setFieldValue("description", data);
                     setFieldTouched("description", true);
                   }}
-                />
+                /> */}
                 <ErrorMessage name="description" component={FormErrorMessage} />
               </FormControl>
               <FormControl>
