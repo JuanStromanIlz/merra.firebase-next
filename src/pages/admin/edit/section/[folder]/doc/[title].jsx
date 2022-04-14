@@ -11,6 +11,7 @@ import {
   BLOG,
   PUBLICACIONES,
 } from "../../../../../../services/foldersNames";
+import getDoc from "../../../../../../actions/getDoc";
 
 const EditFolderView = ({ doc }) => {
   const onSubmit = async (values) => {
@@ -31,19 +32,17 @@ const EditFolderView = ({ doc }) => {
 
   return (
     <Stack>
-      <Heading>
-        edit folder: {folder} title: {title}
-      </Heading>
-      {Object.keys(data).length !== 0 && (
-        <FolderForm isSubmit={isLoading} folder={data} onSubmit={onSubmit} />
+      <Heading>edit folder</Heading>
+      {Object.keys(doc).length !== 0 && (
+        <FolderForm folder={doc} onSubmit={onSubmit} />
       )}
     </Stack>
   );
 };
 
 export async function getStaticProps({ params }) {
-  const { section, title } = params;
-  const doc = await getDoc(title, section);
+  const { folder, title } = params;
+  const doc = await getDoc(title, folder);
   return {
     props: {
       doc,
@@ -60,7 +59,7 @@ export async function getStaticPaths() {
     sections.map(async (section) => {
       let data = await getSection(section);
       data.map((doc) => {
-        docs.push({ section: section, title: doc.title });
+        docs.push({ folder: section, title: doc.title });
       });
     })
   );

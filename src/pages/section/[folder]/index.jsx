@@ -36,7 +36,7 @@ export async function getStaticPaths() {
   const sections = [EDITORIAL, ARTWORK, COMERCIAL, FILMS, BLOG, PUBLICACIONES];
   // Get the paths we want to pre-render based on sections
   const paths = sections.map((folder) => ({
-    params: { folder },
+    params: { folder: folder },
   }));
 
   return { paths, fallback: false };

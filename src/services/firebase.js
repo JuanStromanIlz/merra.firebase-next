@@ -30,8 +30,8 @@ export const getItemByTitle = (title, folder) => {
 export const createItem = (folder, data) => {
   return addDoc(folderRef(folder), {
     ...data,
-    created: Timestamp.now(),
-    updated: Timestamp.now(),
+    created: Timestamp.now().toJSON(),
+    updated: Timestamp.now().toJSON(),
   });
 };
 
@@ -39,7 +39,7 @@ export const updateItem = (folder, data) => {
   const { id, ...rest } = data;
   return updateDoc(itemRef(id, folder), {
     ...rest,
-    updated: Timestamp.now(),
+    updated: Timestamp.now().toJSON(),
   });
 };
 

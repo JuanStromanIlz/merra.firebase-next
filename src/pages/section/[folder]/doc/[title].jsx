@@ -18,16 +18,14 @@ const TitleView = ({ doc }) => {
 
   return (
     <Stack>
-      <Heading>
-        carpeta: {folder}, titulo: {title}
-      </Heading>
+      <Heading>carpeta</Heading>
     </Stack>
   );
 };
 
 export async function getStaticProps({ params }) {
-  const { section, title } = params;
-  const doc = await getDoc(title, section);
+  const { folder, title } = params;
+  const doc = await getDoc(title, folder);
   return {
     props: {
       doc,
@@ -44,7 +42,7 @@ export async function getStaticPaths() {
     sections.map(async (section) => {
       let data = await getSection(section);
       data.map((doc) => {
-        docs.push({ section: section, title: doc.title });
+        docs.push({ folder: section, title: doc.title });
       });
     })
   );
