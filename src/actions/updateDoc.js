@@ -1,26 +1,29 @@
 import { updateItem as updateItemService } from "../services/firebase";
 import {
-  uploadImages as uploadImagesService,
-  deleteImages as deleteImagesService,
+  uploadFiles as uploadFilesService,
+  deleteFiles as deleteFilesService,
 } from "../services/storage";
 import { PUBLICACIONES } from "../services/foldersNames";
 
 const updateDoc = async (values, folder) => {
   try {
-    const { id, newImages, deleteImages, images, title, ...rest } = values;
+    const { id, newFiles, deleteFiles, files, title, ...rest } = values;
     let urls = [];
-    if (newImages.length > 0) {
-      let files = await newImages.map(({ data }) => data);
-      let uploadFiles = await uploadImagesService(files, id);
+    if (newFiles.length > 0) {
+      let files = await newFiles.map(({ data, isVideo }) => ({
+        data,
+        isVideo,
+      }));
+      let uploadFiles = await uploadFilesService(files, id);
       urls.push(...uploadFiles);
     }
-    if (deleteImages.length > 0) {
-      await deleteImagesService(deleteImages, id);
+    if (deleteFiles.length > 0) {
+      await deleteFilesService(deleteFiles, id);
     }
     await updateItemService(folder, {
       id,
       title,
-      images: [...images, ...urls],
+      files: [...files, ...urls],
       ...rest,
     });
   } catch ({ message }) {

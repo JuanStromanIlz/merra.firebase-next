@@ -8,35 +8,37 @@ import {
 
 const storageRef = (path) => ref(firebaseStorage, path);
 
-export const uploadImages = async (images, folder) => {
+export const uploadFiles = async (files, folder) => {
   try {
-    if (images.length === 0) {
+    if (files.length === 0) {
       return [];
     }
-    let files = [];
-    for (const image of images) {
-      let imageRef = storageRef(`${folder}/${image.name}`);
-      await uploadBytes(imageRef, image);
-      let url = await getDownloadURL(imageRef);
-      files.push({
-        name: image.name,
+    let uploadFiles = [];
+    for (const file of files) {
+      const { data, isVideo } = file;
+      let fileRef = storageRef(`${folder}/${data.name}`);
+      await uploadBytes(fileRef, data);
+      let url = await getDownloadURL(fileRef);
+      uploadFiles.push({
+        name: data.name,
         url,
+        isVideo,
       });
     }
-    return files;
+    return uploadFiles;
   } catch ({ message }) {
     return message;
   }
 };
 
-export const deleteImages = async (images, folder) => {
+export const deleteFiles = async (files, folder) => {
   try {
-    if (images.length === 0) {
+    if (files.length === 0) {
       return;
     }
-    for (const image of images) {
-      let imageRef = storageRef(`${folder}/${image.name}`);
-      await deleteObject(imageRef);
+    for (const file of files) {
+      let fileRef = storageRef(`${folder}/${file.name}`);
+      await deleteObject(fileRef);
     }
     return;
   } catch ({ message }) {

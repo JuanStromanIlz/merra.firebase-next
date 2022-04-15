@@ -28,7 +28,7 @@ export async function getStaticProps({ params }) {
   const doc = await getDoc(title, folder);
   return {
     props: {
-      doc,
+      doc: { category: folder, ...doc },
     },
     revalidate: 5,
   };

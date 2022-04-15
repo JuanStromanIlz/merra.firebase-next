@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
-import { Heading, Stack } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { Button, Heading, Stack } from "@chakra-ui/react";
 import FolderForm from "../../../../../../components/FolderForm";
 import updateDoc from "../../../../../../actions/updateDoc";
 import getSection from "../../../../../../actions/getSection";
+import deleteDoc from "../../../../../../actions/deleteDoc";
 import {
   EDITORIAL,
   ARTWORK,
@@ -13,14 +15,23 @@ import {
 } from "../../../../../../services/foldersNames";
 import getDoc from "../../../../../../actions/getDoc";
 
-const EditFolderView = ({ doc }) => {
+const EditTitleView = ({ doc }) => {
+  const router = useRouter();
   const onSubmit = async (values) => {
     try {
-      const { category: folderValue, ...rest } = values;
-      if (folderValue !== PUBLICACIONES) {
-        await updateDoc({ ...rest }, folderValue);
-        router.push(`/section/${folderValue}/doc/${values.title}`);
+      const { category: folder, ...rest } = values;
+      if (folder !== PUBLICACIONES) {
+        await updateDoc({ ...rest }, folder);
+        router.push(`/section/${folder}/doc/${values.title}`);
       }
+    } catch ({ message }) {
+      console.error(message);
+    }
+  };
+
+  const onDeleteTitle = async (document) => {
+    try {
+      await deleteDoc(document);
     } catch ({ message }) {
       console.error(message);
     }
@@ -32,6 +43,7 @@ const EditFolderView = ({ doc }) => {
 
   return (
     <Stack>
+      <Button onClick={() => onDeleteTitle(doc)}>delete</Button>
       <Heading>edit folder</Heading>
       {Object.keys(doc).length !== 0 && (
         <FolderForm folder={doc} onSubmit={onSubmit} />
@@ -45,9 +57,9 @@ export async function getStaticProps({ params }) {
   const doc = await getDoc(title, folder);
   return {
     props: {
-      doc,
+      doc: { category: folder, ...doc },
     },
-    revalidate: 5,
+    revalidate: 1,
   };
 }
 
@@ -73,4 +85,4 @@ export async function getStaticPaths() {
   };
 }
 
-export default EditFolderView;
+export default EditTitleView;
