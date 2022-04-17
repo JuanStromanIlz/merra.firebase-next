@@ -55,6 +55,16 @@ const EditTitleView = ({ doc }) => {
 export async function getStaticProps({ params }) {
   const { folder, title } = params;
   const doc = await getDoc(title, folder);
+
+  if (!doc) {
+    return {
+      redirect: {
+        destination: `/section/${folder}`,
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       doc: { category: folder, ...doc },
