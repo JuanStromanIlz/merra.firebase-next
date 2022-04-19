@@ -10,17 +10,21 @@
     "export": "next export"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.1.7",
     "@chakra-ui/react": "^1.8.8",
     "@ckeditor/ckeditor5-build-classic": "^33.0.0",
     "@ckeditor/ckeditor5-react": "^4.0.1",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@fontsource/open-sans": "^4.5.8",
+    "@fontsource/poppins": "^4.5.5",
     "firebase": "^9.6.10",
     "formik": "^2.2.9",
     "framer-motion": "^6.2.9",
     "next": "12.1.4",
     "react": "18.0.0",
     "react-dom": "18.0.0",
+    "react-share": "^4.4.0",
     "styled-components": "^5.3.5",
     "yup": "^0.32.11"
   },
