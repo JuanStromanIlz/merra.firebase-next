@@ -64,7 +64,11 @@ const KeyWords = ({ values }) => {
               onChange={(event) => setNewKeyWord(event.target.value)}
               placeholder="Agregar palabra clave"
             />
-            <Button onClick={() => handleKeyWord(push)} width={"fit-content"}>
+            <Button
+              onClick={() => handleKeyWord(push)}
+              width={"fit-content"}
+              disabled={newKeyWord.length === 0}
+            >
               Agregar
             </Button>
           </Stack>
