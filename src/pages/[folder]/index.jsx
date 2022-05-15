@@ -14,6 +14,7 @@ import Item from "../../components/Item";
 import StickyTitle from "../../components/StickyTitle";
 import Navbar from "../../components/Navbar";
 import PageWrapper from "../../components/PageWrapper";
+import Title from "../../components/Title";
 
 const SectionView = ({ folder, headerInfo }) => {
   const router = useRouter();
@@ -25,8 +26,10 @@ const SectionView = ({ folder, headerInfo }) => {
   return (
     <PageWrapper>
       <Navbar />
-      {/* <StickyTitle>{folderParam}</StickyTitle> */}
-      <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
+      <Title as={"h2"} size={"4xl"} letterSpacing={"wider"} isTruncated my={12}>
+        {folderParam}
+      </Title>
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
         {folder.map((item) => (
           <Item
             key={item.id}
@@ -46,7 +49,7 @@ export async function getStaticProps({ params }) {
     props: {
       folder,
     },
-    revalidate: 1,
+    revalidate: 10,
   };
 }
 

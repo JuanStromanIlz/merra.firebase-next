@@ -18,7 +18,7 @@ const folderRef = (folder) => collection(db, folder);
 const itemRef = (id, folder) => doc(db, folder, id);
 
 export const getFolder = (folder) => {
-  let q = query(folderRef(folder), orderBy("created", "desc"));
+  let q = query(folderRef(folder), orderBy("updated", "desc"));
   return getDocs(q);
 };
 

@@ -42,7 +42,7 @@ export async function getStaticProps({ params }) {
   if (!doc) {
     return {
       redirect: {
-        destination: `/section/${folder}`,
+        destination: `/${folder}`,
         permanent: false,
       },
     };
@@ -52,7 +52,7 @@ export async function getStaticProps({ params }) {
     props: {
       doc: { category: folder, ...doc },
     },
-    revalidate: 1,
+    revalidate: 10,
   };
 }
 

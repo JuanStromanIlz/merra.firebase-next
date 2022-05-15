@@ -1,19 +1,27 @@
 import React from "react";
-import { Heading, Box } from "@chakra-ui/react";
+import { Heading, Flex } from "@chakra-ui/react";
 import styled from "styled-components";
 
-const TitleContainer = styled(Box)`
+const TitleContainer = styled(Flex)`
   .title {
-    -webkit-text-stroke: 2px #d22d2d;
+    -webkit-text-stroke: 1.5px #d22d2d;
   }
 `;
 
 const Title = ({ children, ...rest }) => (
-  <TitleContainer>
+  <TitleContainer
+    w={"100%"}
+    h={"100%"}
+    justifyContent={"center"}
+    alignItems={"center"}
+  >
     <Heading
       fontWeight={"normal"}
+      textTransform={"capitalize"}
       color={"transparent"}
       className="title"
+      textAlign={"center"}
+      noOfLines={3}
       {...rest}
     >
       {children}

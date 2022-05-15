@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Box, Flex, Link as ChakraLink, Heading } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import { Admin } from "../contexts/AdminContext";
 import {
@@ -13,15 +12,12 @@ import {
 } from "../services/foldersNames";
 
 const NavTag = ({ children, href, ...props }) => {
-  const { asPath } = useRouter();
-
   return (
     <Link href={href} passHref>
       <ChakraLink
         borderRadius={"md"}
         display={"flex"}
-        px={2}
-        py={1}
+        p={2}
         _hover={{
           textDecoration: "none",
           color: "red.500",
@@ -29,9 +25,6 @@ const NavTag = ({ children, href, ...props }) => {
         _focus={{
           boxShadow: "none",
         }}
-        color={asPath.includes(href) && "red.500"}
-        borderWidth={asPath.includes(href) && 0.5}
-        borderColor={asPath.includes(href) && "red.500"}
       >
         <Heading
           fontSize={"xs"}
@@ -55,12 +48,11 @@ const Navbar = () => {
       top={0}
       width={"100%"}
       zIndex={"1024"}
-      py={5}
     >
       <Flex
         direction={"row"}
         display={{ base: "none", md: "flex" }}
-        justifyContent={"space-between"}
+        justifyContent={"space-around"}
         alignItems={"center"}
       >
         <Box>
