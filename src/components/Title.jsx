@@ -21,7 +21,6 @@ const Title = ({ children, ...rest }) => (
       color={"transparent"}
       className="title"
       textAlign={"center"}
-      noOfLines={3}
       {...rest}
     >
       {children}

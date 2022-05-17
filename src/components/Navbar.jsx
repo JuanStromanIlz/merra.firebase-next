@@ -48,6 +48,7 @@ const Navbar = () => {
       top={0}
       width={"100%"}
       zIndex={"1024"}
+      mb={12}
     >
       <Flex
         direction={"row"}

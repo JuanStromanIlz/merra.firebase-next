@@ -44,7 +44,7 @@ const Item = ({ data, href }) => {
         alignItems={"center"}
         m={4}
       >
-        <Title>{data.title}</Title>
+        <Title noOfLines={3}>{data.title}</Title>
       </Flex>
       <NextLink href={href} passHref>
         <LinkBox className="image">
@@ -67,7 +67,7 @@ const Item = ({ data, href }) => {
           px={3}
           py={2}
           flexDirection={"column"}
-          color={"red.500"}
+          color={"pink.50"}
           borderTopRightRadius={"md"}
         >
           {data.keyWords.map((word) => (

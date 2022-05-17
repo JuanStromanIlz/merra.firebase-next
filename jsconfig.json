@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/styled-components/*": ["src/styled-components/*"],
+      "@/context/*": ["src/context/*"],
+      "@/utility/*": ["src/utility/*"]
+    }
+  }
+}

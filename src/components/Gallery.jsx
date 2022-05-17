@@ -93,7 +93,7 @@ const Gallery = ({ open, files, index, onClose }) => {
   }, [open, files, index]);
 
   return (
-    <Modal isOpen={open} onClose={onClose} size={"full"} preserveScrollBarGap>
+    <Modal isOpen={open} onClose={onClose} size={"full"}>
       <ModalContent
         onKeyDown={keyPress}
         onTouchStart={touchStart}

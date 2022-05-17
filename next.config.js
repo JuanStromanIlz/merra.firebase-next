@@ -10,6 +10,10 @@ const nextConfig = {
     NEXT_PUBLIC_FIREBASE_PROJECT_ID: "merra-firebase-next",
     NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: "merra-firebase-next.appspot.com",
   },
+  compiler: {
+    // ssr and displayName are configured by default
+    styledComponents: true,
+  },
 };
 
 module.exports = nextConfig;

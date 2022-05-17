@@ -15,6 +15,7 @@ import StickyTitle from "../../components/StickyTitle";
 import Navbar from "../../components/Navbar";
 import PageWrapper from "../../components/PageWrapper";
 import Title from "../../components/Title";
+import Head from "next/head";
 
 const SectionView = ({ folder, headerInfo }) => {
   const router = useRouter();
@@ -24,7 +25,7 @@ const SectionView = ({ folder, headerInfo }) => {
   }, [folder]);
 
   return (
-    <PageWrapper>
+    <PageWrapper pageTitle={folderParam}>
       <Navbar />
       <Title as={"h2"} size={"4xl"} letterSpacing={"wider"} isTruncated my={12}>
         {folderParam}
