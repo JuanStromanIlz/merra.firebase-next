@@ -39,7 +39,7 @@ const NavTag = ({ children, href, ...props }) => {
   );
 };
 
-const Navbar = () => {
+const Navbar = ({ ...props }) => {
   const { user, signOut } = useContext(Admin);
 
   return (
@@ -48,7 +48,7 @@ const Navbar = () => {
       top={0}
       width={"100%"}
       zIndex={"1024"}
-      mb={12}
+      {...props}
     >
       <Flex
         direction={"row"}

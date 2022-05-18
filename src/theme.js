@@ -57,6 +57,7 @@ const theme = extendTheme({
         padding: 0,
         background: "black",
         color: "pink.50",
+        fontSize: 17,
       },
       button: {
         _focus: {

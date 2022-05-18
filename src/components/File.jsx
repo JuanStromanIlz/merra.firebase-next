@@ -35,6 +35,7 @@ const File = ({ data, onClick }) => {
       key={name}
       width={landscape ? { base: "100%" } : { base: "50%", md: "33%" }}
       p={3}
+      cursor={"pointer"}
     >
       <Img
         src={url}

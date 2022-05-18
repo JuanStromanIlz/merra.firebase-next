@@ -11,11 +11,8 @@ import {
 } from "../../services/foldersNames";
 import getSection from "../../actions/getSection";
 import Item from "../../components/Item";
-import StickyTitle from "../../components/StickyTitle";
-import Navbar from "../../components/Navbar";
 import PageWrapper from "../../components/PageWrapper";
 import Title from "../../components/Title";
-import Head from "next/head";
 
 const SectionView = ({ folder, headerInfo }) => {
   const router = useRouter();
@@ -26,7 +23,6 @@ const SectionView = ({ folder, headerInfo }) => {
 
   return (
     <PageWrapper pageTitle={folderParam}>
-      <Navbar />
       <Title as={"h2"} size={"4xl"} letterSpacing={"wider"} isTruncated my={12}>
         {folderParam}
       </Title>

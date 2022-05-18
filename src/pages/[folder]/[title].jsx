@@ -1,18 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Heading,
-  HStack,
-  Img,
-  SimpleGrid,
-  Stack,
-  Tag,
-  useDisclosure,
-  Text,
-} from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Center, Flex, useDisclosure, Text } from "@chakra-ui/react";
 import {
   EDITORIAL,
   ARTWORK,
@@ -24,10 +11,10 @@ import {
 import getSection from "../../actions/getSection";
 import getDoc from "../../actions/getDoc";
 import PageWrapper from "../../components/PageWrapper";
-import Navbar from "../../components/Navbar";
 import Title from "../../components/Title";
 import Gallery from "../../components/Gallery";
 import File from "src/components/File";
+import TextParse from "src/components/TextParse";
 
 const TitleView = ({ doc }) => {
   const { isOpen, onToggle } = useDisclosure();
@@ -36,24 +23,10 @@ const TitleView = ({ doc }) => {
     setGalleryIndex(index);
     onToggle();
   };
-  const firstImg = doc.files?.find(({ isVideo }) => isVideo == false);
 
   return (
     <PageWrapper pageTitle={doc.title}>
-      <Navbar />
-      {firstImg && (
-        <Center>
-          <Img
-            src={firstImg.url}
-            alt={firstImg.name}
-            borderRadius={"md"}
-            objectFit={"contain"}
-            width={"100%"}
-            maxWidth={600}
-          />
-        </Center>
-      )}
-      <Title as={"h2"} size={"4xl"} letterSpacing={"wider"} my={12}>
+      <Title as={"h1"} size={"4xl"} letterSpacing={"wider"} my={12}>
         {doc.title}
       </Title>
       {doc.files.length > 0 && (
@@ -63,11 +36,9 @@ const TitleView = ({ doc }) => {
           ))}
         </Flex>
       )}
-      {doc.description && (
-        <Center>
-          <Text>{doc.description}</Text>
-        </Center>
-      )}
+      <Center my={3}>
+        <TextParse>{doc.description}</TextParse>
+      </Center>
       {doc.keyWords?.length > 0 && (
         <Flex
           borderTopWidth={1}
