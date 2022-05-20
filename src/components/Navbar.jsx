@@ -1,34 +1,31 @@
 import React, { useContext } from "react";
-import { Box, Flex, Link as ChakraLink, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Link as ChakraLink,
+  Heading,
+  Img,
+  Center,
+  Modal,
+  ModalContent,
+  useDisclosure,
+  ModalBody,
+} from "@chakra-ui/react";
 import Link from "next/link";
 import { Admin } from "../contexts/AdminContext";
-import {
-  EDITORIAL,
-  ARTWORK,
-  COMERCIAL,
-  FILMS,
-  BLOG,
-  PUBLICACIONES,
-} from "../services/foldersNames";
+import * as FOLDERS from "../services/foldersNames";
 
 const NavTag = ({ children, href, ...props }) => {
   return (
     <Link href={href} passHref>
       <ChakraLink
-        borderRadius={"md"}
-        display={"flex"}
-        p={2}
-        _hover={{
-          textDecoration: "none",
-          color: "red.500",
-        }}
         _focus={{
           boxShadow: "none",
         }}
       >
         <Heading
-          fontSize={"xs"}
-          textTransform={"uppercase"}
+          fontSize={"sm"}
+          textTransform={"capitalize"}
           letterSpacing={"wide"}
           {...props}
         >
@@ -39,46 +36,100 @@ const NavTag = ({ children, href, ...props }) => {
   );
 };
 
+const NavTagMobile = ({ children, href, ...props }) => {
+  return (
+    <Link href={href} passHref>
+      <ChakraLink
+        _focus={{
+          boxShadow: "none",
+        }}
+      >
+        <Heading
+          as={"h2"}
+          textTransform={"capitalize"}
+          fontSize={"5xl"}
+          letterSpacing={"wider"}
+          textAlign={"center"}
+          sx={{
+            "-webkit-text-stroke": "1.5px #d22d2d",
+          }}
+          color={"transparent"}
+          {...props}
+        >
+          {children}
+        </Heading>
+      </ChakraLink>
+    </Link>
+  );
+};
+
 const Navbar = ({ ...props }) => {
+  const { isOpen, onToggle } = useDisclosure(false);
   const { user, signOut } = useContext(Admin);
 
   return (
-    <Box
-      position={{ base: "sticky", md: "inherit" }}
-      top={0}
-      width={"100%"}
-      zIndex={"1024"}
-      {...props}
-    >
+    <Box position={"sticky"} top={0} width={"100%"} zIndex={"1024"} {...props}>
       <Flex
         direction={"row"}
         display={{ base: "none", md: "flex" }}
         justifyContent={"space-around"}
         alignItems={"center"}
+        pt={6}
       >
-        <Box>
-          <NavTag href={`/${EDITORIAL}`}>{EDITORIAL}</NavTag>
-        </Box>
-        <Box>
-          <NavTag href={`/${ARTWORK}`}>{ARTWORK}</NavTag>
-        </Box>
-        <Box>
-          <NavTag href={`/${COMERCIAL}`}>{COMERCIAL}</NavTag>
-        </Box>
-        <Box>
-          <NavTag href={`/${FILMS}`}>{FILMS}</NavTag>
-        </Box>
-        <Box>
-          <NavTag href={`/${BLOG}`}>{BLOG}</NavTag>
-        </Box>
-        <Box>
-          <NavTag href={`/${PUBLICACIONES}`}>{PUBLICACIONES}</NavTag>
-        </Box>
-        <Box>
-          <NavTag href={`/info`}>info</NavTag>
-        </Box>
+        {Object.values(FOLDERS).map((i, index) => (
+          <NavTag key={`${i}-${index}`} href={`/${i}`}>
+            {i}
+          </NavTag>
+        ))}
       </Flex>
-      {/* mobile menu */}
+      <Flex
+        display={{ base: "flex", md: "none" }}
+        justifyContent={"center"}
+        alignItems={"center"}
+        position={"sticky"}
+        top={0}
+        width={"100%"}
+        zIndex={"1024"}
+        pt={6}
+      >
+        <Img src="/heart.svg" w={"48px"} onClick={onToggle} />
+        <Modal
+          isOpen={isOpen}
+          onClose={onToggle}
+          size={"full"}
+          motionPreset="scale"
+        >
+          <ModalContent bg={"blackAlpha.800"} height={"100%"}>
+            <ModalBody p={0}>
+              <Flex direction={"column"}>
+                <Flex
+                  position={"absolute"}
+                  top={0}
+                  left={0}
+                  right={0}
+                  justifyContent="center"
+                  pt={6}
+                >
+                  <Img src="/heart.svg" w={"48px"} onClick={onToggle} />
+                </Flex>
+                <Flex
+                  direction={"column"}
+                  justifyContent={"center"}
+                  alignContent={"center"}
+                  height={"100vh"}
+                  width={"100vw"}
+                >
+                  {Object.values(FOLDERS).map((i, index) => (
+                    <NavTagMobile key={`${i}-${index}`} href={`/${i}`}>
+                      {i}
+                    </NavTagMobile>
+                  ))}
+                </Flex>
+              </Flex>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      </Flex>
     </Box>
   );
 };

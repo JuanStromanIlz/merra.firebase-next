@@ -58,11 +58,18 @@ const theme = extendTheme({
         background: "black",
         color: "pink.50",
         fontSize: 17,
+        lineHeight: 1.6,
       },
       button: {
         _focus: {
           boxShadow: "none !important",
         },
+      },
+      "&::-webkit-scrollbar": {
+        width: "10px",
+      },
+      "&::-webkit-scrollbar-thumb": {
+        backgroundColor: "pink.50",
       },
     },
   },
