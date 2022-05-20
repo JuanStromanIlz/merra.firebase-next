@@ -44,7 +44,7 @@ const File = ({ data, onClick }) => {
         objectFit={"contain"}
         onLoad={onLoad}
         onClick={onClick}
-        width={landscape && "80%"}
+        width={landscape && { base: "100%", md: "60%" }}
       />
     </Center>
   ) : (

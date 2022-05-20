@@ -48,7 +48,7 @@ const theme = extendTheme({
       html: {
         height: "100vh",
       },
-      selection: {
+      "::selection": {
         color: "red.500",
         backgroundColor: "transparent",
       },
@@ -57,7 +57,7 @@ const theme = extendTheme({
         padding: 0,
         background: "black",
         color: "pink.50",
-        fontSize: 17,
+        fontSize: 16,
         lineHeight: 1.6,
       },
       button: {

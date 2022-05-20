@@ -4,6 +4,8 @@ import { Heading, Stack } from "@chakra-ui/react";
 import createDoc from "../../actions/createDoc";
 import { PUBLICACIONES } from "../../services/foldersNames";
 import FolderForm from "../../components/FolderForm";
+import Title from "src/components/Title";
+import PageWrapper from "src/components/PageWrapper";
 
 export default function NewItem() {
   const router = useRouter();
@@ -20,9 +22,11 @@ export default function NewItem() {
   };
 
   return (
-    <Stack>
-      <Heading>Nueva carpeta</Heading>
+    <PageWrapper pageTitle="Nueva publicacion">
+      <Title as={"h1"} size={"4xl"} letterSpacing={"wider"} my={12}>
+        Nueva publicacion
+      </Title>
       <FolderForm onSubmit={onSubmit} />
-    </Stack>
+    </PageWrapper>
   );
 }

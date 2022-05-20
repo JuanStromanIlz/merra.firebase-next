@@ -4,6 +4,7 @@ import {
   LinkOverlay,
   LinkBox,
   Link,
+  Box,
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
@@ -33,6 +34,7 @@ const MediaContainer = styled(Flex)`
 `;
 
 const Item = ({ data, href }) => {
+  const file = data.files[0];
   return (
     <MediaContainer borderRadius={"md"} cursor={"pointer"}>
       <Flex
@@ -49,14 +51,20 @@ const Item = ({ data, href }) => {
       <NextLink href={href} passHref>
         <LinkBox className="image">
           <LinkOverlay className="image">
-            <Img
-              src={data.files.find(({ isVideo }) => isVideo == false).url}
-              alt=""
-              objectFit={"cover"}
-              objectPosition={"center"}
-              h={"100%"}
-              w={"100%"}
-            />
+            {!file.isVideo ? (
+              <Img
+                src={file.url}
+                alt=""
+                objectFit={"cover"}
+                objectPosition={"center"}
+                h={"100%"}
+                w={"100%"}
+              />
+            ) : (
+              <Box borderRadius={"md"} overflow={"hidden"}>
+                <video c src={file.url} width={"100%"} height="100%" />
+              </Box>
+            )}
           </LinkOverlay>
         </LinkBox>
       </NextLink>
@@ -77,7 +85,7 @@ const Item = ({ data, href }) => {
                 _hover={{ textDecoration: "underline" }}
                 textTransform={"capitalize"}
               >
-                #{word}
+                {word}
               </Link>
             </WrapItem>
           ))}

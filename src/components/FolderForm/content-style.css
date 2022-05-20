@@ -4,9 +4,14 @@
 .ck .ck-content {
   background-color: black !important;
 }
+.ck .ck-content h2,
+h3,
+h4 {
+  color: #d22d2d;
+}
 .ck-content h2 {
   display: block;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
   margin-inline-start: 0px;
@@ -15,7 +20,7 @@
 }
 .ck-content h3 {
   display: block;
-  font-size: 1.17em;
+  font-size: 1.25rem;
   margin-block-start: 1em;
   margin-block-end: 1em;
   margin-inline-start: 0px;
@@ -23,6 +28,7 @@
   font-weight: bold;
 }
 .ck-content h4 {
+  font-size: 1rem;
   display: block;
   margin-block-start: 1.33em;
   margin-block-end: 1.33em;

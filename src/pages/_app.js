@@ -3,7 +3,7 @@ import "@fontsource/poppins";
 import "@fontsource/open-sans";
 import "../components/FolderForm/content-style.css";
 import { useRouter } from "next/router";
-import { ChakraProvider, CSSReset } from "@chakra-ui/react";
+import { Center, ChakraProvider, CSSReset, Img } from "@chakra-ui/react";
 import AdminContext from "../contexts/AdminContext";
 import theme from "../theme";
 import { useBoolean } from "@chakra-ui/react";
@@ -25,7 +25,13 @@ function MyApp({ Component, pageProps }) {
     <ChakraProvider theme={theme}>
       <CSSReset />
       <AdminContext>
-        {loading ? "loading..." : <Component {...pageProps} />}
+        {loading ? (
+          <Center w={"100vw"} h={"100vh"}>
+            <Img src="/heart.svg" w={"20%"} />
+          </Center>
+        ) : (
+          <Component {...pageProps} />
+        )}
       </AdminContext>
     </ChakraProvider>
   );

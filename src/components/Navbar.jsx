@@ -40,6 +40,9 @@ const NavTagMobile = ({ children, href, ...props }) => {
   return (
     <Link href={href} passHref>
       <ChakraLink
+        _hover={{
+          textDecoration: "none",
+        }}
         _focus={{
           boxShadow: "none",
         }}
@@ -72,7 +75,7 @@ const Navbar = ({ ...props }) => {
       <Flex
         direction={"row"}
         display={{ base: "none", md: "flex" }}
-        justifyContent={"space-around"}
+        justifyContent={"space-between"}
         alignItems={"center"}
         pt={6}
       >
@@ -100,31 +103,29 @@ const Navbar = ({ ...props }) => {
           motionPreset="scale"
         >
           <ModalContent bg={"blackAlpha.800"} height={"100%"}>
-            <ModalBody p={0}>
-              <Flex direction={"column"}>
-                <Flex
-                  position={"absolute"}
-                  top={0}
-                  left={0}
-                  right={0}
-                  justifyContent="center"
-                  pt={6}
-                >
-                  <Img src="/heart.svg" w={"48px"} onClick={onToggle} />
-                </Flex>
-                <Flex
-                  direction={"column"}
-                  justifyContent={"center"}
-                  alignContent={"center"}
-                  height={"100vh"}
-                  width={"100vw"}
-                >
-                  {Object.values(FOLDERS).map((i, index) => (
-                    <NavTagMobile key={`${i}-${index}`} href={`/${i}`}>
-                      {i}
-                    </NavTagMobile>
-                  ))}
-                </Flex>
+            <ModalBody justifyContent={"center"}>
+              <Flex
+                position={"absolute"}
+                top={0}
+                left={0}
+                right={0}
+                justifyContent="center"
+                pt={6}
+              >
+                <Img src="/heart.svg" w={"48px"} onClick={onToggle} />
+              </Flex>
+              <Flex
+                direction={"column"}
+                justifyContent={"center"}
+                alignContent={"center"}
+                height={"100%"}
+                margin={"auto"}
+              >
+                {Object.values(FOLDERS).map((i, index) => (
+                  <NavTagMobile key={`${i}-${index}`} href={`/${i}`}>
+                    {i}
+                  </NavTagMobile>
+                ))}
               </Flex>
             </ModalBody>
           </ModalContent>

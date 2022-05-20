@@ -8,8 +8,8 @@ const PageWrapper = ({ children, pageTitle = "..." }) => (
     <Head>
       <title>{pageTitle.replace(/^\w/, (c) => c.toUpperCase())}</title>
     </Head>
-    <Navbar py={3} />
-    <Stack direction={"column"} px={6} py={3} margin={"auto"} maxWidth={1400}>
+    <Stack direction={"column"} px={6} pb={6} margin={"auto"} maxWidth={1400}>
+      <Navbar />
       {children}
     </Stack>
   </Fragment>

@@ -69,7 +69,7 @@ const FileUpload = ({ values, newFiles, setNewFiles, setDeleteFiles }) => {
         />
       </GridItem>
     ) : (
-      <GridItem position={"relative"}>
+      <GridItem position={"relative"} overflow="hidden" borderRadius={"md"}>
         <Image
           src={url}
           alt=""
@@ -95,7 +95,7 @@ const FileUpload = ({ values, newFiles, setNewFiles, setDeleteFiles }) => {
   return (
     <FormControl>
       <FormLabel fontWeight={"bold"} htmlFor="addFiles">
-        Archivos
+        Archivos:
       </FormLabel>
       <FieldArray name="files">
         {({ remove }) => (
@@ -127,7 +127,8 @@ const FileUpload = ({ values, newFiles, setNewFiles, setDeleteFiles }) => {
             />
             <Button
               onClick={() => inputRef.current.click()}
-              width={"fit-content"}
+              colorScheme="pink"
+              width={{ base: "100%", md: "fit-content" }}
             >
               Subir archivos
             </Button>

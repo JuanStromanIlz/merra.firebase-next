@@ -62,11 +62,15 @@ const KeyWords = ({ values }) => {
               id="addKeyWord"
               value={newKeyWord}
               onChange={(event) => setNewKeyWord(event.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") e.preventDefault();
+              }}
               placeholder="Agregar palabra clave"
             />
             <Button
               onClick={() => handleKeyWord(push)}
               width={"fit-content"}
+              colorScheme="pink"
               disabled={newKeyWord.length === 0}
             >
               Agregar

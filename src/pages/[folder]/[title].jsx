@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Center, Flex, useDisclosure, Text } from "@chakra-ui/react";
+import { Center, Flex, useDisclosure, Text, Box } from "@chakra-ui/react";
 import {
   EDITORIAL,
   ARTWORK,
@@ -36,9 +36,7 @@ const TitleView = ({ doc }) => {
           ))}
         </Flex>
       )}
-      <Center my={3}>
-        <TextParse>{doc.description}</TextParse>
-      </Center>
+      {doc.description.length && <TextParse>{doc.description}</TextParse>}
       {doc.keyWords?.length > 0 && (
         <Flex
           borderTopWidth={1}
@@ -46,19 +44,12 @@ const TitleView = ({ doc }) => {
           pt={3}
           flexDirection={"column"}
         >
-          <Title mb={5} mr={"auto"}>
+          <Title mb={5} mr={"auto"} fontSize={"xl"}>
             Tags
           </Title>
           <Flex>
             {doc.keyWords?.map((word) => (
-              <Text
-                key={word}
-                px={2}
-                mr={2}
-                borderColor={"pink.50"}
-                borderWidth={1}
-                borderRadius={"md"}
-              >
+              <Text key={word} mr={2} fontSize={"sm"}>
                 {word}
               </Text>
             ))}

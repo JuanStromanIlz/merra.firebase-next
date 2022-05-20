@@ -46,7 +46,7 @@ const TextParse = ({ children }) => {
   const linkOpen = "<Link color='red.500' isExternal";
   const linkClose = "<ExternalLinkIcon mx='2px'/></Link>";
   const blockquoteOpen =
-    "<Box py={4} px={3} borderRadius='sm' borderColor={'pink.50'} borderLeftWidth={2}>";
+    "<Box py={4} px={3} borderRadius='md' borderColor={'pink.50'} borderLeftWidth={2} bg='#F9ECEC05'>";
   const blockquoteClose = "</Box>";
   const olOpen = "<OrderedList spacing={3}>";
   const olClose = "</OrderedList>";

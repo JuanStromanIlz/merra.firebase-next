@@ -56,7 +56,7 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
                 error={errors.category}
                 touched={touched.category}
                 alreadySelected={folder && folder.category.length > 0}
-                onChange={({ target: { value = EDITORIAL } }) => {
+                onChange={(value) => {
                   setFieldValue("category", value);
                   setFieldTouched("category", true);
                 }}
@@ -83,7 +83,8 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
                 setDeleteFiles={setDeleteFiles}
               />
               <Button
-                width={"fit-content"}
+                width={{ base: "100%", md: "fit-content" }}
+                colorScheme="green"
                 isLoading={isSubmit}
                 loadingText={
                   folder && folder.title.length > 0
