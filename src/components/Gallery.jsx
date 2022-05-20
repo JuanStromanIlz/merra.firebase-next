@@ -93,22 +93,17 @@ const Gallery = ({ open, files, index, onClose }) => {
   }, [open, files, index]);
 
   return (
-    <Modal isOpen={open} onClose={onClose} size={"full"}>
+    <Modal isOpen={open} onClose={onClose} size={"full"} motionPreset="scale">
       <ModalContent
         onKeyDown={keyPress}
         onTouchStart={touchStart}
         onTouchEnd={touchEnd}
         onTouchMove={touchMove}
         borderRadius={"none"}
-        bg={"black"}
+        bg={"blackAlpha.800"}
       >
         <ModalHeader>
-          <ModalCloseButton
-            color={"red.500"}
-            borderWidth={0.5}
-            borderColor={"red.500"}
-            borderRadius={"md"}
-          />
+          <ModalCloseButton size={"md"} />
         </ModalHeader>
         <ModalBody pos={"relative"} overflow={"hidden"}>
           {galleryData.items.map(({ url, isVideo, name }, index) => (
@@ -145,15 +140,8 @@ const Gallery = ({ open, files, index, onClose }) => {
         </ModalBody>
         <ModalFooter>
           <Flex width={"100%"} justifyContent={"center"}>
-            <Flex
-              color={"red.500"}
-              borderWidth={0.5}
-              borderColor={"red.500"}
-              borderRadius={"md"}
-              px={2}
-              py={1}
-            >
-              <Breadcrumb fontWeight={"bold"}>
+            <Flex>
+              <Breadcrumb>
                 <BreadcrumbItem>
                   <Text>{galleryData.index + 1}</Text>
                 </BreadcrumbItem>
