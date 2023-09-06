@@ -20,7 +20,7 @@ const Editor = ({ name, value, onChange, ...rest }) => {
         removePlugins: [
           "EasyImage",
           "ImageUpload",
-          "MediaEmbed",
+          // "MediaEmbed",
           "Table",
           "TableToolbar",
         ],
