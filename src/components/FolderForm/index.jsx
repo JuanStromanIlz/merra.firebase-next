@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -52,23 +52,23 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
                 <ErrorMessage name="title" component={FormErrorMessage} />
               </FormControl>
               <CategorySelector
-                value={values ? values.category : ""}
+                value={values?.category || ""}
                 error={errors.category}
                 touched={touched.category}
-                alreadySelected={folder && folder.category.length > 0}
+                alreadySelected={folder?.category}
                 onChange={(value) => {
                   setFieldValue("category", value);
                   setFieldTouched("category", true);
                 }}
               />
-              <KeyWords values={values ? values.keyWords : []} />
+              <KeyWords values={values?.keyWords || []} />
               <FormControl>
                 <FormLabel fontWeight={"bold"} htmlFor="description">
                   Descripción
                 </FormLabel>
                 <Editor
                   name="description"
-                  value={values ? values.description : ""}
+                  value={values?.description || ""}
                   onChange={(data) => {
                     setFieldValue("description", data);
                     setFieldTouched("description", true);
@@ -77,7 +77,7 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
                 <ErrorMessage name="description" component={FormErrorMessage} />
               </FormControl>
               <FileUpload
-                values={values ? values.files : []}
+                values={values?.files || []}
                 newFiles={newFiles}
                 setNewFiles={setNewFiles}
                 setDeleteFiles={setDeleteFiles}
@@ -87,15 +87,13 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
                 colorScheme="green"
                 isLoading={isSubmit}
                 loadingText={
-                  folder && folder.title.length > 0
+                  folder?.title?.length > 0
                     ? "Guardando cambios"
                     : "Creando la carpeta"
                 }
                 type="submit"
               >
-                {folder && folder.title.length > 0
-                  ? "Editar Carpeta"
-                  : "Crear Carpeta"}
+                {folder?.title?.length > 0 ? "Editar Carpeta" : "Crear Carpeta"}
               </Button>
             </Stack>
           </Form>

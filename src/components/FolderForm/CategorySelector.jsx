@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FormControl,
   FormLabel,
@@ -29,6 +29,13 @@ const CategorySelector = ({
   alreadySelected,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  useEffect(() => {
+    if (alreadySelected) {
+      onChange(alreadySelected);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <FormControl isInvalid={error && touched}>
