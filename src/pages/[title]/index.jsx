@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Center,
   Flex,
@@ -7,14 +7,15 @@ import {
   Box,
   Container,
   Link,
-} from "@chakra-ui/react";
-import getSection from "../../actions/getSection";
-import getDoc from "../../actions/getDoc";
-import Title from "../../components/Title";
-import Gallery from "../../components/Gallery";
-import File from "src/components/File";
-import TextParse from "src/components/TextParse";
-import TextLayout from "src/components/TextLayout";
+} from '@chakra-ui/react';
+import getSection from '../../actions/getSection';
+import getDoc from '../../actions/getDoc';
+import Title from '../../components/Title';
+import Gallery from '../../components/Gallery';
+import File from 'src/components/File';
+import TextParse from 'src/components/TextParse';
+import TextLayout from 'src/components/TextLayout';
+import RelatedPosts from 'src/components/FolderForm/RelatedPosts';
 
 const TitleView = ({ doc }) => {
   const { isOpen, onToggle } = useDisclosure();
@@ -27,15 +28,15 @@ const TitleView = ({ doc }) => {
   return (
     <>
       <TextLayout>
-        <Title as={"h1"} size={"4xl"} letterSpacing={"wider"} my={12}>
+        <Title as={'h1'} size={'4xl'} letterSpacing={'wider'} my={12}>
           {doc.title}
         </Title>
         <Flex
           borderBottomWidth={1}
-          borderColor={"brand.500"}
+          borderColor={'brand.500'}
           pb={3}
           px={3}
-          flexDirection={"row"}
+          flexDirection={'row'}
           gap={3}
           mb={12}
         >
@@ -46,9 +47,9 @@ const TitleView = ({ doc }) => {
           ))}
         </Flex>
       </TextLayout>
-      <Container maxW="6xl" px={3}>
+      <Container maxW='6xl' px={3}>
         {doc.files.length > 0 && (
-          <Flex justify={"space-around"} wrap="wrap">
+          <Flex justify={'space-around'} wrap='wrap'>
             {doc.files.map((data, index) => (
               <File
                 data={data}
@@ -61,7 +62,7 @@ const TitleView = ({ doc }) => {
       </Container>
       <TextLayout>
         <TextParse>{doc?.description}</TextParse>
-        <Box borderBottomWidth={1} borderColor={"brand.500"} my={12} />
+        <RelatedPosts doc={doc} />
       </TextLayout>
       <Gallery
         open={isOpen}
@@ -80,7 +81,7 @@ export async function getStaticProps({ params }) {
   if (!doc) {
     return {
       redirect: {
-        destination: "/",
+        destination: '/',
         permanent: false,
       },
     };
@@ -103,7 +104,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: "blocking",
+    fallback: 'blocking',
   };
 }
 
