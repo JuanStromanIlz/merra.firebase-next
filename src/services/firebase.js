@@ -27,10 +27,12 @@ export const getItemByTitle = (title, folder) => {
   return getDocs(q);
 };
 
-export const getRelatedPostByTags = (tags = [], folder) => {
+export const getRelatedPostByTags = (doc = {}, folder) => {
+  const { tags = [], title = "" } = doc;
   let q = query(
     folderRef(folder),
     where("tags", "array-contains-any", tags),
+    where("title", "!=", title),
     limit(3)
   );
   return getDocs(q);
