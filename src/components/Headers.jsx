@@ -1,15 +1,15 @@
 import React, { Fragment } from "react";
 
 const Headers = ({ info }) => {
-  let keyWords = "";
-  for (let word in info.keyWords) {
-    keyWords += `${info.keyWords[word]},`;
+  let tags = "";
+  for (let word in info.tags) {
+    tags += `${info.tags[word]},`;
   }
 
   return (
     <Fragment>
       {/* keywords */}
-      <meta name="keywords" content={keyWords} />
+      <meta name="keywords" content={tags} />
       {/* icon */}
       <link rel="shortcut icon" href="/heart.svg" />
       {/* type */}

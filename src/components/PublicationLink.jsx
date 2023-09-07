@@ -3,7 +3,7 @@ import { LinkIcon } from "@chakra-ui/icons";
 import React from "react";
 import Title from "./Title";
 
-const PublicationLink = ({ data: { title, href, keyWords } }) => (
+const PublicationLink = ({ data: { title, href, tags } }) => (
   <Flex direction={"row"} alignItems={"center"}>
     <LinkIcon as={LinkIcon} color="green.500" mr={4} />
     <Flex direction={"column"}>
@@ -24,9 +24,9 @@ const PublicationLink = ({ data: { title, href, keyWords } }) => (
       >
         {title}
       </Heading>
-      {keyWords && (
+      {tags && (
         <Wrap>
-          {keyWords.map((word) => (
+          {tags.map((word) => (
             <WrapItem key={word}>{word}</WrapItem>
           ))}
         </Wrap>

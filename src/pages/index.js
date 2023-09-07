@@ -1,10 +1,33 @@
-import { Heading, Stack } from "@chakra-ui/react";
-import Link from "next/link";
+import React from "react";
+import { Container, SimpleGrid } from "@chakra-ui/react";
+import getSection from "src/actions/getSection";
+import Item from "src/components/Item";
+import Title from "src/components/Title";
 
-export default function Home() {
+const Posts = ({ posts }) => {
   return (
-    <Stack>
-      <Heading>Index</Heading>
-    </Stack>
+    <>
+      <Title as={"h2"} size={"4xl"} letterSpacing={"wider"} isTruncated my={12}>
+        posts
+      </Title>
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
+        {posts?.map((item) => (
+          <Item key={item.id} data={item} href={`/${item.title}`} />
+        ))}
+      </SimpleGrid>
+    </>
   );
+};
+
+export async function getStaticProps() {
+  const posts = await getSection();
+
+  return {
+    props: {
+      posts,
+    },
+    revalidate: 10,
+  };
 }
+
+export default Posts;

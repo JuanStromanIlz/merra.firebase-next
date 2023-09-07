@@ -34,7 +34,7 @@ const MediaContainer = styled(Flex)`
 `;
 
 const Item = ({ data, href }) => {
-  const file = data.files[0];
+  const file = data.files[0] || {};
   return (
     <MediaContainer borderRadius={"md"} cursor={"pointer"}>
       <Flex
@@ -68,7 +68,7 @@ const Item = ({ data, href }) => {
           </LinkOverlay>
         </LinkBox>
       </NextLink>
-      {Object.keys(data.keyWords).length > 0 && (
+      {Object.keys(data.tags).length > 0 && (
         <Wrap
           position={"absolute"}
           bottom={0}
@@ -78,7 +78,7 @@ const Item = ({ data, href }) => {
           color={"pink.50"}
           borderTopRightRadius={"md"}
         >
-          {data.keyWords.map((word) => (
+          {data.tags.map((word) => (
             <WrapItem key={word} zIndex={1}>
               <Link
                 fontSize={"small"}

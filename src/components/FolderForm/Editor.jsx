@@ -17,13 +17,16 @@ const Editor = ({ name, value, onChange, ...rest }) => {
     <CKEditor
       editor={ClassicEditor}
       config={{
-        removePlugins: [
-          "EasyImage",
-          "ImageUpload",
-          // "MediaEmbed",
-          "Table",
-          "TableToolbar",
-        ],
+        mediaEmbed: {
+          previewsInData: true,
+        },
+        // removePlugins: [
+        //   // "EasyImage",
+        //   // "ImageUpload",
+        //   // "MediaEmbed",
+        //   "Table",
+        //   "TableToolbar",
+        // ],
       }}
       data={value}
       onChange={(_, editor) => onChange(editor.getData())}

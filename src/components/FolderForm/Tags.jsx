@@ -13,25 +13,44 @@ import {
 } from "@chakra-ui/react";
 import { Field, FieldArray } from "formik";
 
-const KeyWords = ({ values }) => {
-  const [newKeyWord, setNewKeyWord] = useState("");
+const Tags = ({ values }) => {
+  const [tags, setNewTag] = useState("");
 
-  const handleKeyWord = (push) => {
-    setNewKeyWord((prev) => {
+  const handleTag = (push) => {
+    setNewTag((prev) => {
       push(prev);
-      document.getElementById("addKeyWord").focus();
+      document.getElementById("addTag").focus();
       return "";
     });
   };
 
   return (
     <FormControl>
-      <FormLabel fontWeight={"bold"} htmlFor="addKeyWord">
-        Palabras clave
+      <FormLabel fontWeight={"bold"} htmlFor="addTag">
+        Tags
       </FormLabel>
-      <FieldArray name="keyWords">
+      <FieldArray name="tags">
         {({ pop, push }) => (
           <Stack>
+            <Field
+              width={"50%"}
+              as={Input}
+              id="addTag"
+              value={tags}
+              onChange={(event) => setNewTag(event.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") e.preventDefault();
+              }}
+              placeholder="Agregar tag"
+            />
+            <Button
+              onClick={() => handleTag(push)}
+              width={"fit-content"}
+              colorScheme="pink"
+              disabled={tags.length === 0}
+            >
+              Agregar
+            </Button>
             {values.length > 0 && (
               <Wrap>
                 {values.map((word, index) => (
@@ -56,25 +75,6 @@ const KeyWords = ({ values }) => {
                 ))}
               </Wrap>
             )}
-            <Field
-              width={"50%"}
-              as={Input}
-              id="addKeyWord"
-              value={newKeyWord}
-              onChange={(event) => setNewKeyWord(event.target.value)}
-              onKeyPress={(e) => {
-                if (e.key === "Enter") e.preventDefault();
-              }}
-              placeholder="Agregar palabra clave"
-            />
-            <Button
-              onClick={() => handleKeyWord(push)}
-              width={"fit-content"}
-              colorScheme="pink"
-              disabled={newKeyWord.length === 0}
-            >
-              Agregar
-            </Button>
           </Stack>
         )}
       </FieldArray>
@@ -82,4 +82,4 @@ const KeyWords = ({ values }) => {
   );
 };
 
-export default KeyWords;
+export default Tags;

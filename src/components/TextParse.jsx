@@ -1,53 +1,28 @@
 import React from "react";
-import styled from "styled-components";
 import {
   Box,
-  Heading,
   Link,
   OrderedList,
   UnorderedList,
   Text,
   ListItem,
-  Center,
-  Flex,
 } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import JsxParser from "react-jsx-parser";
+import Title from "./Title";
+import Quote from "./Quote";
 
-const TitleWrapper = styled(Box)`
-  .title {
-    -webkit-text-stroke: 1.5px #d22d2d;
-  }
-`;
-
-const CustomTitle = ({ children, ...rest }) => (
-  <TitleWrapper>
-    <Heading
-      fontWeight={"normal"}
-      textTransform={"capitalize"}
-      color={"transparent"}
-      className="title"
-      letterSpacing={"wider"}
-      my={4}
-      {...rest}
-    >
-      {children}
-    </Heading>
-  </TitleWrapper>
-);
-
-const TextParse = ({ children }) => {
-  const heading1Open = "<CustomTitle as='h2' size='2xl'>";
-  const heading1Close = "</CustomTitle>";
-  const heading2Open = "<CustomTitle as='h3' size='xl'>";
-  const heading2Close = "</CustomTitle>";
-  const heading3Open = "<CustomTitle as='h4' size='md'>";
-  const heading3Close = "</CustomTitle>";
-  const linkOpen = "<Link color='red.500' isExternal";
-  const linkClose = "<ExternalLinkIcon mx='2px'/></Link>";
-  const blockquoteOpen =
-    "<Box py={4} px={3} borderRadius='md' borderColor={'pink.50'} borderLeftWidth={2} bg='#F9ECEC05'>";
-  const blockquoteClose = "</Box>";
+const TextParse = ({ children = "" }) => {
+  const heading1Open = "<Title as='h2' size='xl'>";
+  const heading1Close = "</Title>";
+  const heading2Open = "<Title as='h3' size='lg'>";
+  const heading2Close = "</Title>";
+  const heading3Open = "<Title as='h4' size='sm'>";
+  const heading3Close = "</Title>";
+  const linkOpen = "<Link color='pink.50' isExternal";
+  const linkClose = "</Link>";
+  const blockquoteOpen = "<Quote>";
+  const blockquoteClose = "</Quote>";
   const olOpen = "<OrderedList spacing={3}>";
   const olClose = "</OrderedList>";
   const ulOpen = "<UnorderedList spacing={3}>";
@@ -78,22 +53,21 @@ const TextParse = ({ children }) => {
     .replace("</p>", textClose);
 
   return (
-    <Flex maxWidth={{ base: "100%", lg: "60%" }} direction="column" m={"auto"}>
-      <JsxParser
-        renderInWrapper={false}
-        components={{
-          CustomTitle,
-          Link,
-          ExternalLinkIcon,
-          Box,
-          OrderedList,
-          UnorderedList,
-          ListItem,
-          Text,
-        }}
-        jsx={parsedChild}
-      />
-    </Flex>
+    <JsxParser
+      renderInWrapper={false}
+      components={{
+        Quote,
+        Title,
+        Link,
+        ExternalLinkIcon,
+        Box,
+        OrderedList,
+        UnorderedList,
+        ListItem,
+        Text,
+      }}
+      jsx={parsedChild}
+    />
   );
 };
 export default TextParse;
