@@ -10,13 +10,11 @@ import {
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Editor from "./Editor";
-import KeyWords from "./KeyWords";
+import Tags from "./Tags";
 import FileUpload from "./FileUpload";
-import CategorySelector from "./CategorySelector";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("El titulo es requerido."),
-  category: Yup.string().required("La categoria es requerida."),
 });
 
 const FolderForm = ({ isSubmit, folder, onSubmit }) => {
@@ -51,17 +49,7 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
                 />
                 <ErrorMessage name="title" component={FormErrorMessage} />
               </FormControl>
-              <CategorySelector
-                value={values?.category || ""}
-                error={errors.category}
-                touched={touched.category}
-                alreadySelected={folder?.category}
-                onChange={(value) => {
-                  setFieldValue("category", value);
-                  setFieldTouched("category", true);
-                }}
-              />
-              <KeyWords values={values?.keyWords || []} />
+              <Tags values={values?.tags || []} />
               <FormControl>
                 <FormLabel fontWeight={"bold"} htmlFor="description">
                   Descripción
@@ -108,7 +96,7 @@ FolderForm.defaultProps = {
     title: "",
     category: "",
     description: "",
-    keyWords: [],
+    tags: [],
     files: [],
   },
 };
