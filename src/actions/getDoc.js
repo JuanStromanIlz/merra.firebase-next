@@ -1,6 +1,7 @@
+import { POSTS } from "src/services/foldersNames";
 import { getItemByTitle } from "../services/firebase";
 
-const getDoc = async (title, folder) => {
+const getDoc = async (title, folder = POSTS) => {
   try {
     let data;
     let docs = await getItemByTitle(title, folder);

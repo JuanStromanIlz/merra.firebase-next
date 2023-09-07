@@ -1,10 +1,11 @@
+import { POSTS } from "src/services/foldersNames";
 import { deleteFromFolder } from "../services/firebase";
 import { deleteFiles } from "../services/storage";
 
-const deleteDoc = async (doc) => {
-  const { id, category, files } = doc;
+const deleteDoc = async (doc, folder = POSTS) => {
+  const { id, files } = doc;
   try {
-    await deleteFromFolder(id, category);
+    await deleteFromFolder(id, folder);
     if (files.length > 0) {
       await deleteFiles(files, id);
     }

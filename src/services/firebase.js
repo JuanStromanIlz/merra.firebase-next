@@ -18,12 +18,21 @@ const folderRef = (folder) => collection(db, folder);
 const itemRef = (id, folder) => doc(db, folder, id);
 
 export const getFolder = (folder) => {
-  let q = query(folderRef(folder), orderBy("updated", "desc"));
+  let q = query(folderRef(folder), orderBy("created", "desc"));
   return getDocs(q);
 };
 
 export const getItemByTitle = (title, folder) => {
   let q = query(folderRef(folder), where("title", "==", title), limit(1));
+  return getDocs(q);
+};
+
+export const getRelatedPostByTags = (tags = [], folder) => {
+  let q = query(
+    folderRef(folder),
+    where("tags", "array-contains-any", tags),
+    limit(3)
+  );
   return getDocs(q);
 };
 

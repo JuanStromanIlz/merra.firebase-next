@@ -1,11 +1,11 @@
+import { POSTS } from "src/services/foldersNames";
 import { updateItem as updateItemService } from "../services/firebase";
 import {
   uploadFiles as uploadFilesService,
   deleteFiles as deleteFilesService,
 } from "../services/storage";
-import { PUBLICACIONES } from "../services/foldersNames";
 
-const updateDoc = async (values, folder) => {
+const updateDoc = async (values, folder = POSTS) => {
   try {
     const { id, newFiles, deleteFiles, files, title, ...rest } = values;
     let urls = [];
@@ -28,14 +28,6 @@ const updateDoc = async (values, folder) => {
     });
   } catch ({ message }) {
     return message;
-  }
-};
-
-export const updatePublicationDoc = async (values, folder = PUBLICACIONES) => {
-  try {
-    await updateItem(folder, values);
-  } catch ({ message }) {
-    console.error(message);
   }
 };
 

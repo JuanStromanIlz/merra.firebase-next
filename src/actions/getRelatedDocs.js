@@ -1,10 +1,10 @@
+import { getRelatedPostByTags } from "src/services/firebase";
 import { POSTS } from "src/services/foldersNames";
-import { getFolder as getFolderService } from "../services/firebase";
 
-const getSection = async (folder = POSTS) => {
+const getRelatedDocs = async (tags = [], folder = POSTS) => {
   try {
     const data = [];
-    const res = await getFolderService(folder);
+    const res = await getRelatedPostByTags(tags, folder);
     res.forEach((doc) => {
       data.push({
         id: doc.id,
@@ -16,5 +16,3 @@ const getSection = async (folder = POSTS) => {
     console.error(message);
   }
 };
-
-export default getSection;
