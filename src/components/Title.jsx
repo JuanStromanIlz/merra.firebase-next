@@ -1,6 +1,6 @@
-import React from "react";
-import { Heading, Flex } from "@chakra-ui/react";
-import { useTheme } from "@chakra-ui/react";
+import React from 'react';
+import { Heading } from '@chakra-ui/react';
+import { useTheme } from '@chakra-ui/react';
 
 const Title = ({ children, color, ...rest }) => {
   const {
@@ -9,20 +9,17 @@ const Title = ({ children, color, ...rest }) => {
     },
   } = useTheme();
   return (
-    // <Flex w={"100%"} h={"100%"} justifyContent={"center"} alignItems={"center"}>
     <Heading
-      fontWeight={"normal"}
-      textTransform={"capitalize"}
-      color={"transparent"}
-      // textAlign={"center"}
+      fontWeight={'normal'}
+      textTransform={'capitalize'}
+      color={'transparent'}
       sx={{
-        "-webkit-text-stroke": `1px ${color || brand}}`,
+        WebkitTextStroke: `1px ${color || brand}}`,
       }}
       {...rest}
     >
       {children}
     </Heading>
-    // </Flex>
   );
 };
 
