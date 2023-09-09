@@ -16,60 +16,24 @@ import File from 'src/components/File';
 import TextParse from 'src/components/TextParse';
 import TextLayout from 'src/components/TextLayout';
 import RelatedPosts from 'src/components/FolderForm/RelatedPosts';
+import Tags from 'src/components/Tags';
 
 const TitleView = ({ doc }) => {
-  const { isOpen, onToggle } = useDisclosure();
-  const [galleryIndex, setGalleryIndex] = useState(0);
-  const openGallery = (index) => {
-    setGalleryIndex(index);
-    onToggle();
-  };
-
   return (
     <>
       <TextLayout>
-        <Title as={'h1'} size={'4xl'} letterSpacing={'wider'} my={12}>
+        <Tags tags={doc?.tags} />
+        <Title as={'h1'} size={'4xl'} letterSpacing={'wider'} mt={3} mb={12}>
           {doc.title}
         </Title>
-        <Flex
-          borderBottomWidth={1}
-          borderColor={'brand.500'}
-          pb={3}
-          px={3}
-          flexDirection={'row'}
-          gap={3}
-          mb={12}
-        >
-          {doc.tags?.map((word) => (
-            <Box key={word}>
-              <Link>{word}</Link>
-            </Box>
-          ))}
-        </Flex>
       </TextLayout>
-      <Container maxW='6xl' px={3}>
-        {doc.files.length > 0 && (
-          <Flex justify={'space-around'} wrap='wrap'>
-            {doc.files.map((data, index) => (
-              <File
-                data={data}
-                key={index}
-                onClick={() => openGallery(index)}
-              />
-            ))}
-          </Flex>
-        )}
+      <Container maxW='6xl' px={3} mb={6}>
+        <Gallery files={doc.files} />
       </Container>
       <TextLayout>
         <TextParse>{doc?.description}</TextParse>
         <RelatedPosts doc={doc} />
       </TextLayout>
-      <Gallery
-        open={isOpen}
-        files={doc.files}
-        index={galleryIndex}
-        onClose={onToggle}
-      />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Flex,
   Modal,
@@ -11,12 +11,13 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   Fade,
-  Img,
   useDisclosure,
+  SimpleGrid,
 } from '@chakra-ui/react';
 import File from './File';
 
 const Gallery = ({ files }) => {
+  const initialRef = useRef(null);
   const { isOpen, onToggle } = useDisclosure();
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [touch, setTouch] = useState({
@@ -84,32 +85,43 @@ const Gallery = ({ files }) => {
   return (
     <>
       {files?.length > 0 && (
-        <Flex justify={'space-around'} wrap='wrap'>
+        <SimpleGrid columns={{ base: 2, md: 3 }} gap={3} alignItems={'center'}>
           {files?.map((data, index) => (
-            <File data={data} key={index} onClick={() => openGallery(index)} />
+            <File
+              data={data}
+              key={index}
+              cursor={'pointer'}
+              // width={
+              //   data?.isVideo ? ['100%', null, '60%'] : ['50%', null, '33%']
+              // }
+              onClick={() => openGallery(index)}
+            />
           ))}
-        </Flex>
+        </SimpleGrid>
       )}
       <Modal
         isOpen={isOpen}
         onClose={onToggle}
         size={'full'}
         motionPreset='scale'
+        initialFocusRef={initialRef}
       >
         <ModalContent
+          ref={initialRef}
           onKeyDown={keyPress}
           onTouchStart={touchStart}
           onTouchEnd={touchEnd}
           onTouchMove={touchMove}
           borderRadius={'none'}
           bg={'blackAlpha.800'}
+          onClick={onToggle}
         >
           <ModalHeader>
             <ModalCloseButton size={'md'} />
           </ModalHeader>
           <ModalBody pos={'relative'} overflow={'hidden'}>
-            {files?.map(({ url, isVideo, name }, index) => (
-              <Fade in={index === galleryIndex} key={index}>
+            {files?.map((file, index) => (
+              <Fade in={index === galleryIndex} key={file?.name || index}>
                 <Flex
                   pos={'absolute'}
                   inset={0}
@@ -119,23 +131,7 @@ const Gallery = ({ files }) => {
                   width={'100%'}
                   p={4}
                 >
-                  {!isVideo ? (
-                    <Img
-                      borderRadius={'md'}
-                      src={url}
-                      maxHeight={'100%'}
-                      objectFit={'contain'}
-                      alt={name}
-                    />
-                  ) : (
-                    <Flex
-                      maxHeight={'100%'}
-                      borderRadius={'md'}
-                      overflow={'hidden'}
-                    >
-                      <video src={url} controls />
-                    </Flex>
-                  )}
+                  <File data={file} />
                 </Flex>
               </Fade>
             ))}

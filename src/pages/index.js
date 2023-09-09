@@ -1,21 +1,25 @@
-import React from "react";
-import { Container, SimpleGrid } from "@chakra-ui/react";
-import getSection from "src/actions/getSection";
-import Item from "src/components/Item";
-import Title from "src/components/Title";
+import React from 'react';
+import { Container, SimpleGrid } from '@chakra-ui/react';
+import getSection from 'src/actions/getSection';
+import Post from 'src/components/Post';
+import Title from 'src/components/Title';
 
 const Posts = ({ posts }) => {
   return (
-    <>
-      <Title as={"h2"} size={"4xl"} letterSpacing={"wider"} isTruncated my={12}>
+    <Container maxW='6xl' px={3}>
+      <Title as={'h2'} size={'4xl'} letterSpacing={'wider'} isTruncated my={12}>
         posts
       </Title>
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
+      <SimpleGrid
+        columns={{ base: 1, md: 3 }}
+        spacing={6}
+        alignItems={'center'}
+      >
         {posts?.map((item) => (
-          <Item key={item.id} data={item} href={`/${item.title}`} />
+          <Post key={item.id} data={item} href={`/${item.title}`} />
         ))}
       </SimpleGrid>
-    </>
+    </Container>
   );
 };
 
