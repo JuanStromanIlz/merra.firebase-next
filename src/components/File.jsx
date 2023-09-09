@@ -14,7 +14,7 @@ import { Box, Img } from '@chakra-ui/react';
 
 const File = ({ data, onClick, ...rest }) => {
   // const [landscape, setLandscape] = useState(false);
-  // const { url, name, isVideo } = data;
+  const { url, name, isVideo } = data;
 
   // const onLoad = ({ target: img }) => setLandscape(img.height < img.width);
 
