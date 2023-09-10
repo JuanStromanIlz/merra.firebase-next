@@ -15,7 +15,12 @@ const Tags = ({ tags = [], ...rest }) => {
     <Breadcrumb separator='' {...rest}>
       {tags.map((tag) => (
         <BreadcrumbItem key={tag}>
-          <BreadcrumbLink _disabled={true} textTransform={'capitalize'}>
+          <BreadcrumbLink
+            fontSize={['md', null, 'lg']}
+            _disabled={true}
+            href={tag}
+            textTransform={'capitalize'}
+          >
             {tag}
           </BreadcrumbLink>
         </BreadcrumbItem>

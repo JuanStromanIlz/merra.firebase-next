@@ -22,7 +22,7 @@ const File = ({ data, onClick, ...rest }) => {
     <Img
       src={url}
       alt={name}
-      borderRadius={'md'}
+      // borderRadius={'md'}
       objectFit={'contain'}
       maxHeight={'100%'}
       // onLoad={onLoad}

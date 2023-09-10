@@ -6,12 +6,12 @@ import Title from 'src/components/Title';
 
 const Posts = ({ posts }) => {
   return (
-    <Container maxW='6xl' px={3}>
+    <>
       <Title as={'h2'} size={'4xl'} letterSpacing={'wider'} isTruncated my={12}>
         posts
       </Title>
       <SimpleGrid
-        columns={{ base: 1, md: 3 }}
+        columns={{ base: 1, md: 2 }}
         spacing={6}
         alignItems={'center'}
       >
@@ -19,7 +19,7 @@ const Posts = ({ posts }) => {
           <Post key={item.id} data={item} href={`/${item.title}`} />
         ))}
       </SimpleGrid>
-    </Container>
+    </>
   );
 };
 

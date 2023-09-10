@@ -2,8 +2,8 @@ import { Box, Flex, SimpleGrid, Skeleton } from '@chakra-ui/react';
 import React from 'react';
 import getRelatedDocs from 'src/actions/getRelatedDocs';
 import useFetch from 'src/hooks/useFetch';
-import Title from '../Title';
-import Item from '../Post';
+import Title from './Title';
+import Item from './Post';
 
 const RelatedPosts = ({ doc }) => {
   const { data, loading } = useFetch(() => getRelatedDocs(doc));
