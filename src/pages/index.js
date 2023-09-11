@@ -3,21 +3,22 @@ import { Container, SimpleGrid } from '@chakra-ui/react';
 import getSection from 'src/actions/getSection';
 import Post from 'src/components/Post';
 import Title from 'src/components/Title';
+import Header from 'src/components/sections/Header';
 
 const Posts = ({ posts }) => {
+  const first = posts[0] || {};
   return (
     <>
-      <Title as={'h2'} size={'4xl'} letterSpacing={'wider'} isTruncated my={12}>
-        posts
-      </Title>
+      <Header doc={first} />
       <SimpleGrid
-        columns={{ base: 1, md: 2 }}
-        spacing={6}
+        columns={{ base: 1, md: 2, lg: 4 }}
+        spacing={3}
+        p={3}
         alignItems={'center'}
       >
-        {posts?.map((item) => (
-          <Post key={item.id} data={item} href={`/${item.title}`} />
-        ))}
+        {posts?.map((item, index) =>
+          index === 0 ? null : <Post key={item.id} data={item} />
+        )}
       </SimpleGrid>
     </>
   );

@@ -12,7 +12,7 @@ import File from './File';
 import Tags from './Tags';
 
 const Post = ({ data }) => {
-  const { title, tags, files = [{}] } = data;
+  const { title = '', tags, files = [{}] } = data;
   const file = files[0] || {};
 
   return (

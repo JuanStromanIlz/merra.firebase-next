@@ -14,7 +14,7 @@ const Title = ({ children, color, ...rest }) => {
       textTransform={'capitalize'}
       color={'transparent'}
       sx={{
-        WebkitTextStroke: `1px ${color || brand}}`,
+        WebkitTextStroke: `1.5px ${color || brand}}`,
       }}
       {...rest}
     >
