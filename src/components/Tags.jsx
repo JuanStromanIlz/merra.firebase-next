@@ -4,7 +4,9 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbSeparator,
+  Flex,
   Icon,
+  Text,
 } from '@chakra-ui/react';
 
 const Tags = ({ tags = [], ...rest }) => {
@@ -12,20 +14,13 @@ const Tags = ({ tags = [], ...rest }) => {
     return null;
   }
   return (
-    <Breadcrumb separator='' {...rest}>
+    <Flex direction={'row'} gap={3} {...rest}>
       {tags.map((tag) => (
-        <BreadcrumbItem key={tag}>
-          <BreadcrumbLink
-            fontSize={['md', null, 'lg']}
-            _disabled={true}
-            href={tag}
-            textTransform={'capitalize'}
-          >
-            {tag}
-          </BreadcrumbLink>
-        </BreadcrumbItem>
+        <Text fontSize='md' fontWeight={'bold'} as={'span'} key={tag}>
+          {tag}
+        </Text>
       ))}
-    </Breadcrumb>
+    </Flex>
   );
 };
 

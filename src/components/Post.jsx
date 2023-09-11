@@ -1,7 +1,13 @@
-import { Flex, LinkOverlay, LinkBox } from '@chakra-ui/react';
+import {
+  Flex,
+  LinkOverlay,
+  LinkBox,
+  AspectRatio,
+  Box,
+  Heading,
+} from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
-import Title from './Title';
 import File from './File';
 import Tags from './Tags';
 
@@ -10,17 +16,24 @@ const Post = ({ data }) => {
   const file = files[0] || {};
 
   return (
-    <NextLink href={`/${title}`} passHref>
-      <LinkBox cursor={'pointer'}>
-        <LinkOverlay>
-          <Flex direction='column'>
-            <Tags tags={tags} mb={3} />
-            <File data={file} />
-            <Title mt={3}>{title}</Title>
-          </Flex>
-        </LinkOverlay>
-      </LinkBox>
-    </NextLink>
+    <LinkBox as={'article'} position={'relative'}>
+      <AspectRatio ratio={16 / 9}>
+        <File data={file} />
+      </AspectRatio>
+      <Box
+        position={'absolute'}
+        inset={0}
+        bgGradient={'linear(to-t, blackAlpha.300 0%, transparent 50%)'}
+      />
+      <Flex direction='column' position={'absolute'} bottom={0} px={3} pb={3}>
+        <Heading as={'h3'} size='lg'>
+          <LinkOverlay as={NextLink} href={title}>
+            {title}
+          </LinkOverlay>
+        </Heading>
+        <Tags tags={tags} />
+      </Flex>
+    </LinkBox>
   );
 };
 
