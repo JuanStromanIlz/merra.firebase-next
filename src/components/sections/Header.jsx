@@ -10,7 +10,7 @@ const Header = ({ doc }) => {
   const file = files[0] || {};
 
   return (
-    <Box h={'100vh'} w={'100%'} position={'relative'}>
+    <Box h={'80vh'} w={'100%'} position={'relative'}>
       <File data={file} w='100%' h='100%' objectFit='cover' />
       <Box
         position={'absolute'}
@@ -26,11 +26,11 @@ const Header = ({ doc }) => {
         justifyContent={'space-between'}
       >
         <Tags tags={tags} />
-        <Heading as={'h1'} size='4xl'>
-          <LinkOverlay as={NextLink} href={title}>
+        <LinkOverlay as={NextLink} href={title}>
+          <Title as={'h1'} size='4xl' cursor={'pointer'}>
             {title}
-          </LinkOverlay>
-        </Heading>
+          </Title>
+        </LinkOverlay>
       </Flex>
     </Box>
   );

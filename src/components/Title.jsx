@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Heading } from '@chakra-ui/react';
 import { useTheme } from '@chakra-ui/react';
 
-const Title = ({ children, color, ...rest }) => {
+const Title = forwardRef(function Title({ children, color, ...rest }, ref) {
   const {
     colors: {
       brand: { 500: brand },
@@ -10,6 +10,7 @@ const Title = ({ children, color, ...rest }) => {
   } = useTheme();
   return (
     <Heading
+      ref={ref}
       fontWeight={'normal'}
       textTransform={'capitalize'}
       color={'transparent'}
@@ -21,6 +22,6 @@ const Title = ({ children, color, ...rest }) => {
       {children}
     </Heading>
   );
-};
+});
 
 export default Title;
