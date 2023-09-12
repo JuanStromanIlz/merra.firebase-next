@@ -16,7 +16,7 @@ const Post = ({ data }) => {
   const file = files[0] || {};
 
   return (
-    <LinkBox as={'article'} position={'relative'}>
+    <Box as={'article'} position={'relative'}>
       <AspectRatio ratio={16 / 9}>
         <File data={file} />
       </AspectRatio>
@@ -33,7 +33,7 @@ const Post = ({ data }) => {
         </Heading>
         <Tags tags={tags} />
       </Flex>
-    </LinkBox>
+    </Box>
   );
 };
 
