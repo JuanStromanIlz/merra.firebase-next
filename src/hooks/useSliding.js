@@ -10,7 +10,7 @@ const useSliding = (itemsPerParent, countElements) => {
   const [viewed, setViewed] = useState(0);
 
   useEffect(() => {
-    const item = itemsPerParent + 0.5;
+    const item = itemsPerParent + 0.2;
     setTotalInViewport(Math.floor(width / (width / item)));
     setItemLength(width / item);
   }, [itemLength, itemsPerParent, width]);

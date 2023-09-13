@@ -15,15 +15,12 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 import File from './File';
+import useTouchDirection from 'src/hooks/useTouchDirection';
 
 const Gallery = ({ files }) => {
   const initialRef = useRef(null);
   const { isOpen, onToggle } = useDisclosure();
   const [galleryIndex, setGalleryIndex] = useState(0);
-  const [touch, setTouch] = useState({
-    startPoint: 0,
-    direction: true,
-  });
   const openGallery = (index) => {
     setGalleryIndex(index);
     onToggle();
@@ -48,29 +45,10 @@ const Gallery = ({ files }) => {
     });
   }
 
-  /* Touch */
-  function touchStart(e) {
-    setTouch((prev) => {
-      return {
-        startPoint: e.changedTouches[0].clientX,
-        direction: prev.direction,
-      };
-    });
-  }
-  function touchMove(e) {
-    setTouch((prev) => {
-      return {
-        startPoint: prev.startPoint,
-        direction: e.changedTouches[0].clientX < prev.startPoint,
-      };
-    });
-  }
-  function touchEnd() {
-    if (!touch.direction) {
-      return prevImage();
-    }
-    nextImage();
-  }
+  const { onTouchStart, onTouchEnd, onTouchMove } = useTouchDirection(
+    prevImage,
+    nextImage
+  );
 
   /* Keys */
   function keyPress(e) {
@@ -109,9 +87,9 @@ const Gallery = ({ files }) => {
         <ModalContent
           ref={initialRef}
           onKeyDown={keyPress}
-          onTouchStart={touchStart}
-          onTouchEnd={touchEnd}
-          onTouchMove={touchMove}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+          onTouchMove={onTouchMove}
           borderRadius={'none'}
           bg={'blackAlpha.800'}
           onClick={onToggle}
