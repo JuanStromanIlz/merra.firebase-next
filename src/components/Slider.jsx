@@ -1,8 +1,7 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import useSliding from 'src/hooks/useSliding';
 import { Box, Button, Flex, useBreakpointValue } from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import useTouchDirection from 'src/hooks/useTouchDirection';
 
 const Slider = ({ items, gap = 1, Component = Box, ...rest }) => {
   const itemsPerParent = useBreakpointValue({ base: 1.3, md: 4.3 });

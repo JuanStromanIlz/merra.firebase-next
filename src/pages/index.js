@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react';
 import React from 'react';
 import getSection from 'src/actions/getSection';
 import Post from 'src/components/Post';
@@ -26,11 +27,20 @@ const Posts = ({ posts }) => {
   return (
     <>
       <Header doc={first} />
+      <Box mt={6} />
+      <GroupedPosts
+        title={groupedByTags[1].title}
+        posts={groupedByTags[1].posts}
+      />
+      {posts.map((post) => (
+        <>
+          <PostPreview doc={post} />
+          <Box mt={6} />
+        </>
+      ))}
       {groupedByTags.map((group) => (
         <GroupedPosts key={group.title} {...group} />
       ))}
-      <PostPreview doc={posts[0] || {}} />
-      <Post data={first} />
     </>
   );
 };

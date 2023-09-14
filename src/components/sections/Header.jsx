@@ -17,13 +17,7 @@ const Header = ({ doc }) => {
         inset={0}
         bgGradient={'linear(to-t, blackAlpha.300 0%, transparent 50%)'}
       />
-      <Flex
-        direction='column'
-        position={'absolute'}
-        inset={0}
-        p={6}
-        justifyContent={'space-between'}
-      >
+      <Flex direction='column' position={'absolute'} bottom={0} p={6}>
         <Tags tags={tags} />
         <LinkOverlay as={NextLink} href={title}>
           <Title as={'h1'} size='4xl' cursor={'pointer'}>
