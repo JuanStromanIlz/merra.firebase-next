@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, LinkOverlay } from '@chakra-ui/react';
+import { Box, Flex, LinkOverlay } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import File from '../File';
@@ -21,8 +21,7 @@ const Header = ({ doc }) => {
         direction='column'
         position={'absolute'}
         inset={0}
-        px={3}
-        py={9}
+        p={6}
         justifyContent={'space-between'}
       >
         <Tags tags={tags} />
