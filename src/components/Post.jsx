@@ -26,7 +26,7 @@ const Post = ({ data }) => {
         bgGradient={'linear(to-t, blackAlpha.300 0%, transparent 50%)'}
       />
       <Flex direction='column' position={'absolute'} bottom={0} px={3} pb={3}>
-        <Heading as={'h3'} size='lg'>
+        <Heading as={'h3'} fontSize={{ base: 'md', md: 'lg' }}>
           <LinkOverlay as={NextLink} href={title}>
             {title}
           </LinkOverlay>

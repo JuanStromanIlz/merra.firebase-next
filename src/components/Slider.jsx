@@ -5,7 +5,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import useTouchDirection from 'src/hooks/useTouchDirection';
 
 const Slider = ({ items, gap = 1, Component = Box, ...rest }) => {
-  const itemsPerParent = useBreakpointValue({ base: 1, md: 2, lg: 3 });
+  const itemsPerParent = useBreakpointValue({ base: 1.3, md: 4.3 });
   const {
     handlePrev,
     handleNext,
@@ -15,22 +15,19 @@ const Slider = ({ items, gap = 1, Component = Box, ...rest }) => {
     hasNext,
     hasPrev,
   } = useSliding(itemsPerParent, items?.length);
-  const { onTouchStart, onTouchEnd, onTouchMove } = useTouchDirection(
-    handlePrev,
-    handleNext
-  );
 
   if (!items?.length) {
     return null;
   }
 
   return (
-    <Flex position={'relative'} overflow={'hidden'} {...rest}>
+    <Flex
+      position={'relative'}
+      overflow={{ base: 'scroll', md: 'hidden' }}
+      {...rest}
+    >
       <Flex
         ref={containerRef}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-        onTouchMove={onTouchMove}
         sx={{ transition: 'transform 300ms ease 100ms' }}
         width={'100%'}
         {...slideProps}
@@ -65,21 +62,22 @@ const Slider = ({ items, gap = 1, Component = Box, ...rest }) => {
           <ChevronLeftIcon w={10} h={10} />
         </Button>
       )}
-      {hasNext && itemsPerParent !== 1 && (
-        <Button
-          variant='ghost'
-          onClick={handleNext}
-          position={'absolute'}
-          top={0}
-          bottom={0}
-          right={0}
-          height={'auto'}
-          colorScheme='transparent'
-          w={itemLength / 10}
-        >
-          <ChevronRightIcon w={10} h={10} />
-        </Button>
-      )}
+      {hasNext ||
+        (itemsPerParent === 1 && (
+          <Button
+            variant='ghost'
+            onClick={handleNext}
+            position={'absolute'}
+            top={0}
+            bottom={0}
+            right={0}
+            height={'auto'}
+            colorScheme='transparent'
+            w={itemLength / 10}
+          >
+            <ChevronRightIcon w={10} h={10} />
+          </Button>
+        ))}
     </Flex>
   );
 };

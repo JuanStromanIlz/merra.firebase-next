@@ -21,7 +21,8 @@ import PostNav from 'src/components/PostNav';
 const TitleView = ({ doc }) => {
   return (
     <>
-      <TextLayout>
+      <RelatedPosts doc={doc} />
+      {/* <TextLayout>
         <Tags tags={doc?.tags} />
         <Title as={'h1'} size={'4xl'} letterSpacing={'wider'} mt={3}>
           {doc.title}
@@ -34,7 +35,7 @@ const TitleView = ({ doc }) => {
       <TextLayout>
         <TextParse>{doc?.description}</TextParse>
         <RelatedPosts doc={doc} />
-      </TextLayout>
+      </TextLayout> */}
     </>
   );
 };

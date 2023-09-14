@@ -8,21 +8,21 @@ const useSliding = (itemsPerParent, countElements) => {
   const [distance, setDistance] = useState(0);
   const [totalInViewport, setTotalInViewport] = useState(0);
   const [viewed, setViewed] = useState(0);
+  const roundedItem = Math.floor(itemsPerParent);
 
   useEffect(() => {
-    const item = itemsPerParent + 0.2;
-    setTotalInViewport(Math.floor(width / (width / item)));
-    setItemLength(width / item);
-  }, [itemLength, itemsPerParent, width]);
+    setTotalInViewport(Math.floor(width / (width / roundedItem)));
+    setItemLength(width / itemsPerParent);
+  }, [itemLength, itemsPerParent, roundedItem, width]);
 
   const handlePrev = () => {
     setViewed(viewed - totalInViewport);
-    setDistance(distance + itemLength * itemsPerParent);
+    setDistance(distance + itemLength * roundedItem);
   };
 
   const handleNext = () => {
     setViewed(viewed + totalInViewport);
-    setDistance(distance - itemLength * itemsPerParent);
+    setDistance(distance - itemLength * roundedItem);
   };
 
   const slideProps = {
