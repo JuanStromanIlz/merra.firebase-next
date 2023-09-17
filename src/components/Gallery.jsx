@@ -56,6 +56,11 @@ const Gallery = ({ files }) => {
     nextImage
   );
 
+  const itemSize = ({ isVideo }, index) => {
+    const size = isVideo || dimensions[index] ? '100%' : '40%';
+    return size;
+  };
+
   /* Keys */
   function keyPress(e) {
     if (e.keyCode === 39 || e.keyCode === 40) {
@@ -72,30 +77,28 @@ const Gallery = ({ files }) => {
 
   return (
     <>
-      <Grid p={6} gap={3} templateColumns={'repeat(2, 1fr)'}>
+      <Flex px={6} py={4} gap={3} flexWrap={'wrap'}>
         {files?.map((data, index) => (
-          <GridItem
+          <Flex
             key={data?.name || index}
-            colSpan={data.isVideo || dimensions[index] ? 2 : 1}
+            flexGrow={1}
+            flexShrink={0}
+            flexBasis={itemSize(data, index)}
+            justifyContent={'center'}
+            alignContent={'flex-start'}
+            alignItems={'flex-start'}
           >
-            <Flex
-              justifyContent={'center'}
-              alignContent={'center'}
-              height={'100%'}
-              width={'100%'}
-            >
-              <File
-                data={data}
-                cursor={'pointer'}
-                onLoad={({ target: img }) =>
-                  setDimensions((prev) => [...prev, isLandscape(img)])
-                }
-                onClick={() => openGallery(index)}
-              />
-            </Flex>
-          </GridItem>
+            <File
+              data={data}
+              cursor={'pointer'}
+              onLoad={({ target: img }) =>
+                setDimensions((prev) => [...prev, isLandscape(img)])
+              }
+              onClick={() => openGallery(index)}
+            />
+          </Flex>
         ))}
-      </Grid>
+      </Flex>
       <Modal
         isOpen={isOpen}
         onClose={onToggle}
