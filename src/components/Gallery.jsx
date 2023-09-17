@@ -12,13 +12,19 @@ import {
   BreadcrumbItem,
   Fade,
   useDisclosure,
-  SimpleGrid,
+  Grid,
+  GridItem,
 } from '@chakra-ui/react';
 import File from './File';
 import useTouchDirection from 'src/hooks/useTouchDirection';
 
+const isLandscape = (file) => {
+  return file.isVideo || file.height < file.width;
+};
+
 const Gallery = ({ files }) => {
   const initialRef = useRef(null);
+  const [dimensions, setDimensions] = useState([]);
   const { isOpen, onToggle } = useDisclosure();
   const [galleryIndex, setGalleryIndex] = useState(0);
   const openGallery = (index) => {
@@ -60,23 +66,36 @@ const Gallery = ({ files }) => {
     }
   }
 
+  if (!files?.length) {
+    return null;
+  }
+
   return (
     <>
-      {files?.length > 0 && (
-        <SimpleGrid columns={{ base: 2, md: 3 }} gap={3} alignItems={'center'}>
-          {files?.map((data, index) => (
-            <File
-              data={data}
-              key={index}
-              cursor={'pointer'}
-              // width={
-              //   data?.isVideo ? ['100%', null, '60%'] : ['50%', null, '33%']
-              // }
-              onClick={() => openGallery(index)}
-            />
-          ))}
-        </SimpleGrid>
-      )}
+      <Grid p={6} gap={3} templateColumns={'repeat(2, 1fr)'}>
+        {files?.map((data, index) => (
+          <GridItem
+            key={data?.name || index}
+            colSpan={data.isVideo || dimensions[index] ? 2 : 1}
+          >
+            <Flex
+              justifyContent={'center'}
+              alignContent={'center'}
+              height={'100%'}
+              width={'100%'}
+            >
+              <File
+                data={data}
+                cursor={'pointer'}
+                onLoad={({ target: img }) =>
+                  setDimensions((prev) => [...prev, isLandscape(img)])
+                }
+                onClick={() => openGallery(index)}
+              />
+            </Flex>
+          </GridItem>
+        ))}
+      </Grid>
       <Modal
         isOpen={isOpen}
         onClose={onToggle}

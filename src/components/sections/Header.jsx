@@ -1,31 +1,42 @@
-import { Box, Flex, LinkOverlay } from '@chakra-ui/react';
+import { Flex, LinkOverlay } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
-import File from '../File';
 import Title from '../Title';
 import Tags from '../Tags';
 
-const Header = ({ doc }) => {
+const Header = ({ doc, children }) => {
   const { title = '', tags, files = [{}] } = doc;
-  const file = files[0] || {};
+  const { url } = files[0] || {};
 
   return (
-    <Box h={'80vh'} w={'100%'} position={'relative'}>
-      <File data={file} w='100%' h='100%' objectFit='cover' />
-      <Box
-        position={'absolute'}
-        inset={0}
-        bgGradient={'linear(to-t, blackAlpha.300 0%, transparent 50%)'}
-      />
-      <Flex direction='column' position={'absolute'} bottom={0} p={6}>
+    <Flex
+      minH={'80vh'}
+      w={'100%'}
+      backgroundImage={url}
+      backgroundPosition={'center'}
+      backgroundRepeat={'no-repeat'}
+      backgroundSize={'cover'}
+      direction='column'
+      justifyContent={'space-between'}
+      position={'relative'}
+    >
+      <Flex
+        bgGradient={'linear(to-t, blackAlpha.300 40%, transparent 100%)'}
+        direction='column'
+        justifyContent={'flex-end'}
+        flex={1}
+        py={4}
+        px={6}
+      >
         <Tags tags={tags} />
         <LinkOverlay as={NextLink} href={title}>
-          <Title as={'h1'} size='4xl' cursor={'pointer'}>
+          <Title as={'h1'} fontSize='4xl' cursor={'pointer'}>
             {title}
           </Title>
         </LinkOverlay>
+        {children}
       </Flex>
-    </Box>
+    </Flex>
   );
 };
 

@@ -22,8 +22,8 @@ const TitleView = ({ doc }) => {
   return (
     <>
       <Header doc={doc} />
-      <Gallery files={doc.files} />
-      <Container maxW='6xl' px={3} mb={6}>
+      <Gallery files={doc?.files} />
+      <Container maxW='6xl' px={6}>
         <TextParse>{doc?.description}</TextParse>
       </Container>
       <GroupedPosts posts={data} title={'relacionado'} />
