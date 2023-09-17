@@ -1,15 +1,14 @@
-import { Button, Stack } from "@chakra-ui/react";
-import React, { useContext } from "react";
-import { Admin } from "../../contexts/AdminContext";
+import { Button, Center, Stack } from '@chakra-ui/react';
+import React, { useContext } from 'react';
+import { Admin } from '../../contexts/AdminContext';
 
 const Login = () => {
-  const { signIn, signOut } = useContext(Admin);
+  const { signIn, signOut, user } = useContext(Admin);
 
   return (
-    <Stack>
-      <Button onClick={signIn}>Sign in</Button>
-      <Button onClick={signOut}>Sign out</Button>
-    </Stack>
+    <Center w={'100vw'} h={'100vh'}>
+      <Button onClick={user ? signOut : signIn}>login</Button>
+    </Center>
   );
 };
 
