@@ -5,35 +5,34 @@ import Post from 'src/components/Post';
 import GroupedPosts from 'src/components/sections/GroupedPosts';
 import Header from 'src/components/sections/Header';
 import PostPreview from 'src/components/sections/PostPreview';
+import Program from 'src/components/sections/Program';
 
 const Posts = ({ posts }) => {
   const first = posts[0] || {};
-  // const allTags = [
-  //   ...(new Set(
-  //     posts.reduce((acc, { tags = [] }) => [...acc, ...tags], []) || []
-  //   ) || []),
-  // ];
-  // const groupedByTags = allTags.reduce(
-  //   (acc, tag) => [
-  //     ...acc,
-  //     {
-  //       title: tag,
-  //       posts: posts.filter(({ tags = [] }) => tags.find((i) => i === tag)),
-  //     },
-  //   ],
-  //   []
-  // );
+  const tags = posts.reduce((acc, { tags = [] }) => [...acc, ...tags], []);
+  const filteredTags = [
+    ...(new Set(
+      tags.filter((tag) => tags.filter((t) => t === tag).length >= 3)
+    ) || []),
+  ];
+  const groupedByTags = filteredTags.reduce(
+    (acc, tag) => [
+      ...acc,
+      {
+        title: tag,
+        posts: posts.filter(({ tags = [] }) => tags.find((i) => i === tag)),
+      },
+    ],
+    []
+  );
 
   return (
     <>
-      {posts.map((post) => (
-        <>
-          <PostPreview doc={post} />
-        </>
+      <PostPreview doc={first} />
+      <Box mt={6} />
+      {groupedByTags.map((group) => (
+        <Program key={group.title} {...group} />
       ))}
-      {/* {groupedByTags.map((group) => (
-        <GroupedPosts key={group.title} {...group} />
-      ))} */}
     </>
   );
 };
