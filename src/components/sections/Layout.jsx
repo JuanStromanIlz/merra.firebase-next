@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
       <Flex
         direction={'row'}
         alignContent={'center'}
-        position={'fixed'}
+        position={'absolute'}
         top={0}
         width={'100%'}
         zIndex={'sticky'}

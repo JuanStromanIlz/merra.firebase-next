@@ -1,13 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Center,
-  Flex,
-  useDisclosure,
-  Text,
-  Box,
-  Container,
-  Link,
-} from '@chakra-ui/react';
+import React from 'react';
+import { Container } from '@chakra-ui/react';
 import getSection from '../../actions/getSection';
 import getDoc from '../../actions/getDoc';
 import Gallery from '../../components/Gallery';
@@ -16,12 +8,15 @@ import Header from 'src/components/sections/Header';
 import useFetch from 'src/hooks/useFetch';
 import getRelatedDocs from 'src/actions/getRelatedDocs';
 import GroupedPosts from 'src/components/sections/GroupedPosts';
+import PostNav from 'src/components/PostNav';
 
 const TitleView = ({ doc }) => {
   const { data } = useFetch(() => getRelatedDocs(doc));
   return (
     <>
-      <Header doc={doc} />
+      <Header doc={doc}>
+        <PostNav doc={doc} />
+      </Header>
       <Gallery files={doc?.files} />
       <Container maxW='6xl' px={6}>
         <TextParse>{doc?.description}</TextParse>

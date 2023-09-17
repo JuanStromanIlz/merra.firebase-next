@@ -1,29 +1,51 @@
-import React from 'react';
-import { Button, Flex } from '@chakra-ui/react';
+import React, { useContext } from 'react';
+import { Button, Flex, IconButton } from '@chakra-ui/react';
+import { Admin } from 'src/contexts/AdminContext';
+import { DeleteIcon, EditIcon, LinkIcon } from '@chakra-ui/icons';
+import { useRouter } from 'next/router';
 
-const PostNav = () => {
-  const copyText = () => {
-    navigator.clipboard.writeText(window.location.toString());
+const PostNav = ({ doc }) => {
+  const { title } = doc;
+  const { user, onDeletePost } = useContext(Admin);
+  const router = useRouter();
+
+  const onEdit = () => {
+    return router.push(`/admin/edit?title=${title}`);
+  };
+
+  const sharePost = () => {
+    return navigator.clipboard.writeText(window.location.toString());
   };
 
   return (
-    <Flex
-      borderBottomWidth={1}
-      borderColor={'brand.500'}
-      py={3}
-      mb={12}
-      flexDirection={'row'}
-      gap={1}
-    >
+    <Flex flexDirection={'row'} py={4} gap={3}>
       <Button
-        colorScheme='brand'
-        variant='link'
-        fontWeight={'bold'}
-        ml={'auto'}
-        onClick={copyText}
+        borderRadius={'full'}
+        variant='outline'
+        size='sm'
+        rightIcon={<LinkIcon />}
+        onClick={sharePost}
       >
-        compartir
+        Compartir
       </Button>
+      {user && (
+        <>
+          <IconButton
+            borderRadius={'full'}
+            variant='outline'
+            size='sm'
+            icon={<DeleteIcon />}
+            onClick={() => onDeletePost(doc)}
+          />
+          <IconButton
+            borderRadius={'full'}
+            variant='outline'
+            size='sm'
+            icon={<EditIcon />}
+            onClick={onEdit}
+          />
+        </>
+      )}
     </Flex>
   );
 };

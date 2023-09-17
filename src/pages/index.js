@@ -28,11 +28,15 @@ const Posts = ({ posts }) => {
 
   return (
     <>
-      <PostPreview doc={first} />
-      <Box mt={6} />
-      {groupedByTags.map((group) => (
-        <Program key={group.title} {...group} />
+      {posts.map((data) => (
+        <>
+          <PostPreview doc={data} />
+          <Box mt={6} />
+        </>
       ))}
+      {/* {groupedByTags.map((group) => (
+        <Program key={group.title} {...group} />
+      ))} */}
     </>
   );
 };
