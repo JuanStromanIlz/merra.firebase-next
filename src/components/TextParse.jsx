@@ -6,19 +6,19 @@ import {
   UnorderedList,
   Text,
   ListItem,
+  Heading,
 } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import JsxParser from 'react-jsx-parser';
-import Title from './Title';
 import Quote from './Quote';
 
 const TextParse = ({ children = '' }) => {
-  const heading1Open = "<Title as='h2' size='xl'>";
-  const heading1Close = '</Title>';
-  const heading2Open = "<Title as='h3' size='lg'>";
-  const heading2Close = '</Title>';
-  const heading3Open = "<Title as='h4' size='sm'>";
-  const heading3Close = '</Title>';
+  const heading1Open = "<Heading as='h2' fontSize='xl'>";
+  const heading1Close = '</Heading>';
+  const heading2Open = "<Heading as='h3' fontSize='lg'>";
+  const heading2Close = '</Heading>';
+  const heading3Open = "<Heading as='h4' fontSize='sm'>";
+  const heading3Close = '</Heading>';
   const linkOpen = "<Link color='pink.50'";
   const linkClose = '</Link>';
   const blockquoteOpen = '<Quote>';
@@ -57,7 +57,7 @@ const TextParse = ({ children = '' }) => {
       renderInWrapper={false}
       components={{
         Quote,
-        Title,
+        Heading,
         Link,
         ExternalLinkIcon,
         Box,
