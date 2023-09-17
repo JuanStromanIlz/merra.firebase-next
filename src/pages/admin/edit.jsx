@@ -1,32 +1,31 @@
-import React from "react";
-import { useRouter } from "next/router";
-import FolderForm from "../../components/FolderForm";
-import Title from "src/components/Title";
-import getDoc from "src/actions/getDoc";
-import updateDoc from "src/actions/updateDoc";
-import useFetch from "src/hooks/useFetch";
-import TextLayout from "src/components/TextLayout";
+import React, { useContext } from 'react';
+import { useRouter } from 'next/router';
+import FolderForm from '../../components/FolderForm';
+import Title from 'src/components/Title';
+import getDoc from 'src/actions/getDoc';
+import useFetch from 'src/hooks/useFetch';
+import { Admin } from 'src/contexts/AdminContext';
+import { Box } from '@chakra-ui/react';
+import withAuth from 'src/hoc/withAuth';
 
-export default function Edit() {
+function Edit() {
   const router = useRouter();
   const { title } = router.query;
-  const { data, loading } = useFetch(() => getDoc(title));
-
-  const onUpdate = async (values) => {
-    try {
-      await updateDoc(values);
-      router.push(`/${values.title}`);
-    } catch ({ message }) {
-      console.error(message);
-    }
-  };
+  const { data, loading: loadingDoc } = useFetch(() => getDoc(title));
+  const { onEditPost, loading } = useContext(Admin);
 
   return (
-    <TextLayout>
-      <Title as={"h1"} size={"4xl"} letterSpacing={"wider"} my={12}>
-        {loading ? "loading" : "editar"}
+    <Box px={6}>
+      <Title as={'h1'} fontSize='4xl' cursor={'pointer'}>
+        Editar
       </Title>
-      <FolderForm folder={data} onSubmit={onUpdate} />
-    </TextLayout>
+      <FolderForm
+        loading={loadingDoc || loading}
+        folder={data}
+        onSubmit={onEditPost}
+      />
+    </Box>
   );
 }
+
+export default withAuth(Edit);

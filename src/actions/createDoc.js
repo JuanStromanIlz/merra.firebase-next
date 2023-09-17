@@ -1,9 +1,9 @@
-import { POSTS } from "src/services/foldersNames";
+import { POSTS } from 'src/services/foldersNames';
 import {
   createItem as createItemService,
   updateItem as updateItemService,
-} from "../services/firebase";
-import { uploadFiles } from "../services/storage";
+} from '../services/firebase';
+import { uploadFiles } from '../services/storage';
 
 const createDoc = async (values, folder = POSTS) => {
   try {
@@ -18,8 +18,8 @@ const createDoc = async (values, folder = POSTS) => {
       id,
       files: [...urls],
     });
-  } catch ({ message }) {
-    console.error(message);
+  } catch (err) {
+    throw err;
   }
 };
 

@@ -1,6 +1,6 @@
-import { POSTS } from "src/services/foldersNames";
-import { deleteFromFolder } from "../services/firebase";
-import { deleteFiles } from "../services/storage";
+import { POSTS } from 'src/services/foldersNames';
+import { deleteFromFolder } from '../services/firebase';
+import { deleteFiles } from '../services/storage';
 
 const deleteDoc = async (doc, folder = POSTS) => {
   const { id, files } = doc;
@@ -9,8 +9,8 @@ const deleteDoc = async (doc, folder = POSTS) => {
     if (files.length > 0) {
       await deleteFiles(files, id);
     }
-  } catch ({ message }) {
-    console.error(message);
+  } catch (err) {
+    throw err;
   }
 };
 

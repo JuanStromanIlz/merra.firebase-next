@@ -3,7 +3,13 @@ import '@fontsource/poppins';
 import '@fontsource/open-sans';
 import '../components/FolderForm/content-style.css';
 import { useRouter } from 'next/router';
-import { Center, ChakraProvider, CSSReset, Img } from '@chakra-ui/react';
+import {
+  Center,
+  ChakraProvider,
+  CSSReset,
+  DarkMode,
+  Img,
+} from '@chakra-ui/react';
 import AdminContext from '../contexts/AdminContext';
 import theme from '../theme';
 import { useBoolean } from '@chakra-ui/react';
@@ -25,6 +31,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
       <CSSReset />
+      <DarkMode />
       <AdminContext>
         {loading ? (
           <Center w={'100vw'} h={'100vh'}>

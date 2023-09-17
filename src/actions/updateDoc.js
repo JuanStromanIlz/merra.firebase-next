@@ -1,9 +1,9 @@
-import { POSTS } from "src/services/foldersNames";
-import { updateItem as updateItemService } from "../services/firebase";
+import { POSTS } from 'src/services/foldersNames';
+import { updateItem as updateItemService } from '../services/firebase';
 import {
   uploadFiles as uploadFilesService,
   deleteFiles as deleteFilesService,
-} from "../services/storage";
+} from '../services/storage';
 
 const updateDoc = async (values, folder = POSTS) => {
   try {
@@ -26,8 +26,8 @@ const updateDoc = async (values, folder = POSTS) => {
       files: [...files, ...urls],
       ...rest,
     });
-  } catch ({ message }) {
-    return message;
+  } catch (err) {
+    throw err;
   }
 };
 
