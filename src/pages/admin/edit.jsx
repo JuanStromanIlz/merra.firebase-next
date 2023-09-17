@@ -13,14 +13,14 @@ function Edit() {
   const router = useRouter();
   const { title } = router.query;
   const { data, loading } = useFetch(() => getDoc(title));
-  const { onEditPost } = useContext(Admin);
+  const { onUpdatePost } = useContext(Admin);
 
   return (
     <Box px={6}>
       <Title as={'h1'} fontSize='4xl' cursor={'pointer'}>
         Editar
       </Title>
-      <FolderForm loading={loading} folder={data} onSubmit={onEditPost} />
+      <FolderForm loading={loading} folder={data} onSubmit={onUpdatePost} />
     </Box>
   );
 }

@@ -32,6 +32,7 @@ const FolderForm = ({ loading, folder, onSubmit }) => {
       <Formik
         validationSchema={validationSchema}
         initialValues={folder}
+        enableReinitialize
         onSubmit={(values) => handleSubmit(values)}
       >
         {({ values, errors, touched, setFieldValue, setFieldTouched }) => (
