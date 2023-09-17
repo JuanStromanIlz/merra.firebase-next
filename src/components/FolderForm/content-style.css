@@ -1,10 +1,7 @@
-/* :root {
-  --ck-border-radius: 0.375rem !important;
-}
 .ck .ck-content {
   background-color: black !important;
 }
-.ck .ck-content h2,
+/* .ck .ck-content h2,
 h3,
 h4 {
   color: #d22d2d;
@@ -63,7 +60,7 @@ h4 {
 .ck-content li {
   display: list-item;
   text-align: -webkit-match-parent;
-}
+} */
 .ck-toolbar {
   background-color: black !important;
 }
@@ -78,4 +75,4 @@ h4 {
 }
 .ck-list {
   background-color: black !important;
-} */
+}

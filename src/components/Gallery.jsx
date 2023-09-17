@@ -12,8 +12,6 @@ import {
   BreadcrumbItem,
   Fade,
   useDisclosure,
-  Grid,
-  GridItem,
 } from '@chakra-ui/react';
 import File from './File';
 import useTouchDirection from 'src/hooks/useTouchDirection';

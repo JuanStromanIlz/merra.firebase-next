@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from 'react';
 import {
   FormControl,
   FormLabel,
@@ -6,18 +6,18 @@ import {
   FormErrorMessage,
   Button,
   Stack,
-} from "@chakra-ui/react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import Editor from "./Editor";
-import Tags from "./Tags";
-import FileUpload from "./FileUpload";
+} from '@chakra-ui/react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import Editor from './Editor';
+import Tags from './Tags';
+import FileUpload from './FileUpload';
 
 const validationSchema = Yup.object().shape({
-  title: Yup.string().required("El titulo es requerido."),
+  title: Yup.string().required('El titulo es requerido.'),
 });
 
-const FolderForm = ({ isSubmit, folder, onSubmit }) => {
+const FolderForm = ({ loading, folder, onSubmit }) => {
   const [deleteFiles, setDeleteFiles] = useState([]);
   const [newFiles, setNewFiles] = useState([]);
 
@@ -38,31 +38,36 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
           <Form>
             <Stack gap={3}>
               <FormControl isInvalid={errors.title && touched.title}>
-                <FormLabel fontWeight={"bold"} htmlFor="title">
+                <FormLabel fontSize='md' fontWeight={'bold'} htmlFor='title'>
                   Titulo
                 </FormLabel>
                 <Field
                   as={Input}
-                  id="title"
-                  name="title"
-                  placeholder="Nuevo titulo"
+                  variant='flushed'
+                  id='title'
+                  name='title'
+                  placeholder='Nuevo titulo'
                 />
-                <ErrorMessage name="title" component={FormErrorMessage} />
+                <ErrorMessage name='title' component={FormErrorMessage} />
               </FormControl>
               <Tags values={values?.tags || []} />
               <FormControl>
-                <FormLabel fontWeight={"bold"} htmlFor="description">
+                <FormLabel
+                  fontSize='md'
+                  fontWeight={'bold'}
+                  htmlFor='description'
+                >
                   Descripción
                 </FormLabel>
                 <Editor
-                  name="description"
-                  value={values?.description || ""}
+                  name='description'
+                  value={values?.description || ''}
                   onChange={(data) => {
-                    setFieldValue("description", data);
-                    setFieldTouched("description", true);
+                    setFieldValue('description', data);
+                    setFieldTouched('description', true);
                   }}
                 />
-                <ErrorMessage name="description" component={FormErrorMessage} />
+                <ErrorMessage name='description' component={FormErrorMessage} />
               </FormControl>
               <FileUpload
                 values={values?.files || []}
@@ -71,17 +76,16 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
                 setDeleteFiles={setDeleteFiles}
               />
               <Button
-                width={{ base: "100%", md: "fit-content" }}
-                colorScheme="green"
-                isLoading={isSubmit}
+                colorScheme='brand'
+                isLoading={loading}
                 loadingText={
                   folder?.title?.length > 0
-                    ? "Guardando cambios"
-                    : "Creando la carpeta"
+                    ? 'Guardando cambios'
+                    : 'Creando la carpeta'
                 }
-                type="submit"
+                type='submit'
               >
-                {folder?.title?.length > 0 ? "Editar Carpeta" : "Crear Carpeta"}
+                {folder?.title?.length > 0 ? 'Editar Carpeta' : 'Crear Carpeta'}
               </Button>
             </Stack>
           </Form>
@@ -93,9 +97,9 @@ const FolderForm = ({ isSubmit, folder, onSubmit }) => {
 
 FolderForm.defaultProps = {
   folder: {
-    title: "",
-    category: "",
-    description: "",
+    title: '',
+    category: '',
+    description: '',
     tags: [],
     files: [],
   },
