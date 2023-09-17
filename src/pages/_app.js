@@ -7,6 +7,7 @@ import { Center, ChakraProvider, CSSReset, Img } from '@chakra-ui/react';
 import AdminContext from '../contexts/AdminContext';
 import theme from '../theme';
 import { useBoolean } from '@chakra-ui/react';
+import Layout from 'src/components/sections/Layout';
 
 function MyApp({ Component, pageProps }) {
   const [loading, { on, off }] = useBoolean(false);
@@ -30,7 +31,9 @@ function MyApp({ Component, pageProps }) {
             <Img src='/heart.svg' w={'20%'} />
           </Center>
         ) : (
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         )}
       </AdminContext>
     </ChakraProvider>
