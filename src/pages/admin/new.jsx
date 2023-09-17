@@ -4,6 +4,7 @@ import FolderForm from '../../components/FolderForm';
 import Title from 'src/components/Title';
 import { Admin } from 'src/contexts/AdminContext';
 import withAuth from 'src/hoc/withAuth';
+import withLoading from 'src/hoc/withLoading';
 
 function NewItem() {
   const { onNewPost, loading } = useContext(Admin);
@@ -18,4 +19,4 @@ function NewItem() {
   );
 }
 
-export default withAuth(NewItem);
+export default withAuth(withLoading(NewItem));

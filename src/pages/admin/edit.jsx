@@ -7,25 +7,22 @@ import useFetch from 'src/hooks/useFetch';
 import { Admin } from 'src/contexts/AdminContext';
 import { Box } from '@chakra-ui/react';
 import withAuth from 'src/hoc/withAuth';
+import withLoading from 'src/hoc/withLoading';
 
 function Edit() {
   const router = useRouter();
   const { title } = router.query;
-  const { data, loading: loadingDoc } = useFetch(() => getDoc(title));
-  const { onEditPost, loading } = useContext(Admin);
+  const { data, loading } = useFetch(() => getDoc(title));
+  const { onEditPost } = useContext(Admin);
 
   return (
     <Box px={6}>
       <Title as={'h1'} fontSize='4xl' cursor={'pointer'}>
         Editar
       </Title>
-      <FolderForm
-        loading={loadingDoc || loading}
-        folder={data}
-        onSubmit={onEditPost}
-      />
+      <FolderForm loading={loading} folder={data} onSubmit={onEditPost} />
     </Box>
   );
 }
 
-export default withAuth(Edit);
+export default withAuth(withLoading(Edit));
