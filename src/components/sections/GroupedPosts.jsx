@@ -15,7 +15,6 @@ const GroupedPosts = ({ posts, title }) => {
       </Text>
       <Slider
         items={posts}
-        gap={3}
         Component={({ item }) => <Post key={item.id} data={item} />}
         px={6}
       />

@@ -25,6 +25,11 @@ const useSliding = (itemsPerParent, countElements) => {
     setDistance(distance - itemLength * roundedItem);
   };
 
+  const handleReset = () => {
+    setViewed(0);
+    setDistance(0);
+  };
+
   const slideProps = {
     style: { transform: `translate3d(${distance}px, 0, 0)` },
   };
@@ -35,6 +40,7 @@ const useSliding = (itemsPerParent, countElements) => {
   return {
     handlePrev,
     handleNext,
+    handleReset,
     slideProps,
     containerRef,
     itemLength,

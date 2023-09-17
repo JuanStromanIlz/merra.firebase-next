@@ -3,6 +3,39 @@ import useSliding from 'src/hooks/useSliding';
 import { Box, Button, Flex, useBreakpointValue } from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 
+export const SliderButtons = ({ hasPrev, hasNext, prev, next }) => (
+  <Box display={{ base: 'none', lg: 'block' }}>
+    {hasPrev && (
+      <Button
+        variant='ghost'
+        onClick={prev}
+        position={'absolute'}
+        top={0}
+        bottom={0}
+        left={0}
+        height={'auto'}
+        colorScheme='transparent'
+      >
+        <ChevronLeftIcon w={10} h={10} />
+      </Button>
+    )}
+    {hasNext && (
+      <Button
+        variant='ghost'
+        onClick={next}
+        position={'absolute'}
+        top={0}
+        bottom={0}
+        right={0}
+        height={'auto'}
+        colorScheme='transparent'
+      >
+        <ChevronRightIcon w={10} h={10} />
+      </Button>
+    )}
+  </Box>
+);
+
 const Slider = ({ items, gap = 1, Component = Box, ...rest }) => {
   const itemsPerParent = useBreakpointValue({ base: 1.3, md: 4.3 });
   const {
@@ -46,37 +79,12 @@ const Slider = ({ items, gap = 1, Component = Box, ...rest }) => {
           );
         })}
       </Flex>
-      {hasPrev && itemsPerParent !== 1 && (
-        <Button
-          variant='ghost'
-          onClick={handlePrev}
-          position={'absolute'}
-          top={0}
-          bottom={0}
-          left={0}
-          height={'auto'}
-          w={itemLength / 10}
-          colorScheme='transparent'
-        >
-          <ChevronLeftIcon w={10} h={10} />
-        </Button>
-      )}
-      {hasNext ||
-        (itemsPerParent === 1 && (
-          <Button
-            variant='ghost'
-            onClick={handleNext}
-            position={'absolute'}
-            top={0}
-            bottom={0}
-            right={0}
-            height={'auto'}
-            colorScheme='transparent'
-            w={itemLength / 10}
-          >
-            <ChevronRightIcon w={10} h={10} />
-          </Button>
-        ))}
+      <SliderButtons
+        hasPrev={hasPrev}
+        hasNext={hasNext}
+        prev={handlePrev}
+        next={handleNext}
+      />
     </Flex>
   );
 };
