@@ -8,6 +8,7 @@ const Carrousel = ({
   items,
   Component = Box,
   autoplay = true,
+  indicator = true,
   delay = 7000,
   children,
   ...rest
@@ -74,28 +75,34 @@ const Carrousel = ({
     return null;
   }
 
-  const indicator = () => (
-    <Flex
-      direction={'row'}
-      position={'absolute'}
-      bottom={4}
-      width={'100%'}
-      justifyContent={'center'}
-      alignContent={'center'}
-      gap={3}
-    >
-      {items.map((_, index) => (
-        <Box
-          key={index}
-          width={2.5}
-          height={2.5}
-          borderRadius={'100%'}
-          bgColor={'white'}
-          opacity={index === showing ? 1 : 0.5}
-        />
-      ))}
-    </Flex>
-  );
+  const indicators = (show) => {
+    if (!show) {
+      return null;
+    }
+
+    return (
+      <Flex
+        direction={'row'}
+        position={'absolute'}
+        bottom={4}
+        width={'100%'}
+        justifyContent={'center'}
+        alignContent={'center'}
+        gap={3}
+      >
+        {items.map((_, index) => (
+          <Box
+            key={index}
+            width={2.5}
+            height={2.5}
+            borderRadius={'100%'}
+            bgColor={'white'}
+            opacity={index === showing ? 1 : 0.5}
+          />
+        ))}
+      </Flex>
+    );
+  };
 
   return (
     <Flex
@@ -133,7 +140,7 @@ const Carrousel = ({
         prev={handlePrev}
         next={handleNext}
       />
-      {indicator()}
+      {indicators(indicator)}
     </Flex>
   );
 };

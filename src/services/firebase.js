@@ -32,8 +32,7 @@ export const getRelatedPostByTags = (doc = {}, folder) => {
   let q = query(
     folderRef(folder),
     where('tags', 'array-contains-any', tags),
-    where('title', '!=', title),
-    limit(3)
+    where('title', '!=', title)
   );
   return getDocs(q);
 };

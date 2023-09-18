@@ -1,7 +1,17 @@
 import React from 'react';
+import NextLink from 'next/link';
 import useSliding from 'src/hooks/useSliding';
-import { Box, Button, Flex, useBreakpointValue } from '@chakra-ui/react';
+import {
+  AspectRatio,
+  Box,
+  Button,
+  Flex,
+  Heading,
+  LinkOverlay,
+  useBreakpointValue,
+} from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import File from './File';
 
 export const SliderButtons = ({ hasPrev, hasNext, prev, next }) => (
   <Box display={{ base: 'none', lg: 'block' }}>
@@ -36,7 +46,30 @@ export const SliderButtons = ({ hasPrev, hasNext, prev, next }) => (
   </Box>
 );
 
-const Slider = ({ items, gap = 1, Component = Box, ...rest }) => {
+const Item = ({ item }) => {
+  const { title, files = [] } = item;
+  return (
+    <LinkOverlay as={NextLink} href={title}>
+      <Box as={'article'} position={'relative'} height={'100%'}>
+        <AspectRatio ratio={16 / 9} height={'100%'}>
+          <File data={files[0]} />
+        </AspectRatio>
+        <Box
+          position={'absolute'}
+          inset={0}
+          bgGradient={'linear(to-t, blackAlpha.300 0%, transparent 50%)'}
+        />
+        <Flex direction='column' position={'absolute'} bottom={0} px={3} pb={3}>
+          <Heading as={'h3'} fontSize={'lg'} fontWeight={'bold'}>
+            {title}
+          </Heading>
+        </Flex>
+      </Box>
+    </LinkOverlay>
+  );
+};
+
+const Slider = ({ items, gap = 1, Component = Item, ...rest }) => {
   const itemsPerParent = useBreakpointValue({ base: 1.3, md: 4.3 });
   const {
     handlePrev,
@@ -53,16 +86,13 @@ const Slider = ({ items, gap = 1, Component = Box, ...rest }) => {
   }
 
   return (
-    <Flex
-      position={'relative'}
-      overflow={{ base: 'scroll', md: 'hidden' }}
-      {...rest}
-    >
+    <Flex position={'relative'} overflow={{ base: 'scroll', md: 'hidden' }}>
       <Flex
         ref={containerRef}
         sx={{ transition: 'transform 300ms ease 100ms' }}
         width={'100%'}
         {...slideProps}
+        {...rest}
       >
         {items.map((item, index) => {
           return (
@@ -72,7 +102,7 @@ const Slider = ({ items, gap = 1, Component = Box, ...rest }) => {
               flexShrink={0}
               flexBasis={itemLength}
               key={index}
-              pr={gap}
+              pr={index + 1 !== items.length ? gap : 6}
             >
               <Component item={item} />
             </Box>

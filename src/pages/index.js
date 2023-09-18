@@ -1,43 +1,38 @@
-import { Box } from '@chakra-ui/react';
+import { Flex, SimpleGrid } from '@chakra-ui/react';
 import React from 'react';
 import getSection from 'src/actions/getSection';
 import Post from 'src/components/Post';
-import GroupedPosts from 'src/components/sections/GroupedPosts';
-import Header from 'src/components/sections/Header';
 import PostPreview from 'src/components/sections/PostPreview';
-import Program from 'src/components/sections/Program';
 
 const Posts = ({ posts }) => {
-  const first = posts[0] || {};
-  const tags = posts.reduce((acc, { tags = [] }) => [...acc, ...tags], []);
-  const filteredTags = [
-    ...(new Set(
-      tags.filter((tag) => tags.filter((t) => t === tag).length >= 3)
-    ) || []),
-  ];
-  const groupedByTags = filteredTags.reduce(
-    (acc, tag) => [
-      ...acc,
-      {
-        title: tag,
-        posts: posts.filter(({ tags = [] }) => tags.find((i) => i === tag)),
-      },
-    ],
-    []
-  );
+  const first = posts.slice(0, 1)[0] || {};
+  const restOfPosts = posts.slice(1, posts.length) || [];
+  // const tags = posts.reduce((acc, { tags = [] }) => [...acc, ...tags], []);
+  // const filteredTags = [
+  //   ...(new Set(
+  //     tags.filter((tag) => tags.filter((t) => t === tag).length >= 3)
+  //   ) || []),
+  // ];
+  // const groupedByTags = filteredTags.reduce(
+  //   (acc, tag) => [
+  //     ...acc,
+  //     {
+  //       title: tag,
+  //       posts: posts.filter(({ tags = [] }) => tags.find((i) => i === tag)),
+  //     },
+  //   ],
+  //   []
+  // );
 
   return (
-    <>
-      {posts.map((data) => (
-        <>
-          <PostPreview doc={data} />
-          <Box mt={6} />
-        </>
-      ))}
-      {/* {groupedByTags.map((group) => (
-        <Program key={group.title} {...group} />
-      ))} */}
-    </>
+    <Flex gap={6} direction={'column'}>
+      <PostPreview doc={first} />
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} px={6} gap={6} mb={6}>
+        {restOfPosts.map((data, index) => (
+          <Post data={data} key={data?.title || index} />
+        ))}
+      </SimpleGrid>
+    </Flex>
   );
 };
 
