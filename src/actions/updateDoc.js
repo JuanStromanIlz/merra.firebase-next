@@ -4,6 +4,7 @@ import {
   uploadFiles as uploadFilesService,
   deleteFiles as deleteFilesService,
 } from '../services/storage';
+import { slugify } from './utils';
 
 const updateDoc = async (values, folder = POSTS) => {
   try {
@@ -23,6 +24,7 @@ const updateDoc = async (values, folder = POSTS) => {
     await updateItemService(folder, {
       id,
       title,
+      url: slugify(title),
       files: [...files, ...urls],
       ...rest,
     });

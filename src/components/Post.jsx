@@ -6,12 +6,12 @@ import Tags from './Tags';
 import Title from './Title';
 
 const Post = ({ data }) => {
-  const { title = '', tags, files = [{}] } = data;
+  const { title = '', tags, files = [{}], url } = data;
   const file = files[0] || {};
 
   return (
     <Box as={'article'} position={'relative'}>
-      <LinkOverlay as={NextLink} href={title}>
+      <LinkOverlay as={NextLink} href={url}>
         <Flex direction={'column'} gap={3}>
           <Tags tags={tags} />
           <File data={file} controls={false} />

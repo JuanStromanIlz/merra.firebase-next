@@ -6,7 +6,7 @@ import Carrousel from '../Carrousel';
 import File from '../File';
 
 const Component = ({ item }) => {
-  const { title = '', tags, files = [{}] } = item;
+  const { title = '', tags, files = [{}], url } = item;
   const file = files[0] || {};
 
   return (
@@ -18,7 +18,7 @@ const Component = ({ item }) => {
         bgGradient={'linear(to-t, blackAlpha.300 0%, transparent 50%)'}
       />
       <Flex direction='column' position={'absolute'} bottom={0} px={6} pb={10}>
-        <LinkOverlay as={NextLink} href={title}>
+        <LinkOverlay as={NextLink} href={url}>
           <Heading as={'h3'} fontSize='3xl' cursor={'pointer'}>
             {title}
           </Heading>

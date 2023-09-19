@@ -53,7 +53,7 @@ const AdminContext = ({ children }) => {
       setLoading(true);
       await createDoc(values);
       setLoading(false);
-      router.push(`/${values.title}`);
+      router.push('/');
     } catch ({ message }) {
       console.error(message);
     }
@@ -64,7 +64,7 @@ const AdminContext = ({ children }) => {
       setLoading(true);
       await updateDoc(values);
       setLoading(false);
-      router.push(`/${values.title}`);
+      router.push('/');
     } catch ({ message }) {
       console.error(message);
     }
@@ -75,7 +75,7 @@ const AdminContext = ({ children }) => {
       setLoading(true);
       await deleteDoc(values);
       setLoading(false);
-      router.push(`/${values.title}`);
+      router.push('/');
     } catch ({ message }) {
       console.error(message);
     }

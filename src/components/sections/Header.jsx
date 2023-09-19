@@ -5,7 +5,7 @@ import Title from '../Title';
 import Tags from '../Tags';
 
 const Header = ({ doc, children }) => {
-  const { title = '', tags, files = [{}] } = doc;
+  const { title = '', tags, files = [{}], url: titleUrl } = doc;
   const { url } = files[0] || {};
 
   return (
@@ -29,7 +29,7 @@ const Header = ({ doc, children }) => {
         px={6}
       >
         <Tags tags={tags} />
-        <LinkOverlay as={NextLink} href={title}>
+        <LinkOverlay as={NextLink} href={titleUrl}>
           <Title as={'h1'} fontSize='4xl' cursor={'pointer'}>
             {title}
           </Title>

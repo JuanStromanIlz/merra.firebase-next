@@ -22,17 +22,17 @@ export const getFolder = (folder) => {
   return getDocs(q);
 };
 
-export const getItemByTitle = (title, folder) => {
-  let q = query(folderRef(folder), where('title', '==', title), limit(1));
+export const getItemByTitle = (url, folder) => {
+  let q = query(folderRef(folder), where('url', '==', url), limit(1));
   return getDocs(q);
 };
 
 export const getRelatedPostByTags = (doc = {}, folder) => {
-  const { tags = [], title = '' } = doc;
+  const { tags = [], url = '' } = doc;
   let q = query(
     folderRef(folder),
     where('tags', 'array-contains-any', tags),
-    where('title', '!=', title)
+    where('url', '!=', url)
   );
   return getDocs(q);
 };

@@ -5,12 +5,12 @@ import { DeleteIcon, EditIcon, LinkIcon } from '@chakra-ui/icons';
 import { useRouter } from 'next/router';
 
 const PostNav = ({ doc }) => {
-  const { title } = doc;
+  const { url } = doc;
   const { user, onDeletePost } = useContext(Admin);
   const router = useRouter();
 
   const onEdit = () => {
-    return router.push(`/admin/edit?title=${title}`);
+    return router.push(`/admin/edit?title=${url}`);
   };
 
   const sharePost = () => {

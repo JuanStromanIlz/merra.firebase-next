@@ -47,9 +47,9 @@ export const SliderButtons = ({ hasPrev, hasNext, prev, next }) => (
 );
 
 const Item = ({ item }) => {
-  const { title, files = [] } = item;
+  const { title, files = [], url } = item;
   return (
-    <LinkOverlay as={NextLink} href={title}>
+    <LinkOverlay as={NextLink} href={url}>
       <Box as={'article'} position={'relative'} height={'100%'}>
         <AspectRatio ratio={16 / 9} height={'100%'}>
           <File data={files[0]} />
