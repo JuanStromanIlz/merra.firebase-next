@@ -1,4 +1,5 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useRef, useState } from 'react';
+import { useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import {
   signInWithPopup,
@@ -15,9 +16,33 @@ const { Provider } = Admin;
 
 const AdminContext = ({ children }) => {
   const router = useRouter();
+  const toast = useToast();
+  const toastRef = useRef();
   const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(false);
 
+  const createNotification = async (action, title) => {
+    try {
+      toastRef.current = toast({
+        position: 'bottom-left',
+        title: 'Cargando...',
+        status: 'info',
+      });
+      await action();
+      toast.update(toastRef.current, {
+        position: 'bottom-left',
+        title,
+        status: 'success',
+      });
+    } catch ({ message }) {
+      toast.update(toastRef.current, {
+        position: 'bottom-left',
+        title: message,
+        status: 'error',
+      });
+    }
+  };
+
+  // Auth
   onAuthStateChanged(auth, (user) => {
     if (user) {
       setUser(user);
@@ -31,53 +56,39 @@ const AdminContext = ({ children }) => {
       }
     }
   });
-
   const signIn = async () => {
-    try {
-      await signInWithPopup(auth, provider);
-    } catch ({ message }) {
-      console.error(message);
-    }
+    await createNotification(() => signInWithPopup(auth, provider), 'SignIn');
   };
-
   const signOut = async () => {
-    try {
-      await signOutFirebase(auth);
-    } catch ({ message }) {
-      console.error(message);
-    }
+    await createNotification(() => signOutFirebase(auth), 'SignOut');
   };
 
+  // Post
   const onNewPost = async (values) => {
-    try {
-      setLoading(true);
-      await createDoc(values);
-      setLoading(false);
+    if (user) {
+      await createNotification(
+        () => createDoc(values),
+        'post creado con exito.'
+      );
       router.push('/');
-    } catch ({ message }) {
-      console.error(message);
     }
   };
-
   const onUpdatePost = async (values) => {
-    try {
-      setLoading(true);
-      await updateDoc(values);
-      setLoading(false);
+    if (user) {
+      await createNotification(
+        () => updateDoc(values),
+        'Post editado con exito.'
+      );
       router.push('/');
-    } catch ({ message }) {
-      console.error(message);
     }
   };
-
   const onDeletePost = async (values) => {
-    try {
-      setLoading(true);
-      await deleteDoc(values);
-      setLoading(false);
+    if (user) {
+      await createNotification(
+        () => deleteDoc(values),
+        'Post elimnado con exito.'
+      );
       router.push('/');
-    } catch ({ message }) {
-      console.error(message);
     }
   };
 
@@ -97,7 +108,6 @@ const AdminContext = ({ children }) => {
         onNewPost,
         onUpdatePost,
         onDeletePost,
-        loading,
       }}
     >
       {children}

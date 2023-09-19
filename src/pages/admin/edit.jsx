@@ -7,7 +7,6 @@ import useFetch from 'src/hooks/useFetch';
 import { Admin } from 'src/contexts/AdminContext';
 import { Box } from '@chakra-ui/react';
 import withAuth from 'src/hoc/withAuth';
-import withLoading from 'src/hoc/withLoading';
 
 function Edit() {
   const router = useRouter();
@@ -25,4 +24,4 @@ function Edit() {
   );
 }
 
-export default withAuth(withLoading(Edit));
+export default withAuth(Edit);

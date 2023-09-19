@@ -8,7 +8,7 @@ const PostPreview = ({ doc }) => {
   const { description = '', url } = doc;
   const text = parse(description)
     ?.getElementsByTagName('p')
-    .filter((tag) => tag.textContent)[0].textContent;
+    .filter((tag) => tag.textContent)[0]?.textContent;
 
   return (
     <LinkOverlay as={NextLink} href={url}>
