@@ -27,8 +27,8 @@ const TitleView = ({ doc }) => {
 };
 
 export async function getStaticProps({ params }) {
-  const { title } = params;
-  const doc = await getDoc(title);
+  const { url } = params;
+  const doc = await getDoc(url);
 
   if (!doc) {
     return {
