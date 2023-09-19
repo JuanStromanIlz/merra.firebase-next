@@ -54,6 +54,8 @@ export async function getStaticPaths() {
     paths.push({ params: { ...doc } });
   });
 
+  console.log(paths);
+
   return {
     paths,
     fallback: 'blocking',
