@@ -5,23 +5,18 @@ import getDoc from '../../actions/getDoc';
 import Gallery from '../../components/Gallery';
 import TextParse from 'src/components/TextParse';
 import Header from 'src/components/sections/Header';
-// import useFetch from 'src/hooks/useFetch';
-// import getRelatedDocs from 'src/actions/getRelatedDocs';
-// import GroupedPosts from 'src/components/sections/GroupedPosts';
 import PostNav from 'src/components/PostNav';
 
 const TitleView = ({ doc }) => {
-  // const { data } = useFetch(() => getRelatedDocs(doc));
   return (
     <>
       <Header doc={doc}>
         <PostNav doc={doc} />
       </Header>
       <Gallery files={doc?.files} />
-      <Container maxW='6xl' px={6}>
+      <Container maxW='6xl' px={6} pb={4}>
         <TextParse>{doc?.description}</TextParse>
       </Container>
-      {/* <GroupedPosts posts={data} title={'relacionado'} /> */}
     </>
   );
 };
