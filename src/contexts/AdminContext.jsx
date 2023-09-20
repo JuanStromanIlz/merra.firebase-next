@@ -68,7 +68,7 @@ const AdminContext = ({ children }) => {
     if (user) {
       await createNotification(
         () => createDoc(values),
-        'post creado con exito.'
+        'Post creado con exito.'
       );
       router.push('/');
     }
