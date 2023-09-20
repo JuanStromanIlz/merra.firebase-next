@@ -8,9 +8,9 @@ import {
   deleteDoc,
   orderBy,
   collection,
-  Timestamp,
   where,
   limit,
+  serverTimestamp,
 } from 'firebase/firestore';
 
 const folderRef = (folder) => collection(db, folder);
@@ -18,7 +18,7 @@ const folderRef = (folder) => collection(db, folder);
 const itemRef = (id, folder) => doc(db, folder, id);
 
 export const getFolder = (folder) => {
-  let q = query(folderRef(folder), orderBy('created'));
+  let q = query(folderRef(folder), orderBy('created', 'desc'));
   return getDocs(q);
 };
 
@@ -40,16 +40,14 @@ export const getRelatedPostByTags = (doc = {}, folder) => {
 export const createItem = (folder, data) => {
   return addDoc(folderRef(folder), {
     ...data,
-    created: Timestamp.now().toJSON(),
-    updated: Timestamp.now().toJSON(),
+    created: serverTimestamp(),
   });
 };
 
 export const updateItem = (folder, data) => {
-  const { id, ...rest } = data;
+  const { id, created, ...rest } = data;
   return updateDoc(itemRef(id, folder), {
     ...rest,
-    updated: Timestamp.now().toJSON(),
   });
 };
 

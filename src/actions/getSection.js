@@ -1,5 +1,5 @@
-import { POSTS } from "src/services/foldersNames";
-import { getFolder as getFolderService } from "../services/firebase";
+import { POSTS } from 'src/services/foldersNames';
+import { getFolder as getFolderService } from '../services/firebase';
 
 const getSection = async (folder = POSTS) => {
   try {
@@ -9,11 +9,12 @@ const getSection = async (folder = POSTS) => {
       data.push({
         id: doc.id,
         ...doc.data(),
+        created: doc.data().created.toJSON(),
       });
     });
     return data;
-  } catch ({ message }) {
-    console.error(message);
+  } catch (err) {
+    throw err;
   }
 };
 

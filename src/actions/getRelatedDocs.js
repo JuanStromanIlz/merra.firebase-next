@@ -1,5 +1,5 @@
-import { getRelatedPostByTags } from "src/services/firebase";
-import { POSTS } from "src/services/foldersNames";
+import { getRelatedPostByTags } from 'src/services/firebase';
+import { POSTS } from 'src/services/foldersNames';
 
 const getRelatedDocs = async (doc, folder = POSTS) => {
   try {
@@ -9,11 +9,12 @@ const getRelatedDocs = async (doc, folder = POSTS) => {
       data.push({
         id: doc.id,
         ...doc.data(),
+        created: doc.data().created.toJSON(),
       });
     });
     return data;
-  } catch ({ message }) {
-    console.error(message);
+  } catch (err) {
+    throw err;
   }
 };
 
