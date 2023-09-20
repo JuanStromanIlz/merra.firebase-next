@@ -2,13 +2,13 @@ import React from 'react';
 import { Flex } from '@chakra-ui/react';
 import getSection from 'src/actions/getSection';
 import PostPreview from 'src/components/sections/PostPreview';
+import GroupedPosts from 'src/components/sections/GroupedPosts';
 
 const Posts = ({ posts }) => {
   return (
     <Flex gap={6} direction={'column'}>
-      {posts.map((data) => (
-        <PostPreview key={data.title} doc={data} />
-      ))}
+      <PostPreview doc={posts[0]} />
+      <GroupedPosts posts={posts} />
     </Flex>
   );
 };

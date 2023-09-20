@@ -12,10 +12,10 @@ const Post = ({ data }) => {
   return (
     <Box as={'article'} position={'relative'}>
       <LinkOverlay as={NextLink} href={url}>
-        <Flex direction={'column'} gap={3}>
-          <Tags tags={tags} />
+        <Flex direction={'column'}>
+          <Tags tags={tags} mb={1} />
           <File data={file} controls={false} />
-          <Title as={'h3'} fontSize={'2xl'}>
+          <Title as={'h3'} fontSize={'2xl'} mt={4}>
             {title}
           </Title>
         </Flex>
