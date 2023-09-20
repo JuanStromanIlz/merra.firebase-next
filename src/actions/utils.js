@@ -9,3 +9,6 @@ export const slugify = (string, separator = '-') => {
     .replace(/\-\-+/g, separator) // Replace multiple (-) with single (-)
     .replace(/\-$/g, ''); // Remove trailing (-)
 };
+
+export const firebaseDateParser = (date) =>
+  new Date(date.seconds * 1000 + date.nanoseconds / 1000000);
