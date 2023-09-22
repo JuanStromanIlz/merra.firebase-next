@@ -9,9 +9,9 @@ function NewItem() {
   const { onNewPost } = useContext(Admin);
 
   return (
-    <Box px={6}>
+    <Box px={6} pb={4} pt={20}>
       <Title as={'h1'} fontSize='4xl' cursor={'pointer'}>
-        Nueva Publicacion
+        Nueva post
       </Title>
       <FolderForm onSubmit={onNewPost} />
     </Box>

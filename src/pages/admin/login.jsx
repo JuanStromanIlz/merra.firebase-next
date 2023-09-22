@@ -7,7 +7,9 @@ const Login = () => {
 
   return (
     <Center w={'100vw'} h={'100vh'}>
-      <Button onClick={user ? signOut : signIn}>login</Button>
+      <Button colorScheme='brand' onClick={user ? signOut : signIn}>
+        login
+      </Button>
     </Center>
   );
 };

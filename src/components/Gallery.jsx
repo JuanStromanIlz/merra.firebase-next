@@ -111,7 +111,7 @@ const Gallery = ({ files }) => {
           onTouchEnd={onTouchEnd}
           onTouchMove={onTouchMove}
           borderRadius={'none'}
-          bg={'blackAlpha.800'}
+          bg={'black'}
           onClick={onToggle}
         >
           <ModalHeader>

@@ -78,6 +78,7 @@ const FolderForm = ({ loading, folder, onSubmit }) => {
               />
               <Button
                 colorScheme='brand'
+                width={{ base: '100%', md: 'fit-content' }}
                 isLoading={loading}
                 loadingText={
                   folder?.title?.length > 0
