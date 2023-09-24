@@ -16,7 +16,7 @@ const Tags = ({ tags = [], ...rest }) => {
   return (
     <Flex direction={'row'} gap={3} {...rest}>
       {tags.map((tag) => (
-        <Text fontSize='md' fontWeight={'bold'} as={'span'} key={tag}>
+        <Text as={'span'} key={tag}>
           {tag}
         </Text>
       ))}

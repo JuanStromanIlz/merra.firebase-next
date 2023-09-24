@@ -32,8 +32,8 @@ const Header = ({ doc, children }) => {
       w={'100%'}
       backgroundImage={url}
       backgroundPosition={'center'}
-      backgroundRepeat={'repeat'}
-      backgroundSize={'contain'}
+      backgroundRepeat={'repeat-x'}
+      backgroundSize={['cover', 'contain']}
       direction='column'
       justifyContent={'space-between'}
     >
