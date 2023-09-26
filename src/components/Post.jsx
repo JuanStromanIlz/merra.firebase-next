@@ -16,39 +16,38 @@ const Post = ({ data }) => {
   const withPreview = files.length > 3;
 
   const media = (files) => {
-    if (!withPreview) {
-      const file = files[0] || {};
-      return (
-        <AspectRatio ratio={4 / 5} width={'100%'} py={2}>
-          <File data={file} controls={false} />
-        </AspectRatio>
-      );
-    }
+    // if (!withPreview) {
+    const file = files[0] || {};
     return (
-      <Flex
-        // pt={2}
-        // display={'inline-flex'}
-        height={'50vh'}
-        gap={3}
-        overflow={'scroll'}
-        sx={{
-          '::-webkit-scrollbar': {
-            display: 'none',
-          },
-        }}
-      >
-        {files.map((f, index) => (
-          <File key={f?.name || index} data={f} controls={false} />
-        ))}
-      </Flex>
+      <AspectRatio ratio={4 / 5} width={'100%'} py={2}>
+        <File data={file} controls={false} />
+      </AspectRatio>
     );
+    // }
+    // return (
+    //   <Flex
+    //     height={'50vh'}
+    //     gap={3}
+    //     overflow={'scroll'}
+    //     sx={{
+    //       '::-webkit-scrollbar': {
+    //         display: 'none',
+    //       },
+    //     }}
+    //   >
+    //     {files.map((f, index) => (
+    //       <File key={f?.name || index} data={f} controls={false} />
+    //     ))}
+    //   </Flex>
+    // );
   };
 
   return (
     <GridItem
       as={'article'}
       position={'relative'}
-      colSpan={[1, withPreview ? 4 : 1]}
+      // colSpan={[1, withPreview ? 4 : 1]}
+      colSpan={1}
     >
       <LinkOverlay as={NextLink} href={url}>
         <Box>

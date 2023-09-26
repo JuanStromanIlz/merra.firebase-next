@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import useSliding from 'src/hooks/useSliding';
 import { Box, Flex } from '@chakra-ui/react';
-import useTouchDirection from 'src/hooks/useTouchDirection';
-import { SliderButtons } from './Slider';
 
 const Carrousel = ({
   items,
@@ -44,11 +42,6 @@ const Carrousel = ({
     setShowing(0);
     handleReset();
   }, [handleReset]);
-
-  const { onTouchStart, onTouchEnd, onTouchMove } = useTouchDirection(
-    prev,
-    next
-  );
 
   function resetTimeout() {
     if (timeoutRef.current) {
@@ -105,17 +98,10 @@ const Carrousel = ({
   };
 
   return (
-    <Flex
-      position={'relative'}
-      overflow={'hidden'}
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
-      onTouchMove={onTouchMove}
-      {...rest}
-    >
+    <Flex position={'relative'} overflow={'hidden'} {...rest}>
       <Flex
         ref={containerRef}
-        sx={{ transition: 'transform 300ms ease 100ms' }}
+        sx={{ transition: 'transform 1000ms ease 100ms' }}
         width={'100%'}
         {...slideProps}
       >
@@ -134,12 +120,6 @@ const Carrousel = ({
         })}
       </Flex>
       {children}
-      <SliderButtons
-        hasPrev={hasPrev}
-        hasNext={hasNext}
-        prev={handlePrev}
-        next={handleNext}
-      />
       {indicators(indicator)}
     </Flex>
   );

@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
         </NextLink>
         {user ? (
           <IconButton
-            colorScheme='brand'
+            // colorScheme='brand'
             borderWidth={0}
             variant='outline'
             size='sm'

@@ -39,18 +39,21 @@ const Header = ({ doc, children }) => {
     >
       <Flex
         height={'100%'}
-        bgGradient={'linear(to-t, blackAlpha.500 40%, transparent 100%)'}
         direction='column'
-        justifyContent={'flex-end'}
         flex={1}
-        py={4}
-        px={6}
+        px={3}
+        pt={'56px'}
+        bgGradient={'linear(to-b, transparent 0%, blackAlpha.600 100%)'}
       >
-        <Tags tags={tags} />
-        <Title as={'h1'} fontSize='4xl'>
-          {title}
-        </Title>
-        {children}
+        <Box flexGrow={1}>
+          <Title position={'sticky'} top={'56px'}>
+            {title}
+          </Title>
+          <Tags tags={tags} />
+        </Box>
+        <Box mt={'auto'} py={3}>
+          {children}
+        </Box>
       </Flex>
     </Box>
   );
