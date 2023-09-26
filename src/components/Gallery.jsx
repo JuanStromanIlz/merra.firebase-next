@@ -75,7 +75,7 @@ const Gallery = ({ files }) => {
 
   return (
     <>
-      <Flex px={6} py={4} gap={3} flexWrap={'wrap'}>
+      <Flex gap={3} flexWrap={'wrap'}>
         {files?.map((data, index) => (
           <Flex
             key={data?.name || index}
@@ -83,8 +83,8 @@ const Gallery = ({ files }) => {
             flexShrink={0}
             flexBasis={itemSize(data, index)}
             justifyContent={'center'}
-            alignContent={'flex-start'}
-            alignItems={'flex-start'}
+            alignContent={'center'}
+            alignItems={'center'}
           >
             <File
               data={data}
@@ -111,12 +111,13 @@ const Gallery = ({ files }) => {
           onTouchEnd={onTouchEnd}
           onTouchMove={onTouchMove}
           borderRadius={'none'}
-          bg={'black'}
+          bg={'blackAlpha.500'}
+          backdropFilter={'blur(20px)'}
           onClick={onToggle}
         >
-          <ModalHeader>
+          {/* <ModalHeader>
             <ModalCloseButton size={'md'} />
-          </ModalHeader>
+          </ModalHeader> */}
           <ModalBody pos={'relative'} overflow={'hidden'}>
             {files?.map((file, index) => (
               <Fade in={index === galleryIndex} key={file?.name || index}>
@@ -127,14 +128,14 @@ const Gallery = ({ files }) => {
                   alignItems={'center'}
                   height={'100%'}
                   width={'100%'}
-                  p={4}
+                  p={3}
                 >
                   <File data={file} />
                 </Flex>
               </Fade>
             ))}
           </ModalBody>
-          <ModalFooter>
+          {/* <ModalFooter>
             <Flex width={'100%'} justifyContent={'center'}>
               <Flex>
                 <Breadcrumb>
@@ -147,7 +148,7 @@ const Gallery = ({ files }) => {
                 </Breadcrumb>
               </Flex>
             </Flex>
-          </ModalFooter>
+          </ModalFooter> */}
         </ModalContent>
       </Modal>
     </>

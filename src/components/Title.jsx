@@ -11,11 +11,15 @@ const Title = forwardRef(function Title({ children, color, ...rest }, ref) {
   return (
     <Heading
       ref={ref}
+      fontSize={'4xl'}
       fontWeight={'normal'}
       textTransform={'capitalize'}
+      letterSpacing={1}
+      lineHeight={'80%'}
+      textAlign={'center'}
       color={'transparent'}
       sx={{
-        WebkitTextStroke: `1.5px ${color || brand}}`,
+        WebkitTextStroke: `1px ${color || brand}}`,
       }}
       {...rest}
     >

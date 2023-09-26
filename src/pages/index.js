@@ -6,7 +6,7 @@ import GroupedPosts from 'src/components/sections/GroupedPosts';
 
 const Posts = ({ posts }) => {
   return (
-    <Flex gap={6} direction={'column'}>
+    <Flex direction={'column'} gap={6}>
       <PostPreview doc={posts[0]} />
       <GroupedPosts posts={posts} />
     </Flex>

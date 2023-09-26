@@ -1,4 +1,4 @@
-import { Grid, GridItem } from '@chakra-ui/react';
+import { Grid } from '@chakra-ui/react';
 import React from 'react';
 import Post from '../Post';
 
@@ -8,11 +8,9 @@ const GroupedPosts = ({ posts }) => {
   }
 
   return (
-    <Grid p={4} gap={4} templateColumns={['1fr', 'repeat(4, 1fr)']}>
+    <Grid p={3} gap={6} templateColumns={['1fr', 'repeat(4, 1fr)']}>
       {posts?.map((data, index) => (
-        <GridItem width={'100%'} key={data?.name || index}>
-          <Post data={data} />
-        </GridItem>
+        <Post key={data?.name || index} data={data} />
       ))}
     </Grid>
   );

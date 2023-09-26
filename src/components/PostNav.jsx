@@ -18,12 +18,13 @@ const PostNav = ({ doc }) => {
   };
 
   return (
-    <Flex flexDirection={'row'} py={4} gap={3}>
+    <Flex flexDirection={'row'} gap={3}>
       <Button
         borderRadius={'full'}
         variant='outline'
         size='sm'
-        rightIcon={<LinkIcon />}
+        leftIcon={<LinkIcon />}
+        colorScheme='white'
         onClick={sharePost}
       >
         Compartir
@@ -31,6 +32,7 @@ const PostNav = ({ doc }) => {
       {user && (
         <>
           <IconButton
+            colorScheme='white'
             borderRadius={'full'}
             variant='outline'
             size='sm'
@@ -38,6 +40,7 @@ const PostNav = ({ doc }) => {
             onClick={() => onDeletePost(doc)}
           />
           <IconButton
+            colorScheme='white'
             borderRadius={'full'}
             variant='outline'
             size='sm'

@@ -1,23 +1,22 @@
 import React from 'react';
-import { Container } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import getSection from '../../actions/getSection';
 import getDoc from '../../actions/getDoc';
 import Gallery from '../../components/Gallery';
 import TextParse from 'src/components/TextParse';
-import Header from 'src/components/sections/Header';
+import Title from 'src/components/Title';
+import Tags from 'src/components/Tags';
 import PostNav from 'src/components/PostNav';
+import FolderLayout from 'src/components/FolderLayout';
 
 const TitleView = ({ doc }) => {
   return (
-    <>
-      <Header doc={doc}>
-        <PostNav doc={doc} />
-      </Header>
+    <FolderLayout title={doc?.title}>
+      <Tags tags={doc?.tags} />
+      <PostNav doc={doc} />
       <Gallery files={doc?.files} />
-      <Container maxW='6xl' px={6} pb={4}>
-        <TextParse>{doc?.description}</TextParse>
-      </Container>
-    </>
+      <TextParse>{doc?.description}</TextParse>
+    </FolderLayout>
   );
 };
 

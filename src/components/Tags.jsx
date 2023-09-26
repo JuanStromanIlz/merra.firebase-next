@@ -14,9 +14,14 @@ const Tags = ({ tags = [], ...rest }) => {
     return null;
   }
   return (
-    <Flex direction={'row'} gap={3} {...rest}>
+    <Flex
+      direction={'row'}
+      flexWrap={'wrap'}
+      justifyContent={'center'}
+      {...rest}
+    >
       {tags.map((tag) => (
-        <Text as={'span'} key={tag}>
+        <Text as={'span'} fontSize={'sm'} key={tag}>
           {tag}
         </Text>
       ))}

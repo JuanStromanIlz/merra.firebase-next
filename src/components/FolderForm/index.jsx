@@ -37,7 +37,7 @@ const FolderForm = ({ loading, folder, onSubmit }) => {
       >
         {({ values, errors, touched, setFieldValue, setFieldTouched }) => (
           <Form>
-            <Stack gap={3}>
+            <Stack gap={6}>
               <FormControl isInvalid={errors.title && touched.title}>
                 <FormLabel fontSize='md' fontWeight={'bold'} htmlFor='title'>
                   Titulo
