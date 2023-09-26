@@ -9,6 +9,7 @@ const File = ({ data, onClick, ...rest }) => {
       alt={name}
       objectFit={'contain'}
       maxHeight={'100%'}
+      borderRadius={'md'}
       onClick={onClick}
       {...rest}
     />
@@ -17,7 +18,7 @@ const File = ({ data, onClick, ...rest }) => {
       as='video'
       controls
       src={url}
-      overflow={'hidden'}
+      borderRadius={'md'}
       maxHeight={'100%'}
       {...rest}
     />

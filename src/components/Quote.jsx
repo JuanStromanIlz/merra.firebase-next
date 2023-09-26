@@ -6,12 +6,14 @@ export default function Quote({ children }) {
   return (
     <Box
       as='blockquote'
-      p={3}
+      py={3}
       borderBottomWidth={1}
       borderTopWidth={1}
       borderColor={'brand.500'}
     >
-      <Title size='md'>{children}</Title>
+      <Title fontSize='lg' lineHeight={undefined}>
+        {children}
+      </Title>
     </Box>
   );
 }

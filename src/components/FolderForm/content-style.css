@@ -1,11 +1,6 @@
 .ck .ck-content {
   background-color: black !important;
 }
-/* .ck .ck-content h2,
-h3,
-h4 {
-  color: #d22d2d;
-}
 .ck-content h2 {
   display: block;
   font-size: 1.5rem;
@@ -60,7 +55,7 @@ h4 {
 .ck-content li {
   display: list-item;
   text-align: -webkit-match-parent;
-} */
+}
 .ck-toolbar {
   background-color: black !important;
 }

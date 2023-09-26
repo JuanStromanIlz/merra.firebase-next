@@ -18,6 +18,7 @@ const Tags = ({ tags = [], ...rest }) => {
       direction={'row'}
       flexWrap={'wrap'}
       justifyContent={'center'}
+      gap={1}
       {...rest}
     >
       {tags.map((tag) => (

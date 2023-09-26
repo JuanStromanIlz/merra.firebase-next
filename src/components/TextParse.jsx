@@ -19,7 +19,7 @@ const TextParse = ({ children = '' }) => {
   const heading2Close = '</Heading>';
   const heading3Open = "<Heading as='h4' fontSize='sm'>";
   const heading3Close = '</Heading>';
-  const linkOpen = "<Link color='pink.50'";
+  const linkOpen = "<Link color='brand.500' fontStyle='italic'";
   const linkClose = '</Link>';
   const blockquoteOpen = '<Quote>';
   const blockquoteClose = '</Quote>';
@@ -54,7 +54,6 @@ const TextParse = ({ children = '' }) => {
 
   return (
     <JsxParser
-      renderInWrapper={false}
       components={{
         Quote,
         Heading,

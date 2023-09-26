@@ -26,8 +26,8 @@ const Post = ({ data }) => {
     }
     return (
       <Flex
-        pt={2}
-        display={'inline-flex'}
+        // pt={2}
+        // display={'inline-flex'}
         height={'50vh'}
         gap={3}
         overflow={'scroll'}

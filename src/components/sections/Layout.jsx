@@ -25,9 +25,9 @@ const Layout = ({ children }) => {
         zIndex={'sticky'}
         p={3}
       >
-        <Link as={NextLink} href={'/'} fontStyle={'italic'}>
-          MerraMarie
-        </Link>
+        <NextLink href={'/'} passHref>
+          <Link fontStyle={'italic'}>MerraMarie</Link>
+        </NextLink>
         {user ? (
           <IconButton
             colorScheme='brand'
