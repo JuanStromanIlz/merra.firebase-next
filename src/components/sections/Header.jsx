@@ -49,7 +49,6 @@ const Header = ({ doc, children }) => {
           <Title position={'sticky'} top={'56px'}>
             {title}
           </Title>
-          <Tags tags={tags} />
         </Box>
         <Box mt={'auto'} py={3}>
           {children}

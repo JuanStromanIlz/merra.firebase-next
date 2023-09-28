@@ -15,7 +15,7 @@ const PostPreview = ({ doc }) => {
       <Box cursor={'pointer'}>
         <Header doc={doc}>
           {text && (
-            <Text noOfLines={5} fontSize='md' mt={2}>
+            <Text noOfLines={5} fontSize='md' mt={2} color={'gray.50'}>
               {text}
             </Text>
           )}

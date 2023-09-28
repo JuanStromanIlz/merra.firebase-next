@@ -56,7 +56,6 @@ function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
       <CSSReset />
-      <DarkMode />
       <AdminContext>
         {loading ? (
           <Center w={'100vw'} h={'100vh'}>

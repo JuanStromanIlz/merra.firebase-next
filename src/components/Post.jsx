@@ -19,7 +19,7 @@ const Post = ({ data }) => {
     // if (!withPreview) {
     const file = files[0] || {};
     return (
-      <AspectRatio ratio={4 / 5} width={'100%'} py={2}>
+      <AspectRatio ratio={4 / 5} width={'100%'}>
         <File data={file} controls={false} />
       </AspectRatio>
     );
@@ -50,24 +50,18 @@ const Post = ({ data }) => {
       colSpan={1}
     >
       <LinkOverlay as={NextLink} href={url}>
-        <Box>
-          <Flex
-            direction={'column'}
-            justifyContent={'center'}
-            alignItems={'center'}
+        <Flex gap={1} flexDirection={'column'}>
+          <Heading
+            as={'h3'}
+            fontWeight={'normal'}
+            fontSize={'xl'}
+            lineHeight={'120%'}
+            textAlign={'center'}
           >
-            <Heading
-              as={'h3'}
-              fontWeight={'normal'}
-              fontSize={'xl'}
-              lineHeight={'120%'}
-            >
-              {title}
-            </Heading>
-            <Tags tags={tags} />
-          </Flex>
+            {title}
+          </Heading>
           {media(files)}
-        </Box>
+        </Flex>
       </LinkOverlay>
     </GridItem>
   );

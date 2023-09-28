@@ -12,7 +12,7 @@ const FolderLayout = ({ children, title }) => {
         width={'100%'}
         height={'56px'}
         zIndex={1}
-        bgGradient={'linear(to-b, black, transparent)'}
+        bgGradient={'linear(to-b, gray.50 10%, transparent)'}
       />
       <Title position={'sticky'} top={'56px'}>
         {title}
@@ -26,7 +26,7 @@ const FolderLayout = ({ children, title }) => {
         width={'100%'}
         height={'56px'}
         zIndex={1}
-        bgGradient={'linear(to-t, black, transparent)'}
+        bgGradient={'linear(to-t, gray.50 10%, transparent)'}
       />
     </Flex>
   );

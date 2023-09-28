@@ -21,6 +21,9 @@ const Tags = ({ tags = [], ...rest }) => {
       gap={1}
       {...rest}
     >
+      <Text as={'span'} fontSize={'sm'} fontWeight={'bold'}>
+        tags:
+      </Text>
       {tags.map((tag) => (
         <Text as={'span'} fontSize={'sm'} key={tag}>
           {tag}

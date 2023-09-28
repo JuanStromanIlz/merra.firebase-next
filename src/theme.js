@@ -45,32 +45,14 @@ const theme = extendTheme({
   },
   styles: {
     global: {
-      // html: {
-      //   height: "100vh",
-      // },
-      // "::selection": {
-      //   color: "red.500",
-      //   backgroundColor: "transparent",
-      // },
       body: {
         margin: 0,
         padding: 0,
-        background: 'black',
-        color: 'white',
+        background: 'gray.50',
+        color: 'black',
         fontSize: '1rem',
         lineHeight: '1.6rem',
       },
-      // button: {
-      //   _focus: {
-      //     boxShadow: "none !important",
-      //   },
-      // },
-      // "&::-webkit-scrollbar": {
-      //   width: "10px",
-      // },
-      // "&::-webkit-scrollbar-thumb": {
-      //   backgroundColor: "pink.50",
-      // },
     },
   },
 });
