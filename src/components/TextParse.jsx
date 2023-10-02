@@ -9,6 +9,7 @@ import {
   Text,
   UnorderedList,
   Link as LinkChakra,
+  Flex,
 } from '@chakra-ui/react';
 import File from './File';
 
@@ -16,7 +17,7 @@ const Header = ({ data }) => {
   const { text, level } = data;
   return <Heading as={`h${level}`}>{text}</Heading>;
 };
-const Paragraph = ({ data }) => {
+export const Paragraph = ({ data }) => {
   const { text } = data;
   return <Text>{text}</Text>;
 };
@@ -26,13 +27,15 @@ const Quote = ({ data }) => {
   return (
     <Box
       as='blockquote'
-      py={3}
+      // mx={6}
       borderBottomWidth={1}
       borderTopWidth={1}
       borderColor={'brand.500'}
     >
       <Text>{text}</Text>
-      <Box as='footer'>{caption}</Box>
+      <Box as='footer' mt={1} fontSize={'sm'}>
+        {caption}
+      </Box>
     </Box>
   );
 };
@@ -63,10 +66,12 @@ const Link = ({ data }) => {
 
 const Image = ({ data: { file, caption } }) => {
   return (
-    <figure>
+    <Box as='figure'>
       <File data={file} />
-      <figcaption>{caption}</figcaption>
-    </figure>
+      <Box as='figcaption' mt={1} fontSize={'sm'}>
+        {caption}
+      </Box>
+    </Box>
   );
 };
 
@@ -82,10 +87,9 @@ const TextParse = ({ text }) => {
     // embed
   });
   const html = edjsParser.parse(text);
-  console.log('🚀 ~ file: TextParse.jsx:85 ~ TextParse ~ html:', html);
 
   return (
-    <Box>
+    <Flex direction={'column'} gap={3}>
       {html.map((item, index) => {
         if (typeof item === 'string') {
           return (
@@ -94,7 +98,7 @@ const TextParse = ({ text }) => {
         }
         return item;
       })}
-    </Box>
+    </Flex>
   );
 };
 

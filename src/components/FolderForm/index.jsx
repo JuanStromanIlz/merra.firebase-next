@@ -13,7 +13,6 @@ import * as Yup from 'yup';
 import dynamic from 'next/dynamic';
 import Tags from './Tags';
 import FileUpload from './FileUpload';
-import { useEffect } from 'react';
 
 const Editor = dynamic(() => import('./Editor'), {
   ssr: false,
@@ -66,15 +65,17 @@ const FolderForm = ({ loading, folder, onSubmit }) => {
                 >
                   Descripción
                 </FormLabel>
-                <Box bgColor={'gray.100'}>
-                  <Editor
-                    name='description'
-                    data={values?.description}
-                    onChange={(data) => {
-                      setFieldValue('description', data);
-                      setFieldTouched('description', true);
-                    }}
-                  />
+                <Box bgColor={'gray.100'} p={3}>
+                  {!loading && (
+                    <Editor
+                      name='description'
+                      data={values?.description}
+                      onChange={(data) => {
+                        setFieldValue('description', data);
+                        setFieldTouched('description', true);
+                      }}
+                    />
+                  )}
                 </Box>
                 <ErrorMessage name='description' component={FormErrorMessage} />
               </FormControl>

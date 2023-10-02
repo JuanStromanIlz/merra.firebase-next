@@ -4,21 +4,11 @@ import {
   Modal,
   ModalContent,
   ModalBody,
-  ModalCloseButton,
-  ModalFooter,
-  ModalHeader,
-  Text,
-  Breadcrumb,
-  BreadcrumbItem,
   Fade,
   useDisclosure,
 } from '@chakra-ui/react';
 import File from './File';
 import useTouchDirection from 'src/hooks/useTouchDirection';
-
-const isLandscape = (file) => {
-  return file.isVideo || file.height < file.width;
-};
 
 const Gallery = ({ files }) => {
   const initialRef = useRef(null);
@@ -54,8 +44,8 @@ const Gallery = ({ files }) => {
     nextImage
   );
 
-  const itemSize = ({ isVideo }, index) => {
-    const size = isVideo || dimensions[index] ? '100%' : '40%';
+  const itemSize = ({ isVideo, landscape }, index) => {
+    const size = isVideo || landscape ? '100%' : '40%';
     return size;
   };
 
@@ -89,9 +79,6 @@ const Gallery = ({ files }) => {
             <File
               data={data}
               cursor={'pointer'}
-              onLoad={({ target: img }) =>
-                setDimensions((prev) => [...prev, isLandscape(img)])
-              }
               onClick={() => openGallery(index)}
             />
           </Flex>
@@ -115,9 +102,6 @@ const Gallery = ({ files }) => {
           backdropFilter={'blur(20px)'}
           onClick={onToggle}
         >
-          {/* <ModalHeader>
-            <ModalCloseButton size={'md'} />
-          </ModalHeader> */}
           <ModalBody pos={'relative'} overflow={'hidden'}>
             {files?.map((file, index) => (
               <Fade in={index === galleryIndex} key={file?.name || index}>
@@ -135,20 +119,6 @@ const Gallery = ({ files }) => {
               </Fade>
             ))}
           </ModalBody>
-          {/* <ModalFooter>
-            <Flex width={'100%'} justifyContent={'center'}>
-              <Flex>
-                <Breadcrumb>
-                  <BreadcrumbItem>
-                    <Text>{galleryIndex + 1}</Text>
-                  </BreadcrumbItem>
-                  <BreadcrumbItem>
-                    <Text>{files.length}</Text>
-                  </BreadcrumbItem>
-                </Breadcrumb>
-              </Flex>
-            </Flex>
-          </ModalFooter> */}
         </ModalContent>
       </Modal>
     </>

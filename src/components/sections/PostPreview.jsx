@@ -1,24 +1,23 @@
 import React from 'react';
 import NextLink from 'next/link';
 import { Box, LinkOverlay, Text } from '@chakra-ui/react';
-import { parse } from 'node-html-parser';
+import editorjsHTML from 'editorjs-html';
 import Header from './Header';
+import { Paragraph } from '../TextParse';
 
 const PostPreview = ({ doc }) => {
-  const { description = '', url } = doc;
-  // const text = parse(description)
-  //   ?.getElementsByTagName('p')
-  //   .filter((tag) => !!tag.textContent.trim().length)[0]?.textContent;
+  const { description: { blocks = [] } = {}, url } = doc;
+  const preview = blocks.find(({ type }) => type === 'paragraph');
+  const edjsParser = editorjsHTML({
+    paragraph: Paragraph,
+  });
+  const html = edjsParser.parseBlock(preview);
 
   return (
     <LinkOverlay as={NextLink} href={url}>
       <Box cursor={'pointer'}>
         <Header doc={doc}>
-          {/* {text && (
-            <Text noOfLines={5} fontSize='md' mt={2} color={'gray.50'}>
-              {text}
-            </Text>
-          )} */}
+          {preview && <Box color={'white'}>{html}</Box>}
         </Header>
       </Box>
     </LinkOverlay>

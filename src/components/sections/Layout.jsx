@@ -26,12 +26,15 @@ const Layout = ({ children }) => {
         p={3}
       >
         <NextLink href={'/'} passHref>
-          <Link fontStyle={'italic'}>MerraMarie</Link>
+          <Link fontStyle={'italic'} fontWeight={'bold'} color={'brand.500'}>
+            MerraMarie
+          </Link>
         </NextLink>
         {user ? (
           <IconButton
-            // colorScheme='brand'
-            borderWidth={0}
+            color={'brand.500'}
+            borderColor={'brand.500'}
+            borderRadius={'full'}
             variant='outline'
             size='sm'
             icon={<AddIcon />}
