@@ -19,10 +19,10 @@ const updateDoc = async (values, folder = POSTS) => {
     }
     await updateItemService(folder, {
       id,
+      ...rest,
       title,
       url: slugify(title),
       files: [...files, ...urls],
-      ...rest,
     });
   } catch (err) {
     throw err;
