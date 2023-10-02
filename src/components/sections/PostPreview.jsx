@@ -7,11 +7,11 @@ import { Paragraph } from '../TextParse';
 
 const PostPreview = ({ doc }) => {
   const { description: { blocks = [] } = {}, url } = doc;
-  const preview = blocks.find(({ type }) => type === 'paragraph');
+  const preview = blocks.find(({ type = undefined }) => type === 'paragraph');
   const edjsParser = editorjsHTML({
     paragraph: Paragraph,
   });
-  const html = edjsParser.parseBlock(preview);
+  const html = preview && edjsParser.parseBlock(preview);
 
   return (
     <LinkOverlay as={NextLink} href={url}>

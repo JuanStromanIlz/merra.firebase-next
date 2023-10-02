@@ -18,7 +18,15 @@ export const EDITOR_JS_TOOLS = {
   list: List,
   delimiter: Delimiter,
   link: Link,
-  embed: Embed,
+  embed: {
+    class: Embed,
+    config: {
+      services: {
+        youtube: true,
+        vimeo: true,
+      },
+    },
+  },
   image: {
     class: Image,
     config: {
