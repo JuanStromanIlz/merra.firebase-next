@@ -1,40 +1,33 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { memo, useEffect, useRef } from 'react';
+import EditorJS from '@editorjs/editorjs';
+import { EDITOR_JS_TOOLS } from './tools';
 
-const Editor = ({ name, value, onChange, ...rest }) => {
-  let editorRef = useRef();
-  const { CKEditor, ClassicEditor } = editorRef.current || {};
-  let [loaded, setLoaded] = useState(false);
-
+const Editor = ({ data, onChange, name }) => {
+  const ref = useRef();
+  //Initialize editorjs
   useEffect(() => {
-    editorRef.current = {
-      CKEditor: require("@ckeditor/ckeditor5-react").CKEditor,
-      ClassicEditor: require("@ckeditor/ckeditor5-build-classic"),
-    };
-    setLoaded(true);
-  }, []); // run on mounting
-
-  return loaded ? (
-    <CKEditor
-      editor={ClassicEditor}
-      config={{
-        mediaEmbed: {
-          previewsInData: true,
+    //Initialize editorjs if we don't have a reference
+    if (!ref.current) {
+      const editor = new EditorJS({
+        holder: name,
+        tools: EDITOR_JS_TOOLS,
+        data: data,
+        async onChange(api, event) {
+          const data = await api.saver.save();
+          onChange(data);
         },
-        // removePlugins: [
-        //   // "EasyImage",
-        //   // "ImageUpload",
-        //   // "MediaEmbed",
-        //   "Table",
-        //   "TableToolbar",
-        // ],
-      }}
-      data={value}
-      onChange={(_, editor) => onChange(editor.getData())}
-      {...rest}
-    />
-  ) : (
-    "Editor loading..."
-  );
+      });
+      ref.current = editor;
+    }
+
+    //Add a return function to handle cleanup
+    return () => {
+      if (ref.current && ref.current.destroy) {
+        ref.current.destroy();
+      }
+    };
+  }, []);
+  return <div id={name} />;
 };
 
-export default Editor;
+export default memo(Editor);

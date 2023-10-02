@@ -36,7 +36,7 @@ const Tags = ({ values }) => {
                 as={Input}
                 id='addTag'
                 value={tags}
-                variant='flushed'
+                variant='filled'
                 onChange={(event) => setNewTag(event.target.value)}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter') e.preventDefault();
@@ -46,7 +46,7 @@ const Tags = ({ values }) => {
               <Button
                 onClick={() => handleTag(push)}
                 colorScheme='brand'
-                variant='outline'
+                // variant='outline'
                 disabled={tags.length === 0}
               >
                 Agregar
@@ -55,7 +55,12 @@ const Tags = ({ values }) => {
             {values.length > 0 && (
               <HStack spacing={1}>
                 {values.map((word, index) => (
-                  <Tag key={word} borderRadius={'full'}>
+                  <Tag
+                    key={word}
+                    borderRadius={'full'}
+                    variant='solid'
+                    colorScheme='brand'
+                  >
                     <TagLabel>{word}</TagLabel>
                     {index + 1 === values.length && (
                       <TagCloseButton onClick={() => pop(index)} />

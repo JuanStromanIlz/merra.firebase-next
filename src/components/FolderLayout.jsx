@@ -21,6 +21,7 @@ const FolderLayout = ({ children, title }) => {
       <Box pt={'56px'} />
       <Box
         position={'fixed'}
+        pointerEvents={'none'}
         bottom={0}
         left={0}
         width={'100%'}

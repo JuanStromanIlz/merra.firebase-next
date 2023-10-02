@@ -1,12 +1,41 @@
-import { storage as firebaseStorage } from "../firebase";
+import { slugify } from 'src/actions/utils';
+import { storage as firebaseStorage } from '../firebase';
 import {
   getDownloadURL,
   ref,
   uploadBytes,
   deleteObject,
-} from "firebase/storage";
+} from 'firebase/storage';
 
 const storageRef = (path) => ref(firebaseStorage, path);
+
+export const uploadSingleFile = async (file) => {
+  try {
+    const { name, ...rest } = file;
+    const overrideName = slugify(name);
+    let fileRef = storageRef(`/${overrideName}`);
+    await uploadBytes(fileRef, file);
+    let url = await getDownloadURL(fileRef);
+    return {
+      ...rest,
+      name: overrideName,
+      url,
+    };
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const deleteSingleFile = async (file) => {
+  try {
+    const { name } = file;
+    let fileRef = storageRef(`/${name}`);
+    await deleteObject(fileRef);
+    return;
+  } catch (err) {
+    throw err;
+  }
+};
 
 export const uploadFiles = async (files, folder) => {
   try {
@@ -15,19 +44,20 @@ export const uploadFiles = async (files, folder) => {
     }
     let uploadFiles = [];
     for (const file of files) {
-      const { data, isVideo } = file;
-      let fileRef = storageRef(`${folder}/${data.name}`);
+      const { data, ...rest } = file;
+      const overrideName = slugify(data.name);
+      let fileRef = storageRef(`${folder}/${overrideName}`);
       await uploadBytes(fileRef, data);
       let url = await getDownloadURL(fileRef);
       uploadFiles.push({
-        name: data.name,
+        name: overrideName,
+        ...rest,
         url,
-        isVideo,
       });
     }
     return uploadFiles;
-  } catch ({ message }) {
-    return message;
+  } catch (err) {
+    throw err;
   }
 };
 
@@ -41,7 +71,7 @@ export const deleteFiles = async (files, folder) => {
       await deleteObject(fileRef);
     }
     return;
-  } catch ({ message }) {
-    return message;
+  } catch (err) {
+    throw err;
   }
 };

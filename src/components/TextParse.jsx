@@ -1,72 +1,101 @@
 import React from 'react';
+import editorjsHTML from 'editorjs-html';
 import {
   Box,
-  Link,
-  OrderedList,
-  UnorderedList,
-  Text,
-  ListItem,
+  Divider,
   Heading,
+  ListItem,
+  OrderedList,
+  Text,
+  UnorderedList,
+  Link as LinkChakra,
 } from '@chakra-ui/react';
-import { ExternalLinkIcon } from '@chakra-ui/icons';
-import JsxParser from 'react-jsx-parser';
-import Quote from './Quote';
+import File from './File';
 
-const TextParse = ({ children = '' }) => {
-  const heading1Open = "<Heading as='h2' fontSize='xl'>";
-  const heading1Close = '</Heading>';
-  const heading2Open = "<Heading as='h3' fontSize='lg'>";
-  const heading2Close = '</Heading>';
-  const heading3Open = "<Heading as='h4' fontSize='sm'>";
-  const heading3Close = '</Heading>';
-  const linkOpen = "<Link color='brand.500' fontStyle='italic'";
-  const linkClose = '</Link>';
-  const blockquoteOpen = '<Quote>';
-  const blockquoteClose = '</Quote>';
-  const olOpen = '<OrderedList spacing={3}>';
-  const olClose = '</OrderedList>';
-  const ulOpen = '<UnorderedList spacing={3}>';
-  const ulClose = '</UnorderedList>';
-  const listItemOpen = '<ListItem>';
-  const listItemClose = '</ListItem>';
-  const textOpen = '<Text>';
-  const textClose = '</Text>';
+const Header = ({ data }) => {
+  const { text, level } = data;
+  return <Heading as={`h${level}`}>{text}</Heading>;
+};
+const Paragraph = ({ data }) => {
+  const { text } = data;
+  return <Text>{text}</Text>;
+};
 
-  const parsedChild = children
-    .replace('<h2>', heading1Open)
-    .replace('</h2>', heading1Close)
-    .replace('<h3>', heading2Open)
-    .replace('</h3>', heading2Close)
-    .replace('<h4>', heading3Open)
-    .replace('</h4>', heading3Close)
-    .replace('<a', linkOpen)
-    .replace('</a>', linkClose)
-    .replace('<blockquote>', blockquoteOpen)
-    .replace('</blockquote>', blockquoteClose)
-    .replace('<ul>', ulOpen)
-    .replace('</ul>', ulClose)
-    .replace('<ol>', olOpen)
-    .replace('</ol>', olClose)
-    .replace('<li>', listItemOpen)
-    .replace('</li>', listItemClose)
-    .replace('<p>', textOpen)
-    .replace('</p>', textClose);
-
+const Quote = ({ data }) => {
+  const { text, caption } = data;
   return (
-    <JsxParser
-      components={{
-        Quote,
-        Heading,
-        Link,
-        ExternalLinkIcon,
-        Box,
-        OrderedList,
-        UnorderedList,
-        ListItem,
-        Text,
-      }}
-      jsx={parsedChild}
-    />
+    <Box
+      as='blockquote'
+      py={3}
+      borderBottomWidth={1}
+      borderTopWidth={1}
+      borderColor={'brand.500'}
+    >
+      <Text>{text}</Text>
+      <Box as='footer'>{caption}</Box>
+    </Box>
   );
 };
+
+const List = ({ data }) => {
+  const { style, items = [] } = data;
+  const TypeList = style === 'ordered' ? OrderedList : UnorderedList;
+  return (
+    <TypeList>
+      {items.map((i) => (
+        <ListItem key={i}>{i}</ListItem>
+      ))}
+    </TypeList>
+  );
+};
+
+const Delimiter = () => {
+  return <Divider />;
+};
+
+const Link = ({ data }) => {
+  const {
+    link,
+    meta: { title },
+  } = data;
+  return <LinkChakra href={link}>{title}</LinkChakra>;
+};
+
+const Image = ({ data: { file, caption } }) => {
+  return (
+    <figure>
+      <File data={file} />
+      <figcaption>{caption}</figcaption>
+    </figure>
+  );
+};
+
+const TextParse = ({ text }) => {
+  const edjsParser = editorjsHTML({
+    header: Header,
+    paragraph: Paragraph,
+    quote: Quote,
+    list: List,
+    delimiter: Delimiter,
+    link: Link,
+    image: Image,
+    // embed
+  });
+  const html = edjsParser.parse(text);
+  console.log('🚀 ~ file: TextParse.jsx:85 ~ TextParse ~ html:', html);
+
+  return (
+    <Box>
+      {html.map((item, index) => {
+        if (typeof item === 'string') {
+          return (
+            <div dangerouslySetInnerHTML={{ __html: item }} key={index}></div>
+          );
+        }
+        return item;
+      })}
+    </Box>
+  );
+};
+
 export default TextParse;

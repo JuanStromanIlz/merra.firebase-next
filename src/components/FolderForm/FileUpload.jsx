@@ -12,30 +12,49 @@ import {
 import { FieldArray } from 'formik';
 import File from '../File';
 
+const getLandscape = async (src) => {
+  let img = new Image();
+  let landscape = false;
+  img.src = src;
+  await img.decode();
+  landscape = img.height < img.width;
+  return landscape;
+};
+
+const handleNewFiles = async (files, setNew) => {
+  const data = [];
+  if (files) {
+    for (const file of [...files]) {
+      if (file.type.includes('video/mp4')) {
+        data.push({
+          url: URL.createObjectURL(file),
+          isVideo: true,
+          data: file,
+          landscape: true,
+        });
+      } else {
+        const url = URL.createObjectURL(file);
+        const landscape = await getLandscape(url);
+
+        data.push({
+          url,
+          isVideo: false,
+          data: file,
+          landscape,
+        });
+      }
+    }
+    setNew((prev) => [...prev, ...data]);
+  }
+  return data;
+};
+
 const FileUpload = ({ values, newFiles, setNewFiles, setDeleteFiles }) => {
   const inputRef = useRef();
 
-  const handleNewFiles = (event) => {
+  const onUpdate = (event) => {
     const { files } = event.currentTarget;
-    let filesArray = [];
-    if (files) {
-      [...files].forEach((file) => {
-        if (file.type.includes('video/mp4')) {
-          filesArray.push({
-            url: URL.createObjectURL(file),
-            isVideo: true,
-            data: file,
-          });
-        } else {
-          filesArray.push({
-            url: URL.createObjectURL(file),
-            isVideo: false,
-            data: file,
-          });
-        }
-      });
-      setNewFiles((prev) => [...prev, ...filesArray]);
-    }
+    handleNewFiles(files, setNewFiles);
   };
   const deleteNewFile = (urlDelete) => {
     setNewFiles((prev) => prev.filter(({ url }) => url !== urlDelete));
@@ -92,7 +111,7 @@ const FileUpload = ({ values, newFiles, setNewFiles, setDeleteFiles }) => {
               id='addFiles'
               type='file'
               multiple
-              onChange={handleNewFiles}
+              onChange={onUpdate}
               hidden
             />
             <Button

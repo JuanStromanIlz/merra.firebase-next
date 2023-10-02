@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import '@fontsource/poppins';
 import '@fontsource/open-sans';
-import '../components/FolderForm/content-style.css';
 import { useRouter } from 'next/router';
 import {
   Center,
   ChakraProvider,
   CSSReset,
-  DarkMode,
   Img,
   keyframes,
 } from '@chakra-ui/react';

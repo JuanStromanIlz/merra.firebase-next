@@ -14,14 +14,10 @@ const createDoc = async (values, folder = POSTS) => {
       title,
       url: slugify(title),
     });
-    let files = await newFiles.map(({ data, isVideo }) => ({
-      data,
-      isVideo,
-    }));
-    let urls = await uploadFiles(files, id);
+    let files = await uploadFiles(newFiles, id);
     await updateItemService(folder, {
       id,
-      files: [...urls],
+      files,
     });
   } catch (err) {
     throw err;

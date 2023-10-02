@@ -6,12 +6,18 @@ import {
   FormErrorMessage,
   Button,
   Stack,
+  Box,
 } from '@chakra-ui/react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import Editor from './Editor';
+import dynamic from 'next/dynamic';
 import Tags from './Tags';
 import FileUpload from './FileUpload';
+import { useEffect } from 'react';
+
+const Editor = dynamic(() => import('./Editor'), {
+  ssr: false,
+});
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required('El titulo es requerido.'),
@@ -44,7 +50,7 @@ const FolderForm = ({ loading, folder, onSubmit }) => {
                 </FormLabel>
                 <Field
                   as={Input}
-                  variant='flushed'
+                  variant='filled'
                   id='title'
                   name='title'
                   placeholder='Nuevo titulo'
@@ -60,14 +66,16 @@ const FolderForm = ({ loading, folder, onSubmit }) => {
                 >
                   Descripción
                 </FormLabel>
-                <Editor
-                  name='description'
-                  value={values?.description || ''}
-                  onChange={(data) => {
-                    setFieldValue('description', data);
-                    setFieldTouched('description', true);
-                  }}
-                />
+                <Box bgColor={'gray.100'}>
+                  <Editor
+                    name='description'
+                    data={values?.description}
+                    onChange={(data) => {
+                      setFieldValue('description', data);
+                      setFieldTouched('description', true);
+                    }}
+                  />
+                </Box>
                 <ErrorMessage name='description' component={FormErrorMessage} />
               </FormControl>
               <FileUpload
@@ -101,7 +109,7 @@ FolderForm.defaultProps = {
   folder: {
     title: '',
     category: '',
-    description: '',
+    description: {},
     tags: [],
     files: [],
   },

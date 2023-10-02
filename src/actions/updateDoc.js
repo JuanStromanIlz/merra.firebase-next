@@ -11,11 +11,7 @@ const updateDoc = async (values, folder = POSTS) => {
     const { id, newFiles, deleteFiles, files, title, ...rest } = values;
     let urls = [];
     if (newFiles.length > 0) {
-      let files = await newFiles.map(({ data, isVideo }) => ({
-        data,
-        isVideo,
-      }));
-      let uploadFiles = await uploadFilesService(files, id);
+      let uploadFiles = await uploadFilesService(newFiles, id);
       urls.push(...uploadFiles);
     }
     if (deleteFiles.length > 0) {

@@ -1,4 +1,4 @@
-export const slugify = (string, separator = '-') => {
+export const slugify = (string = '', separator = '-') => {
   return string
     .toString() // Convert input to string (optional)
     .toLowerCase() // Convert the string to lowercase letters

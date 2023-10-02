@@ -12,7 +12,7 @@ const TitleView = ({ doc }) => {
     <FolderLayout title={doc?.title}>
       <PostNav doc={doc} />
       <Gallery files={doc?.files} />
-      <TextParse>{doc?.description}</TextParse>
+      <TextParse text={doc?.description} />
       <Tags tags={doc?.tags} />
     </FolderLayout>
   );
