@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import editorjsHTML from 'editorjs-html';
 import {
   Box,
@@ -85,21 +85,34 @@ const Embed = ({ data }) => {
 };
 
 const TextParse = ({ text }) => {
-  if (!text) {
-    return null;
-  }
+  const ref = useRef();
+  const [html, setHtml] = useState([]);
 
-  const edjsParser = editorjsHTML({
-    header: Header,
-    paragraph: Paragraph,
-    quote: Quote,
-    list: List,
-    delimiter: Delimiter,
-    link: Link,
-    image: Image,
-    embed: Embed,
-  });
-  const html = edjsParser.parse(text);
+  useEffect(() => {
+    if (!ref.current) {
+      const editor = editorjsHTML({
+        header: Header,
+        paragraph: Paragraph,
+        quote: Quote,
+        list: List,
+        delimiter: Delimiter,
+        link: Link,
+        image: Image,
+        embed: Embed,
+      });
+      ref.current = editor;
+    }
+
+    if (ref.current && 'blocks' in text) {
+      setHtml(ref.current.parse(text));
+    }
+
+    return () => {
+      if (ref.current && ref.current.destroy) {
+        ref.current.destroy();
+      }
+    };
+  }, [text]);
 
   return (
     <div>

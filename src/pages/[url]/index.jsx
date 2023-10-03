@@ -22,6 +22,14 @@ export async function getStaticProps({ params }) {
   const { url } = params;
   const doc = await getDoc(url);
 
+  if (!doc) {
+    return {
+      redirect: {
+        destination: '/',
+      },
+    };
+  }
+
   return {
     props: {
       doc,
@@ -39,7 +47,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: 'blocking',
   };
 }
 
