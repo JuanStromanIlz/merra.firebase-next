@@ -85,6 +85,10 @@ const Embed = ({ data }) => {
 };
 
 const TextParse = ({ text }) => {
+  if (!text) {
+    return null;
+  }
+
   const edjsParser = editorjsHTML({
     header: Header,
     paragraph: Paragraph,
