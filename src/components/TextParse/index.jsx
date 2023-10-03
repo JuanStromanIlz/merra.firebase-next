@@ -99,7 +99,7 @@ const TextParse = ({ text }) => {
 
   return (
     <div>
-      {html.map((item, index) => {
+      {html?.map((item, index) => {
         if (typeof item === 'string') {
           return (
             <div dangerouslySetInnerHTML={{ __html: item }} key={index}></div>
