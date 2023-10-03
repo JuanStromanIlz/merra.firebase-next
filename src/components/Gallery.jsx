@@ -98,7 +98,7 @@ const Gallery = ({ files }) => {
           onTouchEnd={onTouchEnd}
           onTouchMove={onTouchMove}
           borderRadius={'none'}
-          bg={'blackAlpha.500'}
+          bg={'whiteAlpha.100'}
           backdropFilter={'blur(20px)'}
           onClick={onToggle}
         >

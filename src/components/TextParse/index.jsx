@@ -9,9 +9,9 @@ import {
   Text,
   UnorderedList,
   Link as LinkChakra,
-  Flex,
+  AspectRatio,
 } from '@chakra-ui/react';
-import File from './File';
+import File from './../File';
 
 const Header = ({ data }) => {
   const { text, level } = data;
@@ -75,6 +75,15 @@ const Image = ({ data: { file, caption } }) => {
   );
 };
 
+const Embed = ({ data }) => {
+  const { embed, width, height, caption, source } = data;
+  return (
+    <AspectRatio ratio={width / height}>
+      <Box as='iframe' src={embed} title={caption} overflow={'hidden'}></Box>
+    </AspectRatio>
+  );
+};
+
 const TextParse = ({ text }) => {
   const edjsParser = editorjsHTML({
     header: Header,
@@ -84,12 +93,12 @@ const TextParse = ({ text }) => {
     delimiter: Delimiter,
     link: Link,
     image: Image,
-    // embed
+    embed: Embed,
   });
   const html = edjsParser.parse(text);
 
   return (
-    <Flex direction={'column'} gap={3}>
+    <div>
       {html.map((item, index) => {
         if (typeof item === 'string') {
           return (
@@ -98,7 +107,7 @@ const TextParse = ({ text }) => {
         }
         return item;
       })}
-    </Flex>
+    </div>
   );
 };
 
