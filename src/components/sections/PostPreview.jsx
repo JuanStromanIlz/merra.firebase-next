@@ -3,7 +3,7 @@ import NextLink from 'next/link';
 import { Box, LinkOverlay, Text } from '@chakra-ui/react';
 import editorjsHTML from 'editorjs-html';
 import Header from './Header';
-import { Paragraph } from '../TextParse';
+// import { Paragraph } from '../TextParse';
 
 const PostPreview = ({ doc }) => {
   const { description: { blocks = [] } = {}, url } = doc;

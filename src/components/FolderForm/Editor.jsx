@@ -1,4 +1,5 @@
 import React, { memo, useEffect, useRef } from 'react';
+import { Prose } from '@nikolovlazar/chakra-ui-prose';
 import EditorJS from '@editorjs/editorjs';
 import { EDITOR_JS_TOOLS } from './tools';
 
@@ -27,7 +28,11 @@ const Editor = ({ data, onChange, name }) => {
       }
     };
   }, []);
-  return <div id={name} />;
+  return (
+    <Prose>
+      <div id={name} />
+    </Prose>
+  );
 };
 
 export default memo(Editor);

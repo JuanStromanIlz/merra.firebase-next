@@ -12,43 +12,17 @@ import {
   AspectRatio,
 } from '@chakra-ui/react';
 import File from './../File';
-
-const Header = ({ data }) => {
-  const { text, level } = data;
-  return <Heading as={`h${level}`}>{text}</Heading>;
-};
-export const Paragraph = ({ data }) => {
-  const { text } = data;
-  return <Text>{text}</Text>;
-};
+import { Prose } from '@nikolovlazar/chakra-ui-prose';
 
 const Quote = ({ data }) => {
   const { text, caption } = data;
   return (
-    <Box
-      as='blockquote'
-      // mx={6}
-      borderBottomWidth={1}
-      borderTopWidth={1}
-      borderColor={'brand.500'}
-    >
-      <Text>{text}</Text>
-      <Box as='footer' mt={1} fontSize={'sm'}>
+    <Box as='blockquote' py={3}>
+      {text}
+      <Text as='footer' mt={3} fontSize={'sm'} fontWeight={'normal'}>
         {caption}
-      </Box>
+      </Text>
     </Box>
-  );
-};
-
-const List = ({ data }) => {
-  const { style, items = [] } = data;
-  const TypeList = style === 'ordered' ? OrderedList : UnorderedList;
-  return (
-    <TypeList>
-      {items.map((i) => (
-        <ListItem key={i}>{i}</ListItem>
-      ))}
-    </TypeList>
   );
 };
 
@@ -91,12 +65,9 @@ const TextParse = ({ text }) => {
   useEffect(() => {
     if (!ref.current) {
       const editor = editorjsHTML({
-        header: Header,
-        paragraph: Paragraph,
         quote: Quote,
-        list: List,
         delimiter: Delimiter,
-        link: Link,
+        // link: Link,
         image: Image,
         embed: Embed,
       });
@@ -115,7 +86,7 @@ const TextParse = ({ text }) => {
   }, [text]);
 
   return (
-    <div>
+    <Prose>
       {html?.map((item, index) => {
         if (typeof item === 'string') {
           return (
@@ -124,7 +95,7 @@ const TextParse = ({ text }) => {
         }
         return item;
       })}
-    </div>
+    </Prose>
   );
 };
 
