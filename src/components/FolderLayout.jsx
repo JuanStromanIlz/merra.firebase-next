@@ -8,7 +8,6 @@ const FolderLayout = ({ children, title }) => {
       <Box pb={'32px'} />
       <Title>{title}</Title>
       {children}
-      <Box pb={'32px'} />
     </Flex>
   );
 };

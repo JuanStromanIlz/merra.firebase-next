@@ -19,15 +19,20 @@ const Layout = ({ children }) => {
         alignContent={'center'}
         justifyContent={'space-between'}
         alignItems={'center'}
-        position={'fixed'}
-        top={0}
+        position={'absolute'}
         width={'100%'}
         zIndex={'sticky'}
         p={3}
-        bgColor={'whiteAlpha.900'}
       >
         <NextLink href={'/'} passHref>
-          <Link fontStyle={'italic'} fontWeight={'bold'}>
+          <Link
+            fontStyle={'italic'}
+            fontWeight={'bold'}
+            textDecoration={'none'}
+            _hover={{
+              textDecoration: 'none',
+            }}
+          >
             MerraMarie
           </Link>
         </NextLink>

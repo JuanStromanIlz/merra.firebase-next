@@ -73,8 +73,8 @@ const Gallery = ({ files }) => {
             flexShrink={0}
             flexBasis={itemSize(data, index)}
             justifyContent={'center'}
-            alignContent={'center'}
-            alignItems={'center'}
+            alignContent={'flex-start'}
+            alignItems={'flex-start'}
           >
             <File
               data={data}
@@ -98,7 +98,7 @@ const Gallery = ({ files }) => {
           onTouchEnd={onTouchEnd}
           onTouchMove={onTouchMove}
           borderRadius={'none'}
-          bg={'whiteAlpha.100'}
+          bg={'whiteAlpha.300'}
           backdropFilter={'blur(20px)'}
           onClick={onToggle}
         >

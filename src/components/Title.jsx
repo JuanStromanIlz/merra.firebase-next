@@ -16,7 +16,6 @@ const Title = forwardRef(function Title({ children, color, ...rest }, ref) {
       textTransform={'capitalize'}
       letterSpacing={1}
       lineHeight={'80%'}
-      textAlign={'center'}
       color={color || brand}
       {...rest}
     >

@@ -3,11 +3,7 @@ import editorjsHTML from 'editorjs-html';
 import {
   Box,
   Divider,
-  Heading,
-  ListItem,
-  OrderedList,
   Text,
-  UnorderedList,
   Link as LinkChakra,
   AspectRatio,
 } from '@chakra-ui/react';
@@ -67,7 +63,6 @@ const TextParse = ({ text }) => {
       const editor = editorjsHTML({
         quote: Quote,
         delimiter: Delimiter,
-        // link: Link,
         image: Image,
         embed: Embed,
       });
@@ -84,6 +79,10 @@ const TextParse = ({ text }) => {
       }
     };
   }, [text]);
+
+  if (!html.length) {
+    return null;
+  }
 
   return (
     <Prose>

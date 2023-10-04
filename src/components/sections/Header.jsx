@@ -5,8 +5,11 @@ import Tags from '../Tags';
 
 const Header = ({ doc, children }) => {
   const [height, setDim] = useState('100%');
-  const { title = '', tags, files = [{}] } = doc;
-  const { url } = files[0] || {};
+  const { title = '', files = [{}], description: { blocks = [] } = {} } = doc;
+  const { data: { file: descriptionFile } = {} } =
+    blocks.find(({ type }) => type === 'image') || {};
+  const file = files[0];
+  const { url } = file || descriptionFile || {};
 
   useEffect(() => {
     // only execute all the code below in client side
@@ -42,17 +45,13 @@ const Header = ({ doc, children }) => {
         direction='column'
         flex={1}
         px={3}
-        pt={'56px'}
+        py={'32px'}
         bgGradient={'linear(to-b, transparent 0%, blackAlpha.600 100%)'}
       >
-        <Box flexGrow={1}>
-          <Title position={'sticky'} top={'56px'}>
-            {title}
-          </Title>
-        </Box>
-        <Box mt={'auto'} py={3}>
-          {children}
-        </Box>
+        <Title mt='auto' textAlign={'center'}>
+          {title}
+        </Title>
+        {children}
       </Flex>
     </Box>
   );

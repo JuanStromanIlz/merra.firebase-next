@@ -9,19 +9,11 @@ const File = ({ data, onClick, ...rest }) => {
       alt={name}
       objectFit={'contain'}
       maxHeight={'100%'}
-      borderRadius={'md'}
       onClick={onClick}
       {...rest}
     />
   ) : (
-    <Box
-      as='video'
-      controls
-      src={url}
-      borderRadius={'md'}
-      maxHeight={'100%'}
-      {...rest}
-    />
+    <Box as='video' controls src={url} maxHeight={'100%'} {...rest} />
   );
 };
 

@@ -20,6 +20,7 @@ const PostNav = ({ doc }) => {
   return (
     <Flex flexDirection={'row'} gap={3}>
       <Button
+        size='sm'
         colorScheme='black'
         borderRadius={'full'}
         variant='outline'
@@ -29,6 +30,7 @@ const PostNav = ({ doc }) => {
         Editar
       </Button>
       <Button
+        size='sm'
         colorScheme='black'
         borderRadius={'full'}
         variant='outline'

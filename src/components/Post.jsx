@@ -1,69 +1,34 @@
-import {
-  Flex,
-  LinkOverlay,
-  Box,
-  Heading,
-  AspectRatio,
-  GridItem,
-} from '@chakra-ui/react';
+import { Flex, LinkOverlay, Heading } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import File from './File';
-import Tags from './Tags';
 
 const Post = ({ data }) => {
-  const { title = '', tags, files = [{}], url } = data;
-  const withPreview = files.length > 3;
-
-  const media = (files) => {
-    // if (!withPreview) {
-    const file = files[0] || {};
-    return (
-      <AspectRatio ratio={4 / 5} width={'100%'}>
-        <File data={file} controls={false} />
-      </AspectRatio>
-    );
-    // }
-    // return (
-    //   <Flex
-    //     height={'50vh'}
-    //     gap={3}
-    //     overflow={'scroll'}
-    //     sx={{
-    //       '::-webkit-scrollbar': {
-    //         display: 'none',
-    //       },
-    //     }}
-    //   >
-    //     {files.map((f, index) => (
-    //       <File key={f?.name || index} data={f} controls={false} />
-    //     ))}
-    //   </Flex>
-    // );
-  };
+  const {
+    title = '',
+    files = [{}],
+    description: { blocks = [] } = {},
+    url,
+  } = data;
+  const { data: { file: descriptionFile } = {} } =
+    blocks.find(({ type }) => type === 'image') || {};
+  const file = files[0];
+  const postFilePreview = file || descriptionFile || {};
 
   return (
-    <GridItem
-      as={'article'}
-      position={'relative'}
-      // colSpan={[1, withPreview ? 4 : 1]}
-      colSpan={1}
-    >
-      <LinkOverlay as={NextLink} href={url}>
-        <Flex gap={1} flexDirection={'column'}>
-          <Heading
-            as={'h3'}
-            fontWeight={'normal'}
-            fontSize={'xl'}
-            lineHeight={'120%'}
-            textAlign={'center'}
-          >
-            {title}
-          </Heading>
-          {media(files)}
-        </Flex>
-      </LinkOverlay>
-    </GridItem>
+    <LinkOverlay as={NextLink} href={url}>
+      <Flex flexDirection={'column'}>
+        <File
+          data={postFilePreview}
+          controls={false}
+          maxWidth='100%'
+          height='auto'
+        />
+        <Heading as={'h3'} fontSize={'2xl'} lineHeight={'120%'} mt={3}>
+          {title}
+        </Heading>
+      </Flex>
+    </LinkOverlay>
   );
 };
 

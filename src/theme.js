@@ -50,7 +50,6 @@ const theme = extendTheme(
         body: {
           margin: 0,
           padding: 0,
-          background: 'gray.50',
           color: 'black',
           fontSize: 'lg',
           lineHeight: '1.5rem',
@@ -58,7 +57,13 @@ const theme = extendTheme(
       },
     },
   },
-  withProse()
+  withProse({
+    baseStyle: {
+      hr: {
+        borderColor: 'black',
+      },
+    },
+  })
 );
 
 export default theme;
