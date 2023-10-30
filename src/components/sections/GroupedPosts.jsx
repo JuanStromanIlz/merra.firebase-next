@@ -8,7 +8,7 @@ const GroupedPosts = ({ posts }) => {
   }
 
   return (
-    <SimpleGrid p={3} gap={6} columns={[1, 2, 3]}>
+    <SimpleGrid gap={6} columns={[1, 2, 3, 4]}>
       {posts?.map((data, index) => (
         <Post key={data?.name || index} data={data} />
       ))}

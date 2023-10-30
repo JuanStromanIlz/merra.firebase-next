@@ -22,7 +22,7 @@ const PostNav = ({ doc }) => {
       <Button
         size='sm'
         colorScheme='black'
-        borderRadius={'full'}
+        borderRadius={'md'}
         variant='outline'
         leftIcon={<EditIcon />}
         onClick={onEdit}
@@ -32,7 +32,7 @@ const PostNav = ({ doc }) => {
       <Button
         size='sm'
         colorScheme='black'
-        borderRadius={'full'}
+        borderRadius={'md'}
         variant='outline'
         leftIcon={<DeleteIcon />}
         onClick={() => onDeletePost(doc)}

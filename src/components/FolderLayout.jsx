@@ -4,8 +4,7 @@ import Title from './Title';
 
 const FolderLayout = ({ children, title }) => {
   return (
-    <Flex direction={'column'} gap={6} p={3}>
-      <Box pb={'32px'} />
+    <Flex direction={'column'} gap={6}>
       <Title>{title}</Title>
       {children}
     </Flex>

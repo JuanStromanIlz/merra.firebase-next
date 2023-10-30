@@ -19,14 +19,17 @@ const Layout = ({ children }) => {
         alignContent={'center'}
         justifyContent={'space-between'}
         alignItems={'center'}
-        position={'absolute'}
+        position={'sticky'}
         width={'100%'}
         zIndex={'sticky'}
+        backgroundColor={'white'}
+        top={0}
         p={3}
       >
         <NextLink href={'/'} passHref>
           <Link
-            fontStyle={'italic'}
+            fontSize={'xl'}
+            fontFamily={'Poppins'}
             fontWeight={'bold'}
             textDecoration={'none'}
             _hover={{
@@ -46,7 +49,9 @@ const Layout = ({ children }) => {
           />
         ) : undefined}
       </Flex>
-      {children}
+      <Box px={3} pb={3}>
+        {children}
+      </Box>
     </Box>
   );
 };
