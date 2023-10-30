@@ -1,7 +1,7 @@
 import Paragraph from '@editorjs/paragraph';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
-import Link from '@editorjs/link';
+// import Link from 'editorjs-hyperlink';
 import Delimiter from '@editorjs/delimiter';
 import Embed from '@editorjs/embed';
 import Image from './image_tool';
@@ -17,7 +17,7 @@ export const EDITOR_JS_TOOLS = {
   quote: Quote,
   list: List,
   delimiter: Delimiter,
-  link: Link,
+  // hyperlink: Link,
   embed: {
     class: Embed,
     config: {

@@ -62,6 +62,13 @@ const theme = extendTheme(
       hr: {
         borderColor: 'black',
       },
+      a: {
+        textDecoration: 'underline',
+        color: 'brand.500',
+        _hover: {
+          fontStyle: 'italic',
+        },
+      },
     },
   })
 );

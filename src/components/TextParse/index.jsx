@@ -26,14 +26,6 @@ const Delimiter = () => {
   return <Divider />;
 };
 
-const Link = ({ data }) => {
-  const {
-    link,
-    meta: { title },
-  } = data;
-  return <LinkChakra href={link}>{title}</LinkChakra>;
-};
-
 const Image = ({ data: { file, caption } }) => {
   return (
     <Box as='figure'>
@@ -57,6 +49,7 @@ const Embed = ({ data }) => {
 const TextParse = ({ text }) => {
   const ref = useRef();
   const [html, setHtml] = useState([]);
+  console.log('🚀 ~ file: index.jsx:61 ~ TextParse ~ html:', html);
 
   useEffect(() => {
     if (!ref.current) {

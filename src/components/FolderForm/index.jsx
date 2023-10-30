@@ -89,11 +89,7 @@ const FolderForm = ({ loading, folder, onSubmit }) => {
                 colorScheme='brand'
                 width={{ base: '100%', md: 'fit-content' }}
                 isLoading={loading}
-                loadingText={
-                  folder?.title?.length > 0
-                    ? 'Guardando cambios'
-                    : 'Creando la carpeta'
-                }
+                loadingText={'Cargando'}
                 type='submit'
               >
                 {folder?.title?.length > 0 ? 'Editar Carpeta' : 'Crear Carpeta'}
