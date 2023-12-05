@@ -61,13 +61,14 @@ export const uploadFiles = async (files, folder) => {
   }
 };
 
-export const deleteFiles = async (files, folder) => {
+export const deleteFiles = async (files, folder = undefined) => {
   try {
     if (files.length === 0) {
       return;
     }
     for (const file of files) {
-      let fileRef = storageRef(`${folder}/${file.name}`);
+      const ref = folder ? `${folder}/${file.name}` : `/${file.name}`;
+      let fileRef = storageRef(ref);
       await deleteObject(fileRef);
     }
     return;

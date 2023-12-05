@@ -19,15 +19,20 @@ const Post = ({ data }) => {
   return (
     <LinkOverlay as={NextLink} href={url}>
       <Flex flexDirection={'column'}>
-        <AspectRatio ratio={89 / 127}>
+        <AspectRatio ratio={89 / 127} overflow={'hidden'}>
           <File
+            cursor={'pointer'}
             data={postFilePreview}
             controls={false}
             maxWidth='100%'
             height='auto'
+            transition='transform .2s'
+            _hover={{
+              transform: 'scale(1.1)',
+            }}
           />
         </AspectRatio>
-        <Text mt={2} mb={5} fontFamily={'Poppins'}>
+        <Text mt={2} mb={5} fontFamily={'Poppins'} cursor={'pointer'}>
           {title}
         </Text>
       </Flex>
