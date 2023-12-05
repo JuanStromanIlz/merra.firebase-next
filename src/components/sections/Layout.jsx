@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
   const { route } = useRouter();
 
   const getRightOption = (r) => {
-    if (!user && r.includes('login')) {
+    if (r.includes('login')) {
       return (
         <Avatar
           ml={'auto'}

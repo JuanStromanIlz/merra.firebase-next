@@ -10,7 +10,7 @@ function NewItem() {
   const { onNewPost } = useContext(Admin);
 
   return (
-    <Flex mx={'auto'} maxW={'1300px'} direction={'column'}>
+    <Flex maxW={'1300px'} direction={'column'}>
       <NextSeo title={`Nuevo | Merra Marie`} defaultTitle='Merra Marie' />
       <Box as={'header'} mb={[6, 12]}>
         <Title>Nuevo</Title>
