@@ -6,6 +6,7 @@ import useFetch from 'src/hooks/useFetch';
 import { Admin } from 'src/contexts/AdminContext';
 import withAuth from 'src/hoc/withAuth';
 import FolderLayout from 'src/components/FolderLayout';
+import { NextSeo } from 'next-seo';
 
 function Edit() {
   const router = useRouter();
@@ -14,9 +15,12 @@ function Edit() {
   const { onUpdatePost } = useContext(Admin);
 
   return (
-    <FolderLayout title={'Editar'}>
-      <FolderForm loading={loading} folder={data} onSubmit={onUpdatePost} />
-    </FolderLayout>
+    <>
+      <NextSeo title={`Editar | Merra Marie`} defaultTitle='Merra Marie' />
+      <FolderLayout title={'Editar'}>
+        <FolderForm loading={loading} folder={data} onSubmit={onUpdatePost} />
+      </FolderLayout>
+    </>
   );
 }
 

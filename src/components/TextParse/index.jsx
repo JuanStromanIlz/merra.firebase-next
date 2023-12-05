@@ -32,10 +32,16 @@ const Image = ({ data: { file, caption } }) => {
 };
 
 const Embed = ({ data }) => {
-  const { embed, width, height, caption, source } = data;
+  const { embed, width, height, caption } = data;
   return (
     <AspectRatio ratio={width / height}>
-      <Box as='iframe' src={embed} title={caption} overflow={'hidden'}></Box>
+      <Box
+        as='iframe'
+        src={embed}
+        title={caption}
+        overflow={'hidden'}
+        borderRadius={'lg'}
+      ></Box>
     </AspectRatio>
   );
 };
