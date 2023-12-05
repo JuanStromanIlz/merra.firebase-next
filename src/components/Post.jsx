@@ -1,4 +1,4 @@
-import { Flex, LinkOverlay, Text } from '@chakra-ui/react';
+import { AspectRatio, Flex, LinkOverlay, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import File from './File';
@@ -18,15 +18,15 @@ const Post = ({ data }) => {
   return (
     <LinkOverlay as={NextLink} href={url}>
       <Flex flexDirection={'column'}>
-        <File
-          data={postFilePreview}
-          controls={false}
-          maxWidth='100%'
-          height='auto'
-        />
-        <Text fontWeight={'bold'} mt={1}>
-          {title}
-        </Text>
+        <AspectRatio ratio={89 / 127}>
+          <File
+            data={postFilePreview}
+            controls={false}
+            maxWidth='100%'
+            height='auto'
+          />
+        </AspectRatio>
+        <Text mt={1}>{title}</Text>
       </Flex>
     </LinkOverlay>
   );

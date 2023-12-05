@@ -40,7 +40,7 @@ const Embed = ({ data }) => {
         src={embed}
         title={caption}
         overflow={'hidden'}
-        borderRadius={'lg'}
+        // borderRadius={'lg'}
       ></Box>
     </AspectRatio>
   );
