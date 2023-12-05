@@ -1,6 +1,6 @@
-import Document, { Head, Main, NextScript, Html } from "next/document";
+import Document, { Head, Main, NextScript, Html } from 'next/document';
 // Import styled components ServerStyleSheet
-import { ServerStyleSheet } from "styled-components";
+import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
@@ -23,8 +23,8 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="shortcut icon" href="/heart.svg" />
-          <meta name="theme-color" content="black" />
+          <link rel='shortcut icon' href='/heart.svg' />
+          <meta name='theme-color' content='white' />
           {/* Step 5: Output the styles in the head  */}
           {this.props.styleTags}
         </Head>

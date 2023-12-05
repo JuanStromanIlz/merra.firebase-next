@@ -1,4 +1,5 @@
 import React from 'react';
+import { NextSeo } from 'next-seo';
 import getSection from '../../actions/getSection';
 import getDoc from '../../actions/getDoc';
 import Gallery from '../../components/Gallery';
@@ -9,12 +10,18 @@ import FolderLayout from 'src/components/FolderLayout';
 
 const TitleView = ({ doc }) => {
   return (
-    <FolderLayout title={doc?.title}>
-      <PostNav doc={doc} />
-      <Gallery files={doc?.files} />
-      <TextParse text={doc?.description} />
-      <Tags tags={doc?.tags} />
-    </FolderLayout>
+    <>
+      <NextSeo
+        title={`${doc.title} | Merra Marie`}
+        defaultTitle='Merra Marie'
+      />
+      <FolderLayout title={doc?.title}>
+        <PostNav doc={doc} />
+        <Gallery files={doc?.files} />
+        <TextParse text={doc?.description} />
+        <Tags tags={doc?.tags} />
+      </FolderLayout>
+    </>
   );
 };
 
