@@ -18,15 +18,15 @@ const Post = ({ data }) => {
   return (
     <LinkOverlay as={NextLink} href={url}>
       <Flex flexDirection={'column'}>
-        <Text fontWeight={'bold'} mb={1}>
-          {title}
-        </Text>
         <File
           data={postFilePreview}
           controls={false}
           maxWidth='100%'
           height='auto'
         />
+        <Text fontWeight={'bold'} mt={1}>
+          {title}
+        </Text>
       </Flex>
     </LinkOverlay>
   );

@@ -44,7 +44,7 @@ const Gallery = ({ files }) => {
     nextImage
   );
 
-  const itemSize = ({ isVideo, landscape }, index) => {
+  const itemSize = ({ isVideo, landscape }) => {
     const size = isVideo || landscape ? '100%' : '40%';
     return size;
   };
@@ -71,7 +71,7 @@ const Gallery = ({ files }) => {
             key={data?.name || index}
             flexGrow={1}
             flexShrink={0}
-            flexBasis={itemSize(data, index)}
+            flexBasis={itemSize(data)}
             justifyContent={'center'}
             alignContent={'flex-start'}
             alignItems={'flex-start'}

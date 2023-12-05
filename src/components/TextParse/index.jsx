@@ -1,12 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import editorjsHTML from 'editorjs-html';
-import {
-  Box,
-  Divider,
-  Text,
-  Link as LinkChakra,
-  AspectRatio,
-} from '@chakra-ui/react';
+import { Box, Divider, Text, AspectRatio } from '@chakra-ui/react';
 import File from './../File';
 import { Prose } from '@nikolovlazar/chakra-ui-prose';
 
@@ -49,7 +43,6 @@ const Embed = ({ data }) => {
 const TextParse = ({ text }) => {
   const ref = useRef();
   const [html, setHtml] = useState([]);
-  console.log('🚀 ~ file: index.jsx:61 ~ TextParse ~ html:', html);
 
   useEffect(() => {
     if (!ref.current) {
@@ -85,7 +78,7 @@ const TextParse = ({ text }) => {
             <div dangerouslySetInnerHTML={{ __html: item }} key={index}></div>
           );
         }
-        return item;
+        return React.cloneElement(item, { key: index });
       })}
     </Prose>
   );

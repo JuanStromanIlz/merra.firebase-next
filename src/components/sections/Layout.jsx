@@ -22,7 +22,6 @@ const Layout = ({ children }) => {
         position={'sticky'}
         width={'100%'}
         zIndex={'sticky'}
-        backgroundColor={'white'}
         top={0}
         p={3}
       >
