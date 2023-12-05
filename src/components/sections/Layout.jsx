@@ -1,10 +1,58 @@
-import { Box, Grid, Link, Text } from '@chakra-ui/react';
+import { Avatar, Box, Flex, Grid, Link, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import { Admin } from 'src/contexts/AdminContext';
 
 const Layout = ({ children }) => {
-  const { user } = useContext(Admin);
+  const { user, signIn, signOut } = useContext(Admin);
+  const { photoURL } = user || {};
+  const { route } = useRouter();
+
+  const getRightOption = (r) => {
+    if (!user && r.includes('login')) {
+      return (
+        <Avatar
+          ml={'auto'}
+          size='xs'
+          src={photoURL}
+          onClick={user ? signOut : signIn}
+          cursor={'pointer'}
+        />
+      );
+    } else if (user && !r.includes('new')) {
+      return (
+        <NextLink href={'/admin/new'} passHref>
+          <Link
+            as={'span'}
+            textTransform={'uppercase'}
+            fontFamily={'Poppins'}
+            fontWeight={'bold'}
+            marginLeft={'auto'}
+            textDecoration={'none'}
+            letterSpacing={'0.05rem'}
+            _hover={{
+              textDecoration: 'none',
+            }}
+          >
+            Nuevo
+          </Link>
+        </NextLink>
+      );
+    } else if (user && r.includes('new')) {
+      return (
+        <Avatar
+          ml={'auto'}
+          size='xs'
+          src={photoURL}
+          onClick={user ? signOut : signIn}
+          cursor={'pointer'}
+        />
+      );
+    } else {
+      return undefined;
+    }
+  };
 
   return (
     <Box>
@@ -15,8 +63,7 @@ const Layout = ({ children }) => {
         width={'100%'}
         zIndex={'sticky'}
         top={0}
-        py={5}
-        px={3}
+        p={3}
       >
         <Text
           as={'span'}
@@ -49,28 +96,11 @@ const Layout = ({ children }) => {
             </Link>
           </NextLink>
         </Box>
-        {user ? (
-          <NextLink href={'/admin/new'} passHref>
-            <Link
-              as={'span'}
-              textTransform={'uppercase'}
-              fontFamily={'Poppins'}
-              fontWeight={'bold'}
-              marginLeft={'auto'}
-              textDecoration={'none'}
-              letterSpacing={'0.05rem'}
-              _hover={{
-                textDecoration: 'none',
-              }}
-            >
-              Nuevo
-            </Link>
-          </NextLink>
-        ) : undefined}
+        {getRightOption(route)}
       </Grid>
-      <Box px={3} pb={3}>
+      <Flex direction={'column'} m={3}>
         {children}
-      </Box>
+      </Flex>
     </Box>
   );
 };

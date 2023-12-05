@@ -27,7 +27,7 @@ const Post = ({ data }) => {
             height='auto'
           />
         </AspectRatio>
-        <Text mt={2} mb={6} fontFamily={'Poppins'}>
+        <Text mt={2} mb={5} fontFamily={'Poppins'}>
           {title}
         </Text>
       </Flex>
