@@ -18,7 +18,7 @@ const AdminContext = ({ children }) => {
   const router = useRouter();
   const toast = useToast();
   const toastRef = useRef();
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(undefined);
 
   const createNotification = async (action, title) => {
     try {

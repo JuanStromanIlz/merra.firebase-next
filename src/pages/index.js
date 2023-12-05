@@ -8,9 +8,7 @@ const Posts = ({ posts = [] }) => {
   return (
     <>
       <NextSeo title='Merra Marie' defaultTitle='Merra Marie' />
-      <Flex direction={'column'} gap={6}>
-        <GroupedPosts posts={posts} />
-      </Flex>
+      <GroupedPosts posts={posts} />
     </>
   );
 };

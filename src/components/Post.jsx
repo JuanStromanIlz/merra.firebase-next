@@ -2,6 +2,7 @@ import { AspectRatio, Flex, LinkOverlay, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import File from './File';
+import Title from './Title';
 
 const Post = ({ data }) => {
   const {
@@ -26,7 +27,9 @@ const Post = ({ data }) => {
             height='auto'
           />
         </AspectRatio>
-        <Text mt={1}>{title}</Text>
+        <Text mt={2} mb={6} fontFamily={'Poppins'}>
+          {title}
+        </Text>
       </Flex>
     </LinkOverlay>
   );
